@@ -6,7 +6,7 @@ import { resolvers, schema } from './schema'
 
 const server = new ApolloServer({
   typeDefs: schema,
-  resolvers,
+  resolvers
 })
 
 const app = express()

@@ -1,17 +1,17 @@
 import { stitchSchema } from '../utils'
 
 import { MutationResultSchema } from './shared'
-import { EmployeeMutations, EmployeeQueries, EmployeesSchema } from './employee'
+import { ServerMutations, ServerQueries, ServersSchema } from './servers'
 
-const schemas = stitchSchema(EmployeesSchema, MutationResultSchema)
+const schemas = stitchSchema(ServersSchema, MutationResultSchema)
 const queries = `#graphql
   type Query {
-    ${stitchSchema(EmployeeQueries)}
+    ${stitchSchema(ServerQueries)}
   }
 `
 const mutations = `#graphql
   type Mutation {
-    ${stitchSchema(EmployeeMutations)}
+    ${stitchSchema(ServerMutations)}
   }
 `
 
