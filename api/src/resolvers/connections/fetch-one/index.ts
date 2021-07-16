@@ -1,16 +1,10 @@
 import { Resolver, Connection } from '@/interfaces'
+import { findById } from '@/db'
 
-export const connection: Resolver<Connection, FetchOneConnectionArgs> = async ({ id }) => {
-  console.log('id', id)
-  return {
-    id: '1',
-    host: 'localhost',
-    port: 6379,
-    name: 'Local Test',
-    protocol: 'http'
-  }
+export const connection: Resolver<Connection, FetchOneConnectionArgs> = async ({ id }, { Client }) => {
+  return findById<Connection>(Client, id, '/connections')
 }
 
 export interface FetchOneConnectionArgs {
-  id: number
+  id: string
 }

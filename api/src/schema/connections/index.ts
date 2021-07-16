@@ -10,7 +10,6 @@ const ConnectionSchema = `#graphql
   }
   input ConnectionInput {
     name: String!
-    id: String!
     host: String!
     port: Int!
     protocol: String!
@@ -18,12 +17,13 @@ const ConnectionSchema = `#graphql
 `
 
 export const ConnectionQueries = `#graphql
-connection(id: Int!): Connection
+connection(id: String!): Connection
 connections(limit: Int, startPosition: Int): [Connection]
 `
 
 export const ConnectionMutations = `#graphql
-createConnection(Connection: ConnectionInput!): MutationResult
+createConnection(connection: ConnectionInput!): MutationResult
+removeConnection(id: String!): MutationResult
 `
 
 export const ConnectionsSchema = stitchSchema(ConnectionSchema)

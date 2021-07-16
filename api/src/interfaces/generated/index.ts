@@ -22,19 +22,25 @@ export type Connection = {
 
 export type ConnectionInput = {
   name: Scalars['String'];
-  id: Scalars['String'];
   host: Scalars['String'];
   port: Scalars['Int'];
+  protocol: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createConnection?: Maybe<MutationResult>;
+  removeConnection?: Maybe<MutationResult>;
 };
 
 
 export type MutationCreateConnectionArgs = {
-  Connection: ConnectionInput;
+  connection: ConnectionInput;
+};
+
+
+export type MutationRemoveConnectionArgs = {
+  id: Scalars['String'];
 };
 
 export type MutationResult = {
@@ -51,7 +57,7 @@ export type Query = {
 
 
 export type QueryConnectionArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 

@@ -1,8 +1,10 @@
+import { v4 as uuid } from 'uuid'
+
 import { Resolver, ConnectionInput, MutationResult } from '@/interfaces'
 
-export const createConnection: Resolver<MutationResult, ConnectionInput> = async (variables, context) => {
-  console.log('var', variables)
-  console.log('context', context)
+export const createConnection: Resolver<MutationResult, CreateConnectionArgs> = async ({ connection }, { Client }) => {
+  const connectionId = uuid()
+  Client.push('/connections[]', { ...connection, id: connectionId }, true)
   return {
     status: 200,
     message: 'Done'
@@ -10,5 +12,5 @@ export const createConnection: Resolver<MutationResult, ConnectionInput> = async
 }
 
 export interface CreateConnectionArgs {
-  id: number
+  connection: ConnectionInput
 }
