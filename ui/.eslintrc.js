@@ -1,4 +1,4 @@
-const prettierrc = require('rc')('prettier')
+const prettierrc = require('rc')('../prettier')
 
 module.exports = {
   extends: ['react-app', 'react-app/jest'],
