@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ThemeProvider } from 'styled-components'
 
-import { GlobalStyle, darkTheme } from 'constants/theme'
+import { ThemeProvider } from 'constants/theme'
 import Router from 'router'
 
 const queryClient = new QueryClient({
@@ -18,8 +17,7 @@ const queryClient = new QueryClient({
 const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={darkTheme}>
-        <GlobalStyle />
+      <ThemeProvider>
         <Router />
       </ThemeProvider>
     </QueryClientProvider>

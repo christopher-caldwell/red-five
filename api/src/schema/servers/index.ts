@@ -4,10 +4,14 @@ const ServerSchema = `#graphql
   type Server {
     name: String!
     id: String!
-    title: String!
-    startDate: String!
-    endDate: String
-    department: String!
+    host: String!
+    port: Int!
+  }
+  input ServerInput {
+    name: String!
+    id: String!
+    host: String!
+    port: Int!
   }
 `
 
@@ -17,7 +21,7 @@ servers(limit: Int, startPosition: Int): [Server]
 `
 
 export const ServerMutations = `#graphql
-createServer(emailAddress: String!, phone: String, firstName: String, lastName: String, password: String!): Server
+createServer(server: ServerInput!): MutationResult
 `
 
 export const ServersSchema = stitchSchema(ServerSchema)

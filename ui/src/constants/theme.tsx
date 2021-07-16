@@ -1,8 +1,11 @@
-import { DefaultTheme, createGlobalStyle } from 'styled-components'
+import { FC } from 'react'
+import { DefaultTheme, createGlobalStyle, ThemeProvider as ScThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider, createTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import { brandColor } from 'constants/styles'
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
@@ -19,6 +22,9 @@ export const GlobalStyle = createGlobalStyle`
   a {
     color: ${({ theme }) => theme.brandColor};
     text-decoration: none;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0
   }
 `
 
@@ -39,7 +45,7 @@ declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
 }
 
-export const darkTheme: DefaultTheme = {
+const darkTheme: DefaultTheme = {
   mode: 'dark',
   primaryBackgroundColor: '#212124',
   primaryTextColor: '#FFFFFF',
@@ -51,3 +57,28 @@ export const darkTheme: DefaultTheme = {
   secondaryButtonColor: 'black',
   brandColor
 }
+
+const theme = createTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#D82C20'
+    },
+    secondary: {
+      main: '#636466'
+    }
+  }
+})
+
+// A41E11 - med red
+// D82C20 - bright red
+
+export const ThemeProvider: FC = ({ children }) => (
+  <ScThemeProvider theme={darkTheme}>
+    <GlobalStyle />
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  </ScThemeProvider>
+)
