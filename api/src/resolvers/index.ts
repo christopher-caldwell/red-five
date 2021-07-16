@@ -1,7 +1,5 @@
-import * as serverResolvers from './servers'
+import * as connectionResolvers from './connections'
 
 export const resolvers = {
-  Query: {
-    ...serverResolvers
-  }
+  ...connectionResolvers
 }

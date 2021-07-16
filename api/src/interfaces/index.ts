@@ -7,7 +7,8 @@ export interface MutationResult {
 }
 
 export type Resolver<ReturnType, Variables = Record<string, string>> = (
-  rootValue: any,
   variables: Variables,
   context: {}
 ) => Promise<ReturnType>
+
+export * from './generated'

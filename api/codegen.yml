@@ -1,12 +1,7 @@
 overwrite: true
 schema: 'http://localhost:5000/graphql'
-documents: 'src/**/*.graphql'
 generates:
-  src/generated/index.ts:
+  src/interfaces/generated/index.ts:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-react-query
-    config:
-      fetcher:
-        endpoint: './src/client/index.ts#runQuery'
