@@ -1,21 +1,20 @@
-import { FC, useState } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { Dialog, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 
-import { Button } from 'components/shared'
 import ConnectionNameInputs from './Inputs'
-import { DialogContent, DialogActions, DialogTitle, CloseDialogButton } from './elements'
+import { DialogTitle, CloseDialogButton } from './elements'
 
 const CreateConnectionDialog: FC = () => {
   const [open, setOpen] = useState(false)
 
-  const handleClickOpen = () => {
+  const handleClickOpen = useCallback(() => {
     setOpen(true)
-  }
-  const handleClose = () => {
+  }, [])
+  const handleClose = useCallback(() => {
     setOpen(false)
-  }
+  }, [])
 
   return (
     <>
@@ -29,12 +28,7 @@ const CreateConnectionDialog: FC = () => {
             <CloseIcon />
           </CloseDialogButton>
         </DialogTitle>
-        <DialogContent dividers>
-          <ConnectionNameInputs />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} text='Connect' />
-        </DialogActions>
+        <ConnectionNameInputs handleClose={handleClose} />
       </Dialog>
     </>
   )

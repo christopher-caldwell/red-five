@@ -1,0 +1,9 @@
+query connections {
+  connections {
+    id
+    name
+    host
+    port
+    protocol
+  }
+}

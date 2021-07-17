@@ -18,6 +18,8 @@ export type Connection = {
   host: Scalars['String'];
   port: Scalars['Int'];
   protocol: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
 };
 
 export type ConnectionInput = {
@@ -25,12 +27,14 @@ export type ConnectionInput = {
   host: Scalars['String'];
   port: Scalars['Int'];
   protocol: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
+  makeConnectionActive?: Maybe<MutationResult>;
 };
 
 
@@ -41,6 +45,11 @@ export type MutationCreateConnectionArgs = {
 
 export type MutationRemoveConnectionArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationMakeConnectionActiveArgs = {
+  id?: Maybe<Scalars['String']>;
 };
 
 export type MutationResult = {

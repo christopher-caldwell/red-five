@@ -7,14 +7,14 @@ import { GRAPHQL_ENDPOINT as uri } from 'constants/index'
 const client = new GraphQLClient(uri, { headers: { Authorization: '' } })
 
 /** Runs a request to the GraphQL API */
-export const runQuery = async <ReturnTypeOfQuery>(
-  query: string,
-  variables: Variables = {}
-): Promise<ReturnTypeOfQuery> => {
-  const res = await client.rawRequest<Record<string, ReturnTypeOfQuery>, Variables>(query, variables)
-  if (res.errors) throw res.errors
-  // GraphQL request returns an object with a single key ( the name of the query ). This returns that key
-  const keyOfReturn = Object.keys(res.data || {})[0]
-  if (!res.data?.[keyOfReturn]) throw new Error('Key is not correctly structured on return')
-  return res.data?.[keyOfReturn]
-}
+export const runQuery =
+  <ReturnTypeOfQuery, TVariables = undefined>(
+    query: string,
+    variables?: TVariables
+  ): (() => Promise<ReturnTypeOfQuery>) =>
+  async () => {
+    const res = await client.rawRequest<ReturnTypeOfQuery, Variables>(query, variables)
+    if (res.errors) throw res.errors
+    if (!res.data) throw new Error('Data is falsy')
+    return res.data
+  }

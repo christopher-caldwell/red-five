@@ -3,6 +3,7 @@ import { graphqlHTTP } from 'express-graphql'
 import cors from 'cors'
 
 import { loadConfig } from './db'
+import './connections'
 import { resolvers, schema } from './schema'
 
 const app = express()

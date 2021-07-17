@@ -1,4 +1,5 @@
 import { JsonDB } from 'node-json-db'
+import { Connection } from './generated'
 
 /** A standard mutation response.
  *
@@ -14,5 +15,11 @@ export type Resolver<ReturnType, Variables = Record<string, string>> = (
     Client: JsonDB
   }
 ) => Promise<ReturnType>
+
+/** Configuration for Red Five */
+export interface AppConfig {
+  connections: Connection[]
+  activeConnection?: string
+}
 
 export * from './generated'

@@ -3,9 +3,10 @@ import { ClickAwayListener, Popper } from '@material-ui/core'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
-import { ServerSelectMenuButton } from './elements'
+import ConnectionDisplay from './connection-display'
+import { ConnectionSelectMenuButton } from './elements'
 
-const ServerMenu: FC = () => {
+const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,16 +19,16 @@ const ServerMenu: FC = () => {
   return (
     <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
       <div>
-        <ServerSelectMenuButton fullWidth aria-describedby={id} type='button' onClick={handleClick}>
-          Server Name
+        <ConnectionSelectMenuButton fullWidth aria-describedby={id} type='button' onClick={handleClick}>
+          Connection Name
           {anchorEl ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </ServerSelectMenuButton>
+        </ConnectionSelectMenuButton>
         <Popper id={id} open={open} anchorEl={anchorEl}>
-          <div>The content of the Popper.</div>
+          <ConnectionDisplay />
         </Popper>
       </div>
     </ClickAwayListener>
   )
 }
 
-export default ServerMenu
+export default ConnectionMenu

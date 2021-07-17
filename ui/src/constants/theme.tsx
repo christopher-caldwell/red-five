@@ -10,14 +10,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background-color: ${({ theme }) => theme.primaryBackgroundColor};
-    font-family: Proxima Nova;
   }
   *::-webkit-scrollbar {
     display: none;
   }
   * {
     color: ${({ theme }) => theme.primaryTextColor};
-    font-family: 'body';
+    font-family: body !important;
   }
   a {
     color: ${({ theme }) => theme.brandColor};

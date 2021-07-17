@@ -11,22 +11,23 @@ export const BaseTextField: FC<TextFieldProps> = props => (
   <TextField {...props} variant='outlined' margin='normal' fullWidth autoCapitalize='none' />
 )
 
-export const EmailTextField: FC<UseInputBind> = props => {
+export type SpecialInputProps = UseInputBind & { autoComplete?: string; label?: string }
+
+export const EmailTextField: FC<SpecialInputProps> = props => {
   return <BaseTextField {...props} label='Email Address' name='email' autoComplete='email' />
 }
 
-export const PasswordTextField: FC<UseInputBind> = props => {
+export const PasswordTextField: FC<SpecialInputProps> = props => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   return (
     <InputWithIcon
       {...props}
       bind={{ onChange: props.onChange, value: props.value }}
       icon={isPasswordShown ? <VisibilityOffIcon /> : <VisibilityIcon />}
-      onIconClick={() => setIsPasswordShown(isPasswordCurrentlyShown => !isPasswordShown)}
-      name='password'
-      label='Password'
+      onIconClick={() => setIsPasswordShown(isPasswordCurrentlyShown => !isPasswordCurrentlyShown)}
+      label={props.label || 'Password'}
       type={isPasswordShown ? 'text' : 'password'}
-      autoComplete='none'
+      autoComplete={props.autoComplete || 'off'}
     />
   )
 }

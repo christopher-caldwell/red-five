@@ -8,5 +8,6 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
-      fetcher:
-        endpoint: './src/client/index.ts#runQuery'
+      fetcher: 'client#runQuery'
+      exposeQueryKeys: true
+      skipTypename: true
