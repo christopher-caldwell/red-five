@@ -1,0 +1,5 @@
+mutation removeConnection($id: String!) {
+  removeConnection(id: $id) {
+    message
+  }
+}

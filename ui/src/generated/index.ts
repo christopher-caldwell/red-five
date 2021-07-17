@@ -20,6 +20,7 @@ export type Connection = {
   port: Scalars['Int'];
   protocol: Scalars['String'];
   password?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
 };
 
 export type ConnectionInput = {
@@ -33,6 +34,7 @@ export type ConnectionInput = {
 export type Mutation = {
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
+  makeConnectionActive?: Maybe<MutationResult>;
 };
 
 
@@ -43,6 +45,11 @@ export type MutationCreateConnectionArgs = {
 
 export type MutationRemoveConnectionArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationMakeConnectionActiveArgs = {
+  id?: Maybe<Scalars['String']>;
 };
 
 export type MutationResult = {
@@ -73,10 +80,24 @@ export type CreateConnectionMutationVariables = Exact<{
 
 export type CreateConnectionMutation = { createConnection?: Maybe<Pick<MutationResult, 'message'>> };
 
+export type MakConnectionActiveMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type MakConnectionActiveMutation = { makeConnectionActive?: Maybe<Pick<MutationResult, 'message'>> };
+
+export type RemoveConnectionMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveConnectionMutation = { removeConnection?: Maybe<Pick<MutationResult, 'message'>> };
+
 export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ConnectionsQuery = { connections?: Maybe<Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol'>>>> };
+export type ConnectionsQuery = { connections?: Maybe<Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>>>> };
 
 
 export const CreateConnectionDocument = `
@@ -94,6 +115,36 @@ export const useCreateConnectionMutation = <
       (variables?: CreateConnectionMutationVariables) => runQuery<CreateConnectionMutation, CreateConnectionMutationVariables>(CreateConnectionDocument, variables)(),
       options
     );
+export const MakConnectionActiveDocument = `
+    mutation makConnectionActive($id: String!) {
+  makeConnectionActive(id: $id) {
+    message
+  }
+}
+    `;
+export const useMakConnectionActiveMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<MakConnectionActiveMutation, TError, MakConnectionActiveMutationVariables, TContext>) => 
+    useMutation<MakConnectionActiveMutation, TError, MakConnectionActiveMutationVariables, TContext>(
+      (variables?: MakConnectionActiveMutationVariables) => runQuery<MakConnectionActiveMutation, MakConnectionActiveMutationVariables>(MakConnectionActiveDocument, variables)(),
+      options
+    );
+export const RemoveConnectionDocument = `
+    mutation removeConnection($id: String!) {
+  removeConnection(id: $id) {
+    message
+  }
+}
+    `;
+export const useRemoveConnectionMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<RemoveConnectionMutation, TError, RemoveConnectionMutationVariables, TContext>) => 
+    useMutation<RemoveConnectionMutation, TError, RemoveConnectionMutationVariables, TContext>(
+      (variables?: RemoveConnectionMutationVariables) => runQuery<RemoveConnectionMutation, RemoveConnectionMutationVariables>(RemoveConnectionDocument, variables)(),
+      options
+    );
 export const ConnectionsDocument = `
     query connections {
   connections {
@@ -102,6 +153,7 @@ export const ConnectionsDocument = `
     host
     port
     protocol
+    isActive
   }
 }
     `;

@@ -8,7 +8,8 @@ const ConnectionSchema = joi.object<Connection>().keys({
   name: joi.string().required(),
   password: joi.string(),
   protocol: joi.string().required(),
-  id: joi.string().required()
+  id: joi.string().required(),
+  isActive: joi.boolean()
 })
 
 const AppConfigSchema = joi.object().keys({

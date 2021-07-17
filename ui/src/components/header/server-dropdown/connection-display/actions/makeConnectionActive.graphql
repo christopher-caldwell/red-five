@@ -1,0 +1,5 @@
+mutation makConnectionActive($id: String!) {
+  makeConnectionActive(id: $id) {
+    message
+  }
+}

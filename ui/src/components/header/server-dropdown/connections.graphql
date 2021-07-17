@@ -5,5 +5,6 @@ query connections {
     host
     port
     protocol
+    isActive
   }
 }

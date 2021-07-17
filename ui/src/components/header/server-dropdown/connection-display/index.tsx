@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import { Alert } from '@material-ui/lab'
 import { DataGrid, GridColDef } from '@material-ui/data-grid'
-import { IconButton, LinearProgress } from '@material-ui/core'
-import EditIcon from '@material-ui/icons/Edit'
-import RemoveIcon from '@material-ui/icons/Delete'
+import { LinearProgress } from '@material-ui/core'
 
+import EditConnection from './actions/Edit'
+import RemoveConnection from './actions/Remove'
+import MakeActive from './actions/MakeActive'
 import { useConnectionsQuery, Connection } from 'generated'
 import { Container, DataGridOuterContainer, DataGridInnerContainer } from './elements'
 
@@ -27,30 +28,32 @@ const ConnectionDisplay: FC = () => {
 }
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Name', flex: 0.5 },
+  {
+    field: 'isActive',
+    headerName: 'Active',
+    flex: 0.25,
+    disableColumnMenu: true,
+    sortable: false,
+    renderCell: params => <MakeActive {...(params.row as Connection)} />
+  },
+  { field: 'name', headerName: 'Name', flex: 0.45 },
   {
     field: 'host',
     headerName: 'Host',
-    flex: 0.5
+    flex: 0.6
   },
-  { field: 'port', headerName: 'Port', flex: 0.3 },
   {
     field: 'edit',
     headerName: 'Edit',
     headerAlign: 'center',
-    flex: 0.25,
+    flex: 0.4,
     disableColumnMenu: true,
     sortable: false,
-    renderCell: params => {
-      console.log('params', params)
+    renderCell: ({ id }) => {
       return (
         <>
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <RemoveIcon />
-          </IconButton>
+          <EditConnection id={id} />
+          <RemoveConnection id={id} />
         </>
       )
     }
