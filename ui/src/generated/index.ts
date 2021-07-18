@@ -36,7 +36,6 @@ export type Key = {
   value: Scalars['String'];
   type: Scalars['String'];
   ttl: Scalars['Int'];
-  namespace?: Maybe<Scalars['String']>;
 };
 
 export type KeyInput = {
@@ -44,7 +43,6 @@ export type KeyInput = {
   value: Scalars['String'];
   type: Scalars['String'];
   ttl: Scalars['Int'];
-  namespace?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -85,12 +83,23 @@ export type MutationResult = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type NameSpacedKeys = {
+  name: Scalars['String'];
+  keys: Array<Maybe<Key>>;
+};
+
+export type NamespaceKeyResult = {
+  allKeys: Array<Maybe<Key>>;
+  namespaced: Array<Maybe<NameSpacedKeys>>;
+};
+
 export type Query = {
   activeConnection?: Maybe<Connection>;
   connection: Connection;
   connections: Array<Maybe<Connection>>;
   key: Key;
   keys: Array<Maybe<Key>>;
+  namespacedKeys: NamespaceKeyResult;
 };
 
 
@@ -113,7 +122,6 @@ export type QueryKeyArgs = {
 export type QueryKeysArgs = {
   limit?: Maybe<Scalars['Int']>;
   startPosition?: Maybe<Scalars['Int']>;
-  namespace?: Maybe<Scalars['String']>;
 };
 
 export type CreateConnectionMutationVariables = Exact<{
@@ -146,6 +154,21 @@ export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ConnectionsQuery = { connections: Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>>> };
+
+export type KeyQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type KeyQuery = { key: Pick<Key, 'value' | 'type' | 'ttl'> };
+
+export type NamespacedKeysQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NamespacedKeysQuery = { namespacedKeys: { allKeys: Array<Maybe<Pick<Key, 'key'>>>, namespaced: Array<Maybe<(
+      Pick<NameSpacedKeys, 'name'>
+      & { keys: Array<Maybe<Pick<Key, 'key'>>> }
+    )>> } };
 
 
 export const CreateConnectionDocument = `
@@ -240,3 +263,55 @@ export const useConnectionsQuery = <
       options
     );
 useConnectionsQuery.getKey = (variables?: ConnectionsQueryVariables) => ['connections', variables];
+
+export const KeyDocument = `
+    query key($id: String!) {
+  key(id: $id) {
+    value
+    type
+    ttl
+  }
+}
+    `;
+export const useKeyQuery = <
+      TData = KeyQuery,
+      TError = unknown
+    >(
+      variables: KeyQueryVariables, 
+      options?: UseQueryOptions<KeyQuery, TError, TData>
+    ) => 
+    useQuery<KeyQuery, TError, TData>(
+      ['key', variables],
+      runQuery<KeyQuery, KeyQueryVariables>(KeyDocument, variables),
+      options
+    );
+useKeyQuery.getKey = (variables: KeyQueryVariables) => ['key', variables];
+
+export const NamespacedKeysDocument = `
+    query namespacedKeys {
+  namespacedKeys {
+    allKeys {
+      key
+    }
+    namespaced {
+      name
+      keys {
+        key
+      }
+    }
+  }
+}
+    `;
+export const useNamespacedKeysQuery = <
+      TData = NamespacedKeysQuery,
+      TError = unknown
+    >(
+      variables?: NamespacedKeysQueryVariables, 
+      options?: UseQueryOptions<NamespacedKeysQuery, TError, TData>
+    ) => 
+    useQuery<NamespacedKeysQuery, TError, TData>(
+      ['namespacedKeys', variables],
+      runQuery<NamespacedKeysQuery, NamespacedKeysQueryVariables>(NamespacedKeysDocument, variables),
+      options
+    );
+useNamespacedKeysQuery.getKey = (variables?: NamespacedKeysQueryVariables) => ['namespacedKeys', variables];

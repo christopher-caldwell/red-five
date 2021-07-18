@@ -91,6 +91,12 @@ export type NameSpacedKeys = {
   keys: Array<Maybe<Key>>;
 };
 
+export type NamespaceKeyResult = {
+  __typename?: 'NamespaceKeyResult';
+  allKeys: Array<Maybe<Key>>;
+  namespaced: Array<Maybe<NameSpacedKeys>>;
+};
+
 export type Query = {
   __typename?: 'Query';
   activeConnection?: Maybe<Connection>;
@@ -98,7 +104,7 @@ export type Query = {
   connections: Array<Maybe<Connection>>;
   key: Key;
   keys: Array<Maybe<Key>>;
-  namespacedKeys: Array<Maybe<NameSpacedKeys>>;
+  namespacedKeys: NamespaceKeyResult;
 };
 
 
@@ -119,12 +125,6 @@ export type QueryKeyArgs = {
 
 
 export type QueryKeysArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  startPosition?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryNamespacedKeysArgs = {
   limit?: Maybe<Scalars['Int']>;
   startPosition?: Maybe<Scalars['Int']>;
 };

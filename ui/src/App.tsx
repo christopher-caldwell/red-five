@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { RecoilRoot } from 'recoil'
 
 import { ThemeProvider } from 'constants/theme'
 import Router from 'router'
@@ -16,11 +17,13 @@ const queryClient = new QueryClient({
 
 const App: FC = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <Router />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <Router />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
   )
 }
 

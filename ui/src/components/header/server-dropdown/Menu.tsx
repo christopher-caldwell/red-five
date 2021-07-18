@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import { useActiveConnectionQuery } from 'generated'
 import ConnectionDisplay from './connection-display'
 import { ConnectionSelectMenuButton, ConnectionContainer } from './elements'
+import styles from './connectionsDisplay.module.sass'
 
 const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -26,7 +27,7 @@ const ConnectionMenu: FC = () => {
           {isLoading ? <CircularProgress variant='indeterminate' /> : connectionName || ''}
           {anchorEl ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </ConnectionSelectMenuButton>
-        <Popper id={id} open={open} anchorEl={anchorEl}>
+        <Popper className={styles.connectionDisplay} id={id} open={open} anchorEl={anchorEl}>
           <ConnectionDisplay />
         </Popper>
       </ConnectionContainer>

@@ -6,6 +6,8 @@ interface FlexContainerProps {
   width?: string
   height?: string
   direction?: 'row' | 'column'
+  padding?: string
+  margin?: string
 }
 export const FlexContainer = styled.div<FlexContainerProps>`
   display: flex;
@@ -14,4 +16,6 @@ export const FlexContainer = styled.div<FlexContainerProps>`
   flex-direction: ${({ direction = 'row' }) => direction};
   ${({ height }) => (height ? `height: ${height};` : '')}
   ${({ width }) => (width ? `width: ${width};` : '')}
+  ${({ padding }) => (padding ? `padding: ${padding};` : '')}
+  ${({ margin }) => (margin ? `margin: ${margin};` : '')}
 `

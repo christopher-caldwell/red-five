@@ -7,6 +7,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.33",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "fuse.js": "^6.4.6",
     "graphql": "^15.5.1",
     "graphql-request": "^3.4.0",
     "react": "^17.0.2",

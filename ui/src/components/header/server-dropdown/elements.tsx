@@ -9,6 +9,7 @@ export const ConnectionSelectMenuButton = styled(Button)`
 `
 
 export const ConnectionContainer = styled.div`
+  z-index: 9000000000000;
   & button {
     text-transform: none;
   }

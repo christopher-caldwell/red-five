@@ -1,9 +1,12 @@
-import { Resolver, Key, NameSpacedKeys } from '@/interfaces'
+import { Resolver, Key, NamespaceKeyResult, NameSpacedKeys } from '@/interfaces'
 import { keys } from '../get-all'
 
-export const namespacedKeys: Resolver<NameSpacedKeys[]> = async ({}, { Client }) => {
+export const namespacedKeys: Resolver<NamespaceKeyResult> = async ({}, { Client }) => {
   const allKeys = await keys({}, { Client })
-  return aggregateKeys(allKeys)
+  return {
+    allKeys,
+    namespaced: aggregateKeys(allKeys)
+  }
 }
 
 /** This is gross. What this does is put all the namespaced keys into a namespace key, while putting the others in a key called `root`
