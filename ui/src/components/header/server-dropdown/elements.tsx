@@ -7,3 +7,9 @@ export const ConnectionSelectMenuButton = styled(Button)`
     margin-left: 10px;
   }
 `
+
+export const ConnectionContainer = styled.div`
+  & button {
+    text-transform: none;
+  }
+`

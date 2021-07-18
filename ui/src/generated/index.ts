@@ -31,10 +31,28 @@ export type ConnectionInput = {
   password?: Maybe<Scalars['String']>;
 };
 
+export type Key = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+  type: Scalars['String'];
+  ttl: Scalars['Int'];
+  namespace?: Maybe<Scalars['String']>;
+};
+
+export type KeyInput = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+  type: Scalars['String'];
+  ttl: Scalars['Int'];
+  namespace?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
   makeConnectionActive?: Maybe<MutationResult>;
+  createKeyEntry?: Maybe<MutationResult>;
+  removeKey?: Maybe<MutationResult>;
 };
 
 
@@ -52,14 +70,27 @@ export type MutationMakeConnectionActiveArgs = {
   id?: Maybe<Scalars['String']>;
 };
 
+
+export type MutationCreateKeyEntryArgs = {
+  entry: KeyInput;
+};
+
+
+export type MutationRemoveKeyArgs = {
+  key: Scalars['String'];
+};
+
 export type MutationResult = {
   status: Scalars['Int'];
   message?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
-  connection?: Maybe<Connection>;
-  connections?: Maybe<Array<Maybe<Connection>>>;
+  activeConnection?: Maybe<Connection>;
+  connection: Connection;
+  connections: Array<Maybe<Connection>>;
+  key: Key;
+  keys: Array<Maybe<Key>>;
 };
 
 
@@ -73,12 +104,29 @@ export type QueryConnectionsArgs = {
   startPosition?: Maybe<Scalars['Int']>;
 };
 
+
+export type QueryKeyArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryKeysArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  startPosition?: Maybe<Scalars['Int']>;
+  namespace?: Maybe<Scalars['String']>;
+};
+
 export type CreateConnectionMutationVariables = Exact<{
   connection: ConnectionInput;
 }>;
 
 
 export type CreateConnectionMutation = { createConnection?: Maybe<Pick<MutationResult, 'message'>> };
+
+export type ActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ActiveConnectionQuery = { activeConnection?: Maybe<Pick<Connection, 'id' | 'name'>> };
 
 export type MakConnectionActiveMutationVariables = Exact<{
   id: Scalars['String'];
@@ -97,7 +145,7 @@ export type RemoveConnectionMutation = { removeConnection?: Maybe<Pick<MutationR
 export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ConnectionsQuery = { connections?: Maybe<Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>>>> };
+export type ConnectionsQuery = { connections: Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>>> };
 
 
 export const CreateConnectionDocument = `
@@ -115,6 +163,28 @@ export const useCreateConnectionMutation = <
       (variables?: CreateConnectionMutationVariables) => runQuery<CreateConnectionMutation, CreateConnectionMutationVariables>(CreateConnectionDocument, variables)(),
       options
     );
+export const ActiveConnectionDocument = `
+    query activeConnection {
+  activeConnection {
+    id
+    name
+  }
+}
+    `;
+export const useActiveConnectionQuery = <
+      TData = ActiveConnectionQuery,
+      TError = unknown
+    >(
+      variables?: ActiveConnectionQueryVariables, 
+      options?: UseQueryOptions<ActiveConnectionQuery, TError, TData>
+    ) => 
+    useQuery<ActiveConnectionQuery, TError, TData>(
+      ['activeConnection', variables],
+      runQuery<ActiveConnectionQuery, ActiveConnectionQueryVariables>(ActiveConnectionDocument, variables),
+      options
+    );
+useActiveConnectionQuery.getKey = (variables?: ActiveConnectionQueryVariables) => ['activeConnection', variables];
+
 export const MakConnectionActiveDocument = `
     mutation makConnectionActive($id: String!) {
   makeConnectionActive(id: $id) {

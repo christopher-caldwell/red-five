@@ -1,14 +1,17 @@
 import { FC, useState } from 'react'
-import { ClickAwayListener, Popper } from '@material-ui/core'
+import { CircularProgress, ClickAwayListener, Popper } from '@material-ui/core'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
+import { useActiveConnectionQuery } from 'generated'
 import ConnectionDisplay from './connection-display'
-import { ConnectionSelectMenuButton } from './elements'
+import { ConnectionSelectMenuButton, ConnectionContainer } from './elements'
 
 const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { data, isLoading } = useActiveConnectionQuery()
 
+  const connectionName = data?.activeConnection?.name
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
@@ -18,15 +21,15 @@ const ConnectionMenu: FC = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-      <div>
+      <ConnectionContainer>
         <ConnectionSelectMenuButton fullWidth aria-describedby={id} type='button' onClick={handleClick}>
-          Connection Name
+          {isLoading ? <CircularProgress variant='indeterminate' /> : connectionName || ''}
           {anchorEl ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </ConnectionSelectMenuButton>
         <Popper id={id} open={open} anchorEl={anchorEl}>
           <ConnectionDisplay />
         </Popper>
-      </div>
+      </ConnectionContainer>
     </ClickAwayListener>
   )
 }

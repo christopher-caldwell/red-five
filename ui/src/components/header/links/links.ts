@@ -1,11 +1,19 @@
 export const links: Link[] = [
   {
     to: '/',
-    label: 'Home'
+    label: 'Keys'
   },
   {
-    to: '/servers',
-    label: 'Servers'
+    to: '/health',
+    label: 'Health'
+  },
+  {
+    to: '/cli',
+    label: 'CLI'
+  },
+  {
+    to: '/connections',
+    label: 'Connections'
   }
 ]
 

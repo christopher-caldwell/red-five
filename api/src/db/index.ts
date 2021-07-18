@@ -7,6 +7,7 @@ import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 import { AppConfig } from '@/interfaces'
 import { logger } from '@/utils'
 import { validateAppConfig } from './configValidation'
+import { mapExistingConnections } from './mapExistingConnections'
 
 const pathToConfig = resolve(os.homedir(), '.redfive', 'config.json')
 const doesHaveExistingConfig = existsSync(pathToConfig)
@@ -19,6 +20,7 @@ export const loadConfig = () => {
   }
   const existingConfig = JSON.parse(readFileSync(pathToConfig).toString()) as AppConfig
   validateAppConfig(existingConfig)
+  mapExistingConnections(existingConfig)
   return new JsonDB(new Config(pathToConfig, true, false, '/'))
 }
 

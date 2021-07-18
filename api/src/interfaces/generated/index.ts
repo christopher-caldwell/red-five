@@ -30,11 +30,28 @@ export type ConnectionInput = {
   password?: Maybe<Scalars['String']>;
 };
 
+export type Key = {
+  __typename?: 'Key';
+  key: Scalars['String'];
+  value: Scalars['String'];
+  type: Scalars['String'];
+  ttl: Scalars['Int'];
+};
+
+export type KeyInput = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+  type: Scalars['String'];
+  ttl: Scalars['Int'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
   makeConnectionActive?: Maybe<MutationResult>;
+  createKeyEntry?: Maybe<MutationResult>;
+  removeKey?: Maybe<MutationResult>;
 };
 
 
@@ -52,16 +69,36 @@ export type MutationMakeConnectionActiveArgs = {
   id?: Maybe<Scalars['String']>;
 };
 
+
+export type MutationCreateKeyEntryArgs = {
+  entry: KeyInput;
+};
+
+
+export type MutationRemoveKeyArgs = {
+  key: Scalars['String'];
+};
+
 export type MutationResult = {
   __typename?: 'MutationResult';
   status: Scalars['Int'];
   message?: Maybe<Scalars['String']>;
 };
 
+export type NameSpacedKeys = {
+  __typename?: 'NameSpacedKeys';
+  name: Scalars['String'];
+  keys: Array<Maybe<Key>>;
+};
+
 export type Query = {
   __typename?: 'Query';
-  connection?: Maybe<Connection>;
-  connections?: Maybe<Array<Maybe<Connection>>>;
+  activeConnection?: Maybe<Connection>;
+  connection: Connection;
+  connections: Array<Maybe<Connection>>;
+  key: Key;
+  keys: Array<Maybe<Key>>;
+  namespacedKeys: Array<Maybe<NameSpacedKeys>>;
 };
 
 
@@ -71,6 +108,23 @@ export type QueryConnectionArgs = {
 
 
 export type QueryConnectionsArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  startPosition?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryKeyArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryKeysArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  startPosition?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryNamespacedKeysArgs = {
   limit?: Maybe<Scalars['Int']>;
   startPosition?: Maybe<Scalars['Int']>;
 };
