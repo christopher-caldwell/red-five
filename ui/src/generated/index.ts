@@ -49,7 +49,7 @@ export type Mutation = {
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
   makeConnectionActive?: Maybe<MutationResult>;
-  createKeyEntry?: Maybe<MutationResult>;
+  setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
 };
 
@@ -69,7 +69,7 @@ export type MutationMakeConnectionActiveArgs = {
 };
 
 
-export type MutationCreateKeyEntryArgs = {
+export type MutationSetKeyArgs = {
   entry: KeyInput;
 };
 
@@ -131,11 +131,6 @@ export type CreateConnectionMutationVariables = Exact<{
 
 export type CreateConnectionMutation = { createConnection?: Maybe<Pick<MutationResult, 'message'>> };
 
-export type ActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ActiveConnectionQuery = { activeConnection?: Maybe<Pick<Connection, 'id' | 'name'>> };
-
 export type MakConnectionActiveMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -149,6 +144,18 @@ export type RemoveConnectionMutationVariables = Exact<{
 
 
 export type RemoveConnectionMutation = { removeConnection?: Maybe<Pick<MutationResult, 'message'>> };
+
+export type SetKeyMutationVariables = Exact<{
+  entry: KeyInput;
+}>;
+
+
+export type SetKeyMutation = { setKey?: Maybe<Pick<MutationResult, 'message'>> };
+
+export type ActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ActiveConnectionQuery = { activeConnection?: Maybe<Pick<Connection, 'id' | 'name'>> };
 
 export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -186,28 +193,6 @@ export const useCreateConnectionMutation = <
       (variables?: CreateConnectionMutationVariables) => runQuery<CreateConnectionMutation, CreateConnectionMutationVariables>(CreateConnectionDocument, variables)(),
       options
     );
-export const ActiveConnectionDocument = `
-    query activeConnection {
-  activeConnection {
-    id
-    name
-  }
-}
-    `;
-export const useActiveConnectionQuery = <
-      TData = ActiveConnectionQuery,
-      TError = unknown
-    >(
-      variables?: ActiveConnectionQueryVariables, 
-      options?: UseQueryOptions<ActiveConnectionQuery, TError, TData>
-    ) => 
-    useQuery<ActiveConnectionQuery, TError, TData>(
-      ['activeConnection', variables],
-      runQuery<ActiveConnectionQuery, ActiveConnectionQueryVariables>(ActiveConnectionDocument, variables),
-      options
-    );
-useActiveConnectionQuery.getKey = (variables?: ActiveConnectionQueryVariables) => ['activeConnection', variables];
-
 export const MakConnectionActiveDocument = `
     mutation makConnectionActive($id: String!) {
   makeConnectionActive(id: $id) {
@@ -238,6 +223,43 @@ export const useRemoveConnectionMutation = <
       (variables?: RemoveConnectionMutationVariables) => runQuery<RemoveConnectionMutation, RemoveConnectionMutationVariables>(RemoveConnectionDocument, variables)(),
       options
     );
+export const SetKeyDocument = `
+    mutation setKey($entry: KeyInput!) {
+  setKey(entry: $entry) {
+    message
+  }
+}
+    `;
+export const useSetKeyMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<SetKeyMutation, TError, SetKeyMutationVariables, TContext>) => 
+    useMutation<SetKeyMutation, TError, SetKeyMutationVariables, TContext>(
+      (variables?: SetKeyMutationVariables) => runQuery<SetKeyMutation, SetKeyMutationVariables>(SetKeyDocument, variables)(),
+      options
+    );
+export const ActiveConnectionDocument = `
+    query activeConnection {
+  activeConnection {
+    id
+    name
+  }
+}
+    `;
+export const useActiveConnectionQuery = <
+      TData = ActiveConnectionQuery,
+      TError = unknown
+    >(
+      variables?: ActiveConnectionQueryVariables, 
+      options?: UseQueryOptions<ActiveConnectionQuery, TError, TData>
+    ) => 
+    useQuery<ActiveConnectionQuery, TError, TData>(
+      ['activeConnection', variables],
+      runQuery<ActiveConnectionQuery, ActiveConnectionQueryVariables>(ActiveConnectionDocument, variables),
+      options
+    );
+useActiveConnectionQuery.getKey = (variables?: ActiveConnectionQueryVariables) => ['activeConnection', variables];
+
 export const ConnectionsDocument = `
     query connections {
   connections {

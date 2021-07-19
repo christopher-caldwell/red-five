@@ -1,11 +1,13 @@
-import { TreeView } from '@material-ui/lab'
 import styled from 'styled-components'
+import { TreeView, Alert } from '@material-ui/lab'
 
-export const Root = styled.div`
+import { warning } from 'constants/styles'
+import { FlexContainer } from 'components/shared'
+
+export const Root = styled(FlexContainer)`
   z-index: 1;
   overflow: hidden;
   position: relative;
-  display: flex;
   & * {
     user-select: none;
   }
@@ -27,4 +29,8 @@ export const Dragger = styled.div`
 export const KeysTreeView = styled(TreeView)`
   padding-top: 20px;
   width: 100%;
+`
+
+export const NoResultsAlert = styled(Alert)`
+  background-color: ${warning};
 `

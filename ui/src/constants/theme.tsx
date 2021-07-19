@@ -50,7 +50,7 @@ const darkTheme: DefaultTheme = {
   primaryTextColor: '#FFFFFF',
   primaryTitleColor: 'white',
   secondaryBackgroundColor: brandColor,
-  secondaryTitleColor: '#1e9c17',
+  secondaryTitleColor: '#D82C20',
   secondaryTextColor: brandColor,
   primaryButtonColor: brandColor,
   secondaryButtonColor: 'black',

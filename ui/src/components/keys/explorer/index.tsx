@@ -1,21 +1,21 @@
-import { FC, useMemo } from 'react'
-import { IconButton, LinearProgress } from '@material-ui/core'
+import { FC, SetStateAction, Dispatch, useMemo } from 'react'
+import { LinearProgress } from '@material-ui/core'
 import { TreeItem } from '@material-ui/lab'
 import SearchIcon from '@material-ui/icons/Search'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import RefreshIcon from '@material-ui/icons/Refresh'
 import Fuse from 'fuse.js'
 import { useSetRecoilState } from 'recoil'
 
+import SpeedDials from 'components/shared/speed-dial'
 import { activeKeyAtom } from 'store'
 import { useNamespacedKeysQuery } from 'generated'
 import { useInput } from 'hooks/useInput'
 import { FlexContainer, InputWithIcon } from 'components/shared'
 import KeyDrawer from './KeyDrawer'
-import { KeysTreeView } from './elements'
+import { KeysTreeView, NoResultsAlert } from './elements'
 
-const Explorer: FC = () => {
+const Explorer: FC<Props> = props => {
   const setActiveKey = useSetRecoilState(activeKeyAtom)
   const { data, isLoading, refetch } = useNamespacedKeysQuery()
   const [searchTerm, searchTermBind] = useInput('')
@@ -25,33 +25,38 @@ const Explorer: FC = () => {
   const results = handleSearchResults(NamespaceSearch, searchTerm, namespaces)
 
   return (
-    <KeyDrawer>
-      <FlexContainer width='100%' justify='flex-start' direction='column'>
-        <FlexContainer>
+    <KeyDrawer {...props}>
+      <FlexContainer align='flex-start' justify='space-between'>
+        <FlexContainer width='80%' justify='flex-start' direction='column'>
           <InputWithIcon icon={<SearchIcon />} bind={searchTermBind} label='Search Keys' />
-          <IconButton onClick={() => refetch()}>
-            <RefreshIcon />
-          </IconButton>
+
+          {isLoading ? <LinearProgress variant='indeterminate' /> : null}
+          <KeysTreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
+            {results.length ? (
+              results.map((namespace, index) => {
+                const KeySearch = new Fuse(namespace?.keys || [], { keys: ['key'], includeScore: true })
+                const keyResults = handleSearchResults(KeySearch, searchTerm, namespace?.keys || [])
+                return (
+                  <TreeItem nodeId={`${namespace?.name}-${index}`} key={namespace?.name} label={namespace?.name}>
+                    {keyResults.map(key => (
+                      <TreeItem
+                        nodeId={`${namespace?.name}-${key}`}
+                        key={key?.key}
+                        label={key?.key}
+                        onClick={() => setActiveKey(key?.key)}
+                      />
+                    ))}
+                  </TreeItem>
+                )
+              })
+            ) : (
+              <NoResultsAlert severity='warning'>No Results</NoResultsAlert>
+            )}
+          </KeysTreeView>
         </FlexContainer>
-        {isLoading ? <LinearProgress variant='indeterminate' /> : null}
-        <KeysTreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
-          {results.map((namespace, index) => {
-            const KeySearch = new Fuse(namespace?.keys || [], { keys: ['key'], includeScore: true })
-            const keyResults = handleSearchResults(KeySearch, searchTerm, namespace?.keys || [])
-            return (
-              <TreeItem nodeId={`${namespace?.name}-${index}`} key={namespace?.name} label={namespace?.name}>
-                {keyResults.map(key => (
-                  <TreeItem
-                    nodeId={`${namespace?.name}-${key}`}
-                    key={key?.key}
-                    label={key?.key}
-                    onClick={() => setActiveKey(key?.key)}
-                  />
-                ))}
-              </TreeItem>
-            )
-          })}
-        </KeysTreeView>
+        <FlexContainer width='20%'>
+          <SpeedDials refresh={refetch} />
+        </FlexContainer>
       </FlexContainer>
     </KeyDrawer>
   )
@@ -72,6 +77,11 @@ const handleSearchResults = function <TData>(
     results.push(item)
   }
   return results
+}
+
+interface Props {
+  width: number
+  setWidth: Dispatch<SetStateAction<number>>
 }
 
 export default Explorer

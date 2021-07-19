@@ -1,12 +1,11 @@
-import { FC, useRef, useState } from 'react'
+import { FC, useRef, Dispatch, SetStateAction } from 'react'
 import { Drawer } from '@material-ui/core'
 
-import styles from './drawer.module.sass'
 import { Root, Dragger } from './elements'
+import styles from './drawer.module.sass'
 
 let isResizing = false
-const KeyDrawer: FC = ({ children }) => {
-  const [width, setWidth] = useState(300)
+const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
   const sidebarPanelRef = useRef<HTMLDivElement>(null)
   const sidebarCurrent = sidebarPanelRef?.current
 
@@ -38,8 +37,6 @@ const KeyDrawer: FC = ({ children }) => {
     document.removeEventListener('mouseup', handleMousedown)
   }
 
-  console.log('width', sidebarCurrent?.style.width)
-
   return (
     <Root ref={sidebarPanelRef}>
       <Drawer
@@ -56,6 +53,11 @@ const KeyDrawer: FC = ({ children }) => {
       </Drawer>
     </Root>
   )
+}
+
+interface Props {
+  width: number
+  setWidth: Dispatch<SetStateAction<number>>
 }
 
 const minWidth = 200

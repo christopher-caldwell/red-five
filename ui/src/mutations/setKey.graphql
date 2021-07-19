@@ -1,0 +1,5 @@
+mutation setKey($entry: KeyInput!) {
+  setKey(entry: $entry) {
+    message
+  }
+}

@@ -32,7 +32,7 @@ namespacedKeys: NamespaceKeyResult!
 `
 
 export const KeyMutations = `#graphql
-createKeyEntry(entry: KeyInput!): MutationResult
+setKey(entry: KeyInput!): MutationResult
 removeKey(key: String!): MutationResult
 `
 

@@ -1,1 +1,26 @@
 @import fonts
+
+.codeInput
+  white-space: pre
+  font-family: monospace
+
+pre,
+.pre
+  background: #222
+  border: none
+  margin: 0
+  height: 100%
+  & code
+    height: 100% !important
+    display: block
+    height: 19em
+    padding: 1em
+    overflow-y: auto
+    overflow-x: hidden
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  margin: 0
