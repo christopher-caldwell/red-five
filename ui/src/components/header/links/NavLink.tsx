@@ -7,7 +7,7 @@ import styles from './index.module.sass'
 
 const NavLink: FC<Link> = ({ to, label }) => {
   return (
-    <LinkContainer to={to} activeClassName={styles.activeLink} exact>
+    <LinkContainer to={to} activeClassName={styles.activeLink}>
       <FlexContainer height='100%'>{label}</FlexContainer>
     </LinkContainer>
   )

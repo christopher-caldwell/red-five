@@ -85,20 +85,20 @@ export type MutationResult = {
 
 export type NameSpacedKeys = {
   name: Scalars['String'];
-  keys: Array<Maybe<Key>>;
+  keys: Array<Key>;
 };
 
 export type NamespaceKeyResult = {
-  allKeys: Array<Maybe<Key>>;
-  namespaced: Array<Maybe<NameSpacedKeys>>;
+  allKeys: Array<Key>;
+  namespaced: Array<NameSpacedKeys>;
 };
 
 export type Query = {
   activeConnection?: Maybe<Connection>;
   connection: Connection;
-  connections: Array<Maybe<Connection>>;
+  connections: Array<Connection>;
   key: Key;
-  keys: Array<Maybe<Key>>;
+  keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
 };
 
@@ -160,7 +160,7 @@ export type ActiveConnectionQuery = { activeConnection?: Maybe<Pick<Connection, 
 export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ConnectionsQuery = { connections: Array<Maybe<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>>> };
+export type ConnectionsQuery = { connections: Array<Pick<Connection, 'id' | 'name' | 'host' | 'port' | 'protocol' | 'isActive'>> };
 
 export type KeyQueryVariables = Exact<{
   id: Scalars['String'];
@@ -172,10 +172,10 @@ export type KeyQuery = { key: Pick<Key, 'value' | 'type' | 'ttl'> };
 export type NamespacedKeysQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NamespacedKeysQuery = { namespacedKeys: { allKeys: Array<Maybe<Pick<Key, 'key'>>>, namespaced: Array<Maybe<(
+export type NamespacedKeysQuery = { namespacedKeys: { allKeys: Array<Pick<Key, 'key'>>, namespaced: Array<(
       Pick<NameSpacedKeys, 'name'>
-      & { keys: Array<Maybe<Pick<Key, 'key'>>> }
-    )>> } };
+      & { keys: Array<Pick<Key, 'key'>> }
+    )> } };
 
 
 export const CreateConnectionDocument = `

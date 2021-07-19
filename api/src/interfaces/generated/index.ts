@@ -50,7 +50,7 @@ export type Mutation = {
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
   makeConnectionActive?: Maybe<MutationResult>;
-  createKeyEntry?: Maybe<MutationResult>;
+  setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
 };
 
@@ -70,7 +70,7 @@ export type MutationMakeConnectionActiveArgs = {
 };
 
 
-export type MutationCreateKeyEntryArgs = {
+export type MutationSetKeyArgs = {
   entry: KeyInput;
 };
 

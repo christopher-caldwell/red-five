@@ -1,4 +1,4 @@
 export enum Routes {
-  Keys = '/',
-  Create = '/create'
+  Keys = '/keys',
+  CreateKey = '/keys/create'
 }

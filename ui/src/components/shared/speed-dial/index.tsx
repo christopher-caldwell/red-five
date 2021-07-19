@@ -23,7 +23,7 @@ const SpeedDials: FC<Props> = ({ refresh }) => {
   )
 
   const handleGoToAdd = useCallback(() => {
-    push(Routes.Create)
+    push(Routes.CreateKey)
   }, [push])
 
   const handleOpen = useCallback(() => {

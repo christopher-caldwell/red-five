@@ -1,6 +1,6 @@
 export const links: Link[] = [
   {
-    to: '/',
+    to: '/keys',
     label: 'Keys'
   },
   {

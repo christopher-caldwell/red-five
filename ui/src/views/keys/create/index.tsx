@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { useSetKeyMutation, useNamespacedKeysQuery } from 'generated'
 import { BaseTextField, FlexContainer, Button } from 'components/shared'
 import { useInput } from 'hooks'
+import { Title } from './elements'
 
 const namespacedKeys = useNamespacedKeysQuery.getKey()
 
@@ -26,6 +27,7 @@ const CreateKey: FC<Props> = ({ width }) => {
 
   return (
     <FlexContainer padding='1%' width={`calc(100% - ${width}px)`} justify='flex-start' direction='column'>
+      <Title>Create a Key</Title>
       <BaseTextField label='Key' {...keyNameBind} />
       <BaseTextField label='TTL' type='number' {...keyTtlBind} />
       <BaseTextField label='Value' multiline fullWidth {...keyValueBind} />

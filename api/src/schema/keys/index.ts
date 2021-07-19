@@ -16,18 +16,18 @@ const KeySchema = `#graphql
   }
   type NameSpacedKeys {
     name: String!
-    keys: [Key]!
+    keys: [Key!]!
   }
   type NamespaceKeyResult {
-    allKeys: [Key]!
-    namespaced: [NameSpacedKeys]!
+    allKeys: [Key!]!
+    namespaced: [NameSpacedKeys!]!
   }
 
 `
 
 export const KeyQueries = `#graphql
 key(id: String!): Key!
-keys(limit: Int, startPosition: Int): [Key]!
+keys(limit: Int, startPosition: Int): [Key!]!
 namespacedKeys: NamespaceKeyResult!
 `
 

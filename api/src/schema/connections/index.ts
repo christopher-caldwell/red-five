@@ -22,7 +22,7 @@ const ConnectionSchema = `#graphql
 export const ConnectionQueries = `#graphql
 activeConnection: Connection
 connection(id: String!): Connection!
-connections(limit: Int, startPosition: Int): [Connection]!
+connections(limit: Int, startPosition: Int): [Connection!]!
 `
 
 export const ConnectionMutations = `#graphql
