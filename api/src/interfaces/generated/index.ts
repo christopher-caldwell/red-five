@@ -11,6 +11,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type CliResponse = {
+  __typename?: 'CliResponse';
+  time: Scalars['Float'];
+  message?: Maybe<Scalars['String']>;
+  command: Scalars['String'];
+  isError?: Maybe<Scalars['Boolean']>;
+};
+
 export type Connection = {
   __typename?: 'Connection';
   name: Scalars['String'];
@@ -28,6 +36,11 @@ export type ConnectionInput = {
   port: Scalars['Int'];
   protocol: Scalars['String'];
   password?: Maybe<Scalars['String']>;
+};
+
+export type ConnectionTestResponse = {
+  __typename?: 'ConnectionTestResponse';
+  connected: Scalars['Boolean'];
 };
 
 export type Key = {
@@ -53,6 +66,7 @@ export type Mutation = {
   setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
   setSettings?: Maybe<MutationResult>;
+  sendCliCommand?: Maybe<CliResponse>;
 };
 
 
@@ -85,6 +99,11 @@ export type MutationSetSettingsArgs = {
   settings: SettingsInput;
 };
 
+
+export type MutationSendCliCommandArgs = {
+  command: Scalars['String'];
+};
+
 export type MutationResult = {
   __typename?: 'MutationResult';
   status: Scalars['Int'];
@@ -108,6 +127,7 @@ export type Query = {
   activeConnection?: Maybe<Connection>;
   connection: Connection;
   connections: Array<Connection>;
+  testActiveConnection: ConnectionTestResponse;
   key: Key;
   keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;

@@ -1,9 +1,9 @@
 import { JsonDB } from 'node-json-db'
 import { serializeError } from 'serialize-error'
+import { Redis } from 'ioredis'
 
 import { Connection } from '@/interfaces'
 import { connections } from '@/connections'
-import { Redis } from 'ioredis'
 
 export const findById = <TData>(Client: JsonDB, id: string, searchPath: string, key: string = 'id'): TData => {
   const index = Client.getIndex(searchPath, id, key)
@@ -32,10 +32,9 @@ export const createIfNotExists = <TData>(Client: JsonDB, searchPath: string, def
 
 /** Returns the configuration for the active connection, not the actual Redis connection itself */
 export const getActiveConnectionConfig = (Client: JsonDB): Connection | undefined => {
-  //@ts-ignore
-  const index = Client.getIndex('/connections', true, 'isActive')
-  if (index < 0) return
-  return Client.getObject<Connection>(`/connections[${index}]`)
+  const activeConnectionId = Client.getObject<string>('/activeConnection')
+  if (!activeConnectionId) return
+  return findById(Client, activeConnectionId, '/connections')
 }
 
 export const getActiveConnection = (Client: JsonDB): Redis | undefined => {

@@ -17,12 +17,16 @@ const ConnectionSchema = `#graphql
     protocol: String!
     password: String
   }
+  type ConnectionTestResponse {
+    connected: Boolean!
+  }
 `
 
 export const ConnectionQueries = `#graphql
 activeConnection: Connection
 connection(id: String!): Connection!
 connections(limit: Int, startPosition: Int): [Connection!]!
+testActiveConnection: ConnectionTestResponse!
 `
 
 export const ConnectionMutations = `#graphql

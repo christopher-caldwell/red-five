@@ -13,6 +13,13 @@ export type Scalars = {
   Float: number;
 };
 
+export type CliResponse = {
+  time: Scalars['Float'];
+  message?: Maybe<Scalars['String']>;
+  command: Scalars['String'];
+  isError?: Maybe<Scalars['Boolean']>;
+};
+
 export type Connection = {
   name: Scalars['String'];
   id: Scalars['String'];
@@ -29,6 +36,10 @@ export type ConnectionInput = {
   port: Scalars['Int'];
   protocol: Scalars['String'];
   password?: Maybe<Scalars['String']>;
+};
+
+export type ConnectionTestResponse = {
+  connected: Scalars['Boolean'];
 };
 
 export type Key = {
@@ -52,6 +63,7 @@ export type Mutation = {
   setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
   setSettings?: Maybe<MutationResult>;
+  sendCliCommand?: Maybe<CliResponse>;
 };
 
 
@@ -84,6 +96,11 @@ export type MutationSetSettingsArgs = {
   settings: SettingsInput;
 };
 
+
+export type MutationSendCliCommandArgs = {
+  command: Scalars['String'];
+};
+
 export type MutationResult = {
   status: Scalars['Int'];
   message?: Maybe<Scalars['String']>;
@@ -103,6 +120,7 @@ export type Query = {
   activeConnection?: Maybe<Connection>;
   connection: Connection;
   connections: Array<Connection>;
+  testActiveConnection: ConnectionTestResponse;
   key: Key;
   keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
@@ -169,6 +187,13 @@ export type RemoveKeyMutationVariables = Exact<{
 
 export type RemoveKeyMutation = { removeKey?: Maybe<Pick<MutationResult, 'message'>> };
 
+export type SendCliCommandMutationVariables = Exact<{
+  command: Scalars['String'];
+}>;
+
+
+export type SendCliCommandMutation = { sendCliCommand?: Maybe<Pick<CliResponse, 'time' | 'message' | 'command' | 'isError'>> };
+
 export type SetKeyMutationVariables = Exact<{
   entry: KeyInput;
 }>;
@@ -212,6 +237,11 @@ export type SettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SettingsQuery = { settings: Pick<Settings, 'willPromptBeforeDelete' | 'willSaveCliOutput'> };
+
+export type TestActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestActiveConnectionQuery = { testActiveConnection: Pick<ConnectionTestResponse, 'connected'> };
 
 
 export const CreateConnectionDocument = `
@@ -272,6 +302,24 @@ export const useRemoveKeyMutation = <
     >(options?: UseMutationOptions<RemoveKeyMutation, TError, RemoveKeyMutationVariables, TContext>) => 
     useMutation<RemoveKeyMutation, TError, RemoveKeyMutationVariables, TContext>(
       (variables?: RemoveKeyMutationVariables) => runQuery<RemoveKeyMutation, RemoveKeyMutationVariables>(RemoveKeyDocument, variables)(),
+      options
+    );
+export const SendCliCommandDocument = `
+    mutation sendCliCommand($command: String!) {
+  sendCliCommand(command: $command) {
+    time
+    message
+    command
+    isError
+  }
+}
+    `;
+export const useSendCliCommandMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<SendCliCommandMutation, TError, SendCliCommandMutationVariables, TContext>) => 
+    useMutation<SendCliCommandMutation, TError, SendCliCommandMutationVariables, TContext>(
+      (variables?: SendCliCommandMutationVariables) => runQuery<SendCliCommandMutation, SendCliCommandMutationVariables>(SendCliCommandDocument, variables)(),
       options
     );
 export const SetKeyDocument = `
@@ -425,3 +473,24 @@ export const useSettingsQuery = <
       options
     );
 useSettingsQuery.getKey = (variables?: SettingsQueryVariables) => ['settings', variables];
+
+export const TestActiveConnectionDocument = `
+    query testActiveConnection {
+  testActiveConnection {
+    connected
+  }
+}
+    `;
+export const useTestActiveConnectionQuery = <
+      TData = TestActiveConnectionQuery,
+      TError = unknown
+    >(
+      variables?: TestActiveConnectionQueryVariables, 
+      options?: UseQueryOptions<TestActiveConnectionQuery, TError, TData>
+    ) => 
+    useQuery<TestActiveConnectionQuery, TError, TData>(
+      ['testActiveConnection', variables],
+      runQuery<TestActiveConnectionQuery, TestActiveConnectionQueryVariables>(TestActiveConnectionDocument, variables),
+      options
+    );
+useTestActiveConnectionQuery.getKey = (variables?: TestActiveConnectionQueryVariables) => ['testActiveConnection', variables];

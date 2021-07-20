@@ -4,14 +4,15 @@ import { LinearProgress } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 
 import SpeedDials from 'components/shared/speed-dial'
-import { useNamespacedKeysQuery } from 'generated'
+import { useActiveConnectionQuery, useNamespacedKeysQuery } from 'generated'
 import { useInput } from 'hooks/useInput'
 import { FlexContainer, InputWithIcon } from 'components/shared'
 import KeyDrawer from './KeyDrawer'
 import KeyTree from './key-tree'
 
 const Explorer: FC<Props> = props => {
-  const { data, isLoading, refetch } = useNamespacedKeysQuery()
+  const { data: activeConnectionData } = useActiveConnectionQuery()
+  const { data, isLoading, refetch } = useNamespacedKeysQuery({}, { enabled: !!activeConnectionData })
   const [searchTerm, searchTermBind] = useInput('')
 
   const namespaces = data?.namespacedKeys.namespaced || []

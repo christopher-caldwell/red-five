@@ -1,6 +1,6 @@
-// import { DocumentNode } from 'graphql'
-import { GraphQLClient } from 'graphql-request'
-import { Variables } from 'graphql-request/dist/types'
+import { serializeError } from 'serialize-error'
+import { GraphQLClient, ClientError } from 'graphql-request'
+import { Variables, GraphQLResponse } from 'graphql-request/dist/types'
 
 import { GRAPHQL_ENDPOINT as uri } from 'constants/index'
 
@@ -13,8 +13,16 @@ export const runQuery =
     variables?: TVariables
   ): (() => Promise<ReturnTypeOfQuery>) =>
   async () => {
-    const res = await client.rawRequest<ReturnTypeOfQuery, Variables>(query, variables)
-    if (res.errors) throw res.errors
-    if (!res.data) throw new Error('Data is falsy')
-    return res.data
+    try {
+      const res = await client.rawRequest<ReturnTypeOfQuery, Variables>(query, variables)
+      if (!res.data) throw new Error('Data is falsy')
+      return res.data
+    } catch (e) {
+      const error = serializeError<ClientError>(e)
+      const errorResponse = error.response as GraphQLResponse
+      const errors = errorResponse?.errors || []
+      if (!errors.length) throw e
+      const errorMessage = errors[0].message
+      throw new Error(errorMessage)
+    }
   }

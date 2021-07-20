@@ -10,22 +10,23 @@ export const useUpdateSettings = () => {
   const { data } = useSettingsQuery()
   const settings = data?.settings
 
-  const { mutateAsync } = useSetSettingsMutation({
+  const { mutate, isError } = useSetSettingsMutation({
     onSuccess() {
       queryClient.invalidateQueries(settingsKey)
     }
   })
 
   const updateSettings = useCallback(
-    async (keyToUpdate: keyof Settings, value: Settings[typeof keyToUpdate]) => {
+    (keyToUpdate: keyof Settings, value: Settings[typeof keyToUpdate]) => {
       if (!settings) return
-      await mutateAsync({ settings: { ...settings, [keyToUpdate]: value } })
+      mutate({ settings: { ...settings, [keyToUpdate]: value } })
     },
-    [mutateAsync, settings]
+    [mutate, settings]
   )
 
   return {
     settings,
-    updateSettings
+    updateSettings,
+    isUpdateSettingsError: isError
   }
 }

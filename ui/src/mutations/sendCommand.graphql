@@ -1,0 +1,8 @@
+mutation sendCliCommand($command: String!) {
+  sendCliCommand(command: $command) {
+    time
+    message
+    command
+    isError
+  }
+}

@@ -30,7 +30,7 @@ export const useInput = (
 
 export interface UseInputBind {
   value: string
-  onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+  onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement | HTMLTextAreaElement>
 }
 
 export type UseInputHook = [
