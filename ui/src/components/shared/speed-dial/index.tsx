@@ -7,19 +7,23 @@ import AddIcon from '@material-ui/icons/Add'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import CloseIcon from '@material-ui/icons/Close'
 
+import { useInvalidateAllKeys } from 'utils/cache'
 import { Routes } from 'router/routes'
 import { SpeedDialContainer } from './elements'
 
 const SpeedDials: FC<Props> = ({ refresh }) => {
   const [open, setOpen] = useState(false)
   const { push } = useHistory()
+  const invalidateAllKeys = useInvalidateAllKeys()
 
   const handleClose = useCallback(
-    (callback?: Refresh) => async () => {
-      callback && (await callback())
+    (invalidateKeys?: boolean) => async () => {
+      if (invalidateKeys) {
+        invalidateAllKeys()
+      }
       setOpen(false)
     },
-    []
+    [invalidateAllKeys]
   )
 
   const handleGoToAdd = useCallback(() => {
@@ -40,7 +44,7 @@ const SpeedDials: FC<Props> = ({ refresh }) => {
       FabProps={{ size: 'small' }}
       direction='down'
     >
-      <SpeedDialAction key='refresh' icon={<RefreshIcon />} tooltipTitle='Refresh' onClick={handleClose(refresh)} />
+      <SpeedDialAction key='refresh' icon={<RefreshIcon />} tooltipTitle='Refresh' onClick={handleClose(true)} />
       <SpeedDialAction key='add' icon={<AddIcon />} tooltipTitle='Add' onClick={handleGoToAdd} />
     </SpeedDialContainer>
   )

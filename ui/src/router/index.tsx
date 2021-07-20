@@ -6,6 +6,7 @@ import Header from 'components/header'
 import { Routes } from './routes'
 
 const Keys = lazy(() => import('views/keys'))
+const CLI = lazy(() => import('views/cli'))
 
 const Router: FC = () => {
   return (
@@ -15,6 +16,7 @@ const Router: FC = () => {
         <Spacer>
           <Switch>
             <Route path={Routes.Keys} component={Keys} />
+            <Route path={Routes.CLI} component={CLI} />
           </Switch>
         </Spacer>
       </Suspense>

@@ -139,8 +139,10 @@ export type QueryKeysArgs = {
 export type Settings = {
   __typename?: 'Settings';
   willPromptBeforeDelete: Scalars['Boolean'];
+  willSaveCliOutput: Scalars['Boolean'];
 };
 
 export type SettingsInput = {
   willPromptBeforeDelete: Scalars['Boolean'];
+  willSaveCliOutput: Scalars['Boolean'];
 };

@@ -18,7 +18,7 @@ const Header: FC = () => {
         <FlexContainer justify='space-between' width='100%' height='45px'>
           <FlexContainer>
             <Link to={Routes.Home}>
-              <Logo width={75} stackColor='white' />
+              <Logo width={70} stackColor='white' />
             </Link>
             <Menu />
           </FlexContainer>

@@ -1,38 +1,26 @@
 import { FC, useCallback, useState, ChangeEvent, Dispatch, SetStateAction } from 'react'
-import { useQueryClient } from 'react-query'
 import { Dialog, DialogActions, Checkbox, DialogContent, FormControlLabel } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 
-import { useSetSettingsMutation, useSettingsQuery } from 'generated'
 import { DialogTitle, CloseDialogButton } from 'components/header/create-connection-dialog/elements'
 import { Button } from 'components/shared'
-
-const settingsKey = useSettingsQuery.getKey()
+import { useUpdateSettings } from 'utils/settings'
 
 const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
-  const queryClient = useQueryClient()
   const [willSuppressDialogs, setWillSuppressDialogs] = useState(false)
 
-  const { mutateAsync } = useSetSettingsMutation({
-    onSuccess() {
-      queryClient.invalidateQueries(settingsKey)
-    }
-  })
+  const { updateSettings } = useUpdateSettings()
 
   const handleClose = useCallback(() => {
     setOpen(false)
   }, [setOpen])
 
-  const { data } = useSettingsQuery()
-  const settings = data?.settings
-
   const toggleSuppressDialog = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
-      if (!settings) return
-      await mutateAsync({ settings: { ...settings, willPromptBeforeDelete: event.target.checked } })
+      await updateSettings('willPromptBeforeDelete', event.target.checked)
       setWillSuppressDialogs(event.target.checked)
     },
-    [mutateAsync, settings]
+    [setWillSuppressDialogs, updateSettings]
   )
 
   return (

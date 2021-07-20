@@ -4,9 +4,11 @@ import { stitchSchema } from '@/utils'
 const SettingsSchema = `#graphql
   type Settings {
     willPromptBeforeDelete: Boolean!
+    willSaveCliOutput: Boolean!
   }
   input SettingsInput {
     willPromptBeforeDelete: Boolean!
+    willSaveCliOutput: Boolean!
   }
 `
 

@@ -1,6 +1,6 @@
 import joi from 'joi'
 
-import { AppConfig, Connection } from '@/interfaces'
+import { AppConfig, Connection, Settings } from '@/interfaces'
 
 const ConnectionSchema = joi.object<Connection>().keys({
   host: joi.string().hostname().required(),
@@ -12,9 +12,15 @@ const ConnectionSchema = joi.object<Connection>().keys({
   isActive: joi.boolean()
 })
 
-const AppConfigSchema = joi.object().keys({
+const SettingsSchema = joi.object<Settings>().keys({
+  willPromptBeforeDelete: joi.bool().required(),
+  willSaveCliOutput: joi.bool().required()
+})
+
+const AppConfigSchema = joi.object<AppConfig>().keys({
   connections: joi.array().items(ConnectionSchema),
-  activeConnection: joi.string().allow('')
+  activeConnection: joi.string().allow(''),
+  settings: SettingsSchema.not().required()
 })
 
 const findDuplicateIds = (arr: AppConfig['connections']) => arr.filter((item, index) => arr.indexOf(item) != index)

@@ -1,5 +1,6 @@
 import { JsonDB } from 'node-json-db'
-import { Connection } from './generated'
+
+import { Settings, Connection } from './generated'
 
 /** A standard mutation response.
  *
@@ -20,6 +21,7 @@ export type Resolver<ReturnType, Variables = Record<string, string>> = (
 export interface AppConfig {
   connections: Connection[]
   activeConnection?: string
+  settings?: Settings
 }
 
 export * from './generated'

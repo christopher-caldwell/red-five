@@ -133,10 +133,12 @@ export type QueryKeysArgs = {
 
 export type Settings = {
   willPromptBeforeDelete: Scalars['Boolean'];
+  willSaveCliOutput: Scalars['Boolean'];
 };
 
 export type SettingsInput = {
   willPromptBeforeDelete: Scalars['Boolean'];
+  willSaveCliOutput: Scalars['Boolean'];
 };
 
 export type CreateConnectionMutationVariables = Exact<{
@@ -209,7 +211,7 @@ export type NamespacedKeysQuery = { namespacedKeys: { allKeys: Array<Pick<Key, '
 export type SettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SettingsQuery = { settings: Pick<Settings, 'willPromptBeforeDelete'> };
+export type SettingsQuery = { settings: Pick<Settings, 'willPromptBeforeDelete' | 'willSaveCliOutput'> };
 
 
 export const CreateConnectionDocument = `
@@ -406,6 +408,7 @@ export const SettingsDocument = `
     query settings {
   settings {
     willPromptBeforeDelete
+    willSaveCliOutput
   }
 }
     `;
