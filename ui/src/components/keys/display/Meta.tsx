@@ -11,7 +11,7 @@ const KeyMeta: FC<Props> = ({ ttl, type, isEditing, bind }) => {
   return (
     <>
       <KeyTitleWrapper>
-        Key: <KeyTitle>{keyId || 'Choose a key in the explorer'}</KeyTitle>
+        Key: <KeyTitle>{keyId}</KeyTitle>
       </KeyTitleWrapper>
       <KeyTitleWrapper>
         TTL:{' '}

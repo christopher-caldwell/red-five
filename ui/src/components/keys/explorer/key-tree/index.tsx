@@ -47,7 +47,9 @@ const KeyTree: FC<Props> = ({ namespaces, searchTerm }) => {
           )
         })
       ) : (
-        <NoResultsAlert severity='warning'>No Results</NoResultsAlert>
+        <NoResultsAlert variant='filled' severity='warning'>
+          No Results
+        </NoResultsAlert>
       )}
     </KeysTreeView>
   )

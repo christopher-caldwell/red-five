@@ -40,7 +40,9 @@ const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
     <>
       <DialogContent dividers>
         {isError ? (
-          <Alert severity='error'>Something went wrong. If this issue persists, please contact support</Alert>
+          <Alert variant='filled' severity='error'>
+            Something went wrong. If this issue persists, please contact support
+          </Alert>
         ) : null}
 
         <form>

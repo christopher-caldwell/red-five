@@ -1,14 +1,16 @@
 import { FC } from 'react'
 import { Alert } from '@material-ui/lab'
 import { LinearProgress, Switch, TextField } from '@material-ui/core'
+import RemoveIcon from '@material-ui/icons/Delete'
 import Highlight from 'react-highlight.js'
 import stringify from 'json-stringify-pretty-compact'
 
-import { FlexContainer, Button } from 'components/shared'
+import { FlexContainer, Button, BottomFab } from 'components/shared'
 import KeyMeta from './Meta'
 import { ViewAsJsonFormControl, HighlightContainer } from './elements'
-import 'styles/theme.css'
 import { useEditKeys } from './useEditKeys'
+import { useRemoveKey } from './useRemoveKey'
+import 'styles/theme.css'
 
 const Display: FC<Props> = ({ width }) => {
   const {
@@ -23,13 +25,13 @@ const Display: FC<Props> = ({ width }) => {
     isEditing,
     isLoading,
     isError,
-    isSetLoading
+    isSetLoading,
+    EditSnackbar
   } = useEditKeys()
+  const { DeletePrompt, isRemoveKeyLoading, openRemoveDialogOrRemoveKey } = useRemoveKey(keyId)
 
-  return (
-    <FlexContainer padding='1%' width={`calc(100% - ${width}px)`} justify='flex-start' direction='column'>
-      {isLoading ? <LinearProgress variant='indeterminate' /> : null}
-      {isError ? <Alert severity='error' /> : null}
+  const Display = keyId ? (
+    <>
       <KeyMeta keyId={keyId} {...(key || {})} isEditing={isEditing} bind={editedTtlBind} />
       <ViewAsJsonFormControl
         control={<Switch checked={shouldViewAsJson} onChange={handleShouldViewAsJsonChange} color='primary' />}
@@ -61,7 +63,32 @@ const Display: FC<Props> = ({ width }) => {
           </FlexContainer>
         </>
       )}
-    </FlexContainer>
+    </>
+  ) : (
+    <h1>Choose a key in the explorer</h1>
+  )
+
+  return (
+    <>
+      <FlexContainer padding='1%' width={`calc(100% - ${width}px)`} justify='flex-start' direction='column'>
+        {isLoading ? <LinearProgress variant='indeterminate' /> : null}
+        {isError ? (
+          <Alert variant='filled' severity='error'>
+            Something went wrong
+          </Alert>
+        ) : null}
+        {Display}
+      </FlexContainer>
+      {keyId ? (
+        <BottomFab
+          onClick={openRemoveDialogOrRemoveKey}
+          buttonContent={<RemoveIcon />}
+          isLoading={isRemoveKeyLoading}
+        />
+      ) : null}
+      {EditSnackbar}
+      {DeletePrompt}
+    </>
   )
 }
 

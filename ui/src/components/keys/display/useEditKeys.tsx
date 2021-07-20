@@ -1,25 +1,20 @@
-import { useState, ChangeEvent, useCallback, useEffect } from 'react'
+import { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react'
 import { useQueryClient } from 'react-query'
 import { useRecoilValue } from 'recoil'
 
-import {
-  useKeyQuery,
-  useSetKeyMutation,
-  useConnectionsQuery,
-  useNamespacedKeysQuery,
-  useActiveConnectionQuery
-} from 'generated'
+import { useKeyQuery, useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery } from 'generated'
 import { activeKeyAtom } from 'store'
+import { Snackbar } from 'components/shared'
 import { useInput } from 'hooks'
 
 const connectionsKey = useConnectionsQuery.getKey()
 const namespacedKeys = useNamespacedKeysQuery.getKey()
-const activeConnectionKey = useActiveConnectionQuery.getKey()
 
 export const useEditKeys = () => {
   const queryClient = useQueryClient()
   const keyId = useRecoilValue(activeKeyAtom)
   const [shouldViewAsJson, setShouldViewAsJson] = useState(false)
+  const [isSnackbarShown, setIsSnackbarShown] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const { data, isLoading, isError, refetch } = useKeyQuery(
     {
@@ -33,15 +28,21 @@ export const useEditKeys = () => {
   const { mutateAsync: setKey, isLoading: isSetLoading } = useSetKeyMutation({
     onSuccess() {
       refetch()
+      setIsSnackbarShown(true)
       queryClient.invalidateQueries(connectionsKey)
       queryClient.invalidateQueries(namespacedKeys)
-      queryClient.invalidateQueries(activeConnectionKey)
     }
   })
 
   const key = data?.key
-  const [editedTtl, editedTtlBind, { setValue: setEditedTtl }] = useInput('')
-  const [editedValue, editedValueBind, { setValue: setEditedValue }] = useInput('')
+  const [editedTtl, editedTtlBind, { setValue: setEditedTtl, resetValue: resetEditedTtl }] = useInput('')
+  const [editedValue, editedValueBind, { setValue: setEditedValue, resetValue: resetEditedValue }] = useInput('')
+
+  useEffect(() => {
+    if (keyId) return
+    resetEditedTtl()
+    resetEditedValue()
+  }, [keyId, resetEditedValue, resetEditedTtl])
 
   useEffect(() => {
     if (!key) return
@@ -64,6 +65,18 @@ export const useEditKeys = () => {
     await setKey({ entry: { key: keyId, value: editedValue, ttl: Number(editedTtl), type: 'string' } })
   }, [setKey, keyId, editedTtl, editedValue])
 
+  const EditSnackbar = useMemo(
+    () => (
+      <Snackbar
+        severity={isError ? 'error' : 'success'}
+        message={isError ? 'Something went wrong' : 'Done'}
+        setIsOpen={setIsSnackbarShown}
+        isOpen={isSnackbarShown}
+      />
+    ),
+    [isSnackbarShown, setIsSnackbarShown, isError]
+  )
+
   return {
     key,
     keyId,
@@ -77,6 +90,7 @@ export const useEditKeys = () => {
     isEditing,
     isLoading,
     isError,
-    isSetLoading
+    isSetLoading,
+    EditSnackbar
   }
 }

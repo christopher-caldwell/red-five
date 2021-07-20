@@ -52,6 +52,7 @@ export type Mutation = {
   makeConnectionActive?: Maybe<MutationResult>;
   setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
+  setSettings?: Maybe<MutationResult>;
 };
 
 
@@ -79,6 +80,11 @@ export type MutationRemoveKeyArgs = {
   key: Scalars['String'];
 };
 
+
+export type MutationSetSettingsArgs = {
+  settings: SettingsInput;
+};
+
 export type MutationResult = {
   __typename?: 'MutationResult';
   status: Scalars['Int'];
@@ -88,23 +94,24 @@ export type MutationResult = {
 export type NameSpacedKeys = {
   __typename?: 'NameSpacedKeys';
   name: Scalars['String'];
-  keys: Array<Maybe<Key>>;
+  keys: Array<Key>;
 };
 
 export type NamespaceKeyResult = {
   __typename?: 'NamespaceKeyResult';
-  allKeys: Array<Maybe<Key>>;
-  namespaced: Array<Maybe<NameSpacedKeys>>;
+  allKeys: Array<Key>;
+  namespaced: Array<NameSpacedKeys>;
 };
 
 export type Query = {
   __typename?: 'Query';
   activeConnection?: Maybe<Connection>;
   connection: Connection;
-  connections: Array<Maybe<Connection>>;
+  connections: Array<Connection>;
   key: Key;
-  keys: Array<Maybe<Key>>;
+  keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
+  settings: Settings;
 };
 
 
@@ -127,4 +134,13 @@ export type QueryKeyArgs = {
 export type QueryKeysArgs = {
   limit?: Maybe<Scalars['Int']>;
   startPosition?: Maybe<Scalars['Int']>;
+};
+
+export type Settings = {
+  __typename?: 'Settings';
+  willPromptBeforeDelete: Scalars['Boolean'];
+};
+
+export type SettingsInput = {
+  willPromptBeforeDelete: Scalars['Boolean'];
 };

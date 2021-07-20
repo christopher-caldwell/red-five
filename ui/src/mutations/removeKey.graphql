@@ -1,0 +1,5 @@
+mutation removeKey($key: String!) {
+  removeKey(key: $key) {
+    message
+  }
+}

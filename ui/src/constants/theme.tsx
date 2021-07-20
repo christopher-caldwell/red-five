@@ -65,6 +65,9 @@ const theme = createTheme({
     },
     secondary: {
       main: '#636466'
+    },
+    success: {
+      main: '#388e3c'
     }
   }
 })

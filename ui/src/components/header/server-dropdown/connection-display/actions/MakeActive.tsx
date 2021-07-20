@@ -28,7 +28,6 @@ const MakeActive: FC<Connection> = ({ id, isActive }) => {
   const makeConnectionActive = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       if (!event.target.checked) return
-      console.log('will run')
       await mutateAsync({ id })
     },
     [mutateAsync, id]

@@ -4,16 +4,17 @@ import { stitchSchema } from '@/utils'
 import { MutationResultSchema } from './shared'
 import { ConnectionMutations, ConnectionQueries, ConnectionsSchema } from './connections'
 import { KeyMutations, KeyQueries, KeysSchema } from './keys'
+import { SettingsMutations, SettingsQueries, FinalSettingsSchema } from './settings'
 
-const schemas = stitchSchema(ConnectionsSchema, KeysSchema, MutationResultSchema)
+const schemas = stitchSchema(ConnectionsSchema, KeysSchema, FinalSettingsSchema, MutationResultSchema)
 const queries = `#graphql
   type Query {
-    ${stitchSchema(ConnectionQueries, KeyQueries)}
+    ${stitchSchema(ConnectionQueries, KeyQueries, SettingsQueries)}
   }
 `
 const mutations = `#graphql
   type Mutation {
-    ${stitchSchema(ConnectionMutations, KeyMutations)}
+    ${stitchSchema(ConnectionMutations, KeyMutations, SettingsMutations)}
   }
 `
 

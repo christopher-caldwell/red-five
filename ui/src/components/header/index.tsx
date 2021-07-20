@@ -1,7 +1,10 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import { AppBar, Toolbar } from '@material-ui/core'
 
 import { FlexContainer } from 'components/shared'
+import Logo from 'components/svg/logo'
+import { Routes } from 'router/routes'
 import { links } from './links/links'
 import NavLink from './links/NavLink'
 import Menu from './server-dropdown/Menu'
@@ -14,7 +17,9 @@ const Header: FC = () => {
       <Toolbar variant='dense'>
         <FlexContainer justify='space-between' width='100%' height='45px'>
           <FlexContainer>
-            <h6>Photos</h6>
+            <Link to={Routes.Home}>
+              <Logo width={75} stackColor='white' />
+            </Link>
             <Menu />
           </FlexContainer>
           <FlexContainer align='center' justify='space-between' height='100%'>

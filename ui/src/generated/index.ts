@@ -51,6 +51,7 @@ export type Mutation = {
   makeConnectionActive?: Maybe<MutationResult>;
   setKey?: Maybe<MutationResult>;
   removeKey?: Maybe<MutationResult>;
+  setSettings?: Maybe<MutationResult>;
 };
 
 
@@ -78,6 +79,11 @@ export type MutationRemoveKeyArgs = {
   key: Scalars['String'];
 };
 
+
+export type MutationSetSettingsArgs = {
+  settings: SettingsInput;
+};
+
 export type MutationResult = {
   status: Scalars['Int'];
   message?: Maybe<Scalars['String']>;
@@ -100,6 +106,7 @@ export type Query = {
   key: Key;
   keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
+  settings: Settings;
 };
 
 
@@ -124,6 +131,14 @@ export type QueryKeysArgs = {
   startPosition?: Maybe<Scalars['Int']>;
 };
 
+export type Settings = {
+  willPromptBeforeDelete: Scalars['Boolean'];
+};
+
+export type SettingsInput = {
+  willPromptBeforeDelete: Scalars['Boolean'];
+};
+
 export type CreateConnectionMutationVariables = Exact<{
   connection: ConnectionInput;
 }>;
@@ -145,12 +160,26 @@ export type RemoveConnectionMutationVariables = Exact<{
 
 export type RemoveConnectionMutation = { removeConnection?: Maybe<Pick<MutationResult, 'message'>> };
 
+export type RemoveKeyMutationVariables = Exact<{
+  key: Scalars['String'];
+}>;
+
+
+export type RemoveKeyMutation = { removeKey?: Maybe<Pick<MutationResult, 'message'>> };
+
 export type SetKeyMutationVariables = Exact<{
   entry: KeyInput;
 }>;
 
 
 export type SetKeyMutation = { setKey?: Maybe<Pick<MutationResult, 'message'>> };
+
+export type SetSettingsMutationVariables = Exact<{
+  settings: SettingsInput;
+}>;
+
+
+export type SetSettingsMutation = { setSettings?: Maybe<Pick<MutationResult, 'message'>> };
 
 export type ActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -176,6 +205,11 @@ export type NamespacedKeysQuery = { namespacedKeys: { allKeys: Array<Pick<Key, '
       Pick<NameSpacedKeys, 'name'>
       & { keys: Array<Pick<Key, 'key'>> }
     )> } };
+
+export type SettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SettingsQuery = { settings: Pick<Settings, 'willPromptBeforeDelete'> };
 
 
 export const CreateConnectionDocument = `
@@ -223,6 +257,21 @@ export const useRemoveConnectionMutation = <
       (variables?: RemoveConnectionMutationVariables) => runQuery<RemoveConnectionMutation, RemoveConnectionMutationVariables>(RemoveConnectionDocument, variables)(),
       options
     );
+export const RemoveKeyDocument = `
+    mutation removeKey($key: String!) {
+  removeKey(key: $key) {
+    message
+  }
+}
+    `;
+export const useRemoveKeyMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<RemoveKeyMutation, TError, RemoveKeyMutationVariables, TContext>) => 
+    useMutation<RemoveKeyMutation, TError, RemoveKeyMutationVariables, TContext>(
+      (variables?: RemoveKeyMutationVariables) => runQuery<RemoveKeyMutation, RemoveKeyMutationVariables>(RemoveKeyDocument, variables)(),
+      options
+    );
 export const SetKeyDocument = `
     mutation setKey($entry: KeyInput!) {
   setKey(entry: $entry) {
@@ -236,6 +285,21 @@ export const useSetKeyMutation = <
     >(options?: UseMutationOptions<SetKeyMutation, TError, SetKeyMutationVariables, TContext>) => 
     useMutation<SetKeyMutation, TError, SetKeyMutationVariables, TContext>(
       (variables?: SetKeyMutationVariables) => runQuery<SetKeyMutation, SetKeyMutationVariables>(SetKeyDocument, variables)(),
+      options
+    );
+export const SetSettingsDocument = `
+    mutation setSettings($settings: SettingsInput!) {
+  setSettings(settings: $settings) {
+    message
+  }
+}
+    `;
+export const useSetSettingsMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<SetSettingsMutation, TError, SetSettingsMutationVariables, TContext>) => 
+    useMutation<SetSettingsMutation, TError, SetSettingsMutationVariables, TContext>(
+      (variables?: SetSettingsMutationVariables) => runQuery<SetSettingsMutation, SetSettingsMutationVariables>(SetSettingsDocument, variables)(),
       options
     );
 export const ActiveConnectionDocument = `
@@ -337,3 +401,24 @@ export const useNamespacedKeysQuery = <
       options
     );
 useNamespacedKeysQuery.getKey = (variables?: NamespacedKeysQueryVariables) => ['namespacedKeys', variables];
+
+export const SettingsDocument = `
+    query settings {
+  settings {
+    willPromptBeforeDelete
+  }
+}
+    `;
+export const useSettingsQuery = <
+      TData = SettingsQuery,
+      TError = unknown
+    >(
+      variables?: SettingsQueryVariables, 
+      options?: UseQueryOptions<SettingsQuery, TError, TData>
+    ) => 
+    useQuery<SettingsQuery, TError, TData>(
+      ['settings', variables],
+      runQuery<SettingsQuery, SettingsQueryVariables>(SettingsDocument, variables),
+      options
+    );
+useSettingsQuery.getKey = (variables?: SettingsQueryVariables) => ['settings', variables];

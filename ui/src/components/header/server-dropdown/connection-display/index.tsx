@@ -11,10 +11,14 @@ import { Container, DataGridOuterContainer, DataGridInnerContainer } from './ele
 
 const ConnectionDisplay: FC = () => {
   const { isLoading, data, isError } = useConnectionsQuery()
-  const connections: Connection[] = (data?.connections?.filter(Boolean) as Connection[]) || []
+  const connections: Connection[] = data?.connections || []
   return (
     <Container elevation={2}>
-      {isError ? <Alert>Something went wrong</Alert> : null}
+      {isError ? (
+        <Alert variant='filled' severity='error'>
+          Something went wrong
+        </Alert>
+      ) : null}
       {isLoading ? <LinearProgress variant='indeterminate' /> : null}
       <div>
         <DataGridOuterContainer>
