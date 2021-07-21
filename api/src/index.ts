@@ -1,3 +1,5 @@
+import ws from 'ws'
+import { useServer } from 'graphql-ws/lib/use/ws'
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import cors from 'cors'
@@ -20,4 +22,13 @@ app.use(
   })
 )
 
-app.listen({ port: 5000 }, () => console.log(`🚀 Skynet is active`))
+const server = app.listen(5000, () => {
+  // create and use the websocket server
+  const wsServer = new ws.Server({
+    server,
+    path: '/graphql'
+  })
+
+  useServer({ schema }, wsServer)
+  console.log(`🚀 Skynet is active`)
+})

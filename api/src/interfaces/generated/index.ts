@@ -58,6 +58,12 @@ export type KeyInput = {
   ttl: Scalars['Int'];
 };
 
+export type MonitoringStatus = {
+  __typename?: 'MonitoringStatus';
+  isMonitoring: Scalars['Boolean'];
+  activeConnectionId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createConnection?: Maybe<MutationResult>;
@@ -67,6 +73,7 @@ export type Mutation = {
   removeKey?: Maybe<MutationResult>;
   setSettings?: Maybe<MutationResult>;
   sendCliCommand?: Maybe<CliResponse>;
+  toggleMonitoring?: Maybe<MutationResult>;
 };
 
 
@@ -103,6 +110,11 @@ export type MutationSetSettingsArgs = {
 
 export type MutationSendCliCommandArgs = {
   command: Scalars['String'];
+};
+
+
+export type MutationToggleMonitoringArgs = {
+  isMonitoring: Scalars['Boolean'];
 };
 
 export type MutationResult = {
@@ -166,4 +178,9 @@ export type Settings = {
 export type SettingsInput = {
   willPromptBeforeDelete: Scalars['Boolean'];
   willSaveCliOutput: Scalars['Boolean'];
+};
+
+export type Subscriptions = {
+  __typename?: 'Subscriptions';
+  monitor: Scalars['String'];
 };

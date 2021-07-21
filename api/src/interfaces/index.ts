@@ -17,6 +17,13 @@ export type Resolver<ReturnType, Variables = Record<string, string>> = (
   }
 ) => Promise<ReturnType>
 
+export type SubscriptionResolver<ReturnType, Variables = Record<string, string>> = (
+  variables: Variables,
+  context: {
+    Client: JsonDB
+  }
+) => AsyncGenerator<ReturnType>
+
 /** Configuration for Red Five */
 export interface AppConfig {
   connections: Connection[]

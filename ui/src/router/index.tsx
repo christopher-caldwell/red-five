@@ -7,6 +7,7 @@ import { Routes } from './routes'
 
 const Keys = lazy(() => import('views/keys'))
 const CLI = lazy(() => import('views/cli'))
+const Monitor = lazy(() => import('views/monitor'))
 
 const Router: FC = () => {
   return (
@@ -15,6 +16,7 @@ const Router: FC = () => {
       <Suspense fallback={<span />}>
         <Spacer>
           <Switch>
+            <Route path={Routes.Monitor} component={Monitor} />
             <Route path={Routes.Keys} component={Keys} />
             <Route path={Routes.CLI} component={CLI} />
           </Switch>
