@@ -23,7 +23,7 @@ const ConnectionDisplay: FC = () => {
       <div>
         <DataGridOuterContainer>
           <DataGridInnerContainer>
-            <DataGrid columns={columns} rows={connections} />
+            <DataGrid disableColumnSelector disableSelectionOnClick columns={columns} rows={connections} />
           </DataGridInnerContainer>
         </DataGridOuterContainer>
       </div>
@@ -40,7 +40,7 @@ const columns: GridColDef[] = [
     sortable: false,
     renderCell: params => <MakeActive {...(params.row as Connection)} />
   },
-  { field: 'name', headerName: 'Name', flex: 0.45 },
+  { field: 'name', headerName: 'Name', flex: 0.35, disableColumnMenu: true },
   {
     field: 'host',
     headerName: 'Host',
@@ -50,7 +50,7 @@ const columns: GridColDef[] = [
     field: 'edit',
     headerName: 'Edit',
     headerAlign: 'center',
-    flex: 0.4,
+    flex: 0.3,
     disableColumnMenu: true,
     sortable: false,
     renderCell: ({ id }) => {

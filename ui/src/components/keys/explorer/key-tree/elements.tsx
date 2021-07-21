@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { LinearProgress } from '@material-ui/core'
 import { TreeView, Alert } from '@material-ui/lab'
 
 import { warning } from 'constants/styles'
@@ -33,4 +34,9 @@ export const KeysTreeView = styled(TreeView)`
 
 export const NoResultsAlert = styled(Alert)`
   background-color: ${warning};
+`
+
+export const LoadingSpinner = styled(LinearProgress)`
+  margin-top: 5%;
+  width: 100%;
 `

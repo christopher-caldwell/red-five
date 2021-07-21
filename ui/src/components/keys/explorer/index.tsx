@@ -1,6 +1,4 @@
 import { FC, SetStateAction, Dispatch } from 'react'
-
-import { LinearProgress } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 
 import SpeedDials from 'components/shared/speed-dial'
@@ -21,9 +19,8 @@ const Explorer: FC<Props> = props => {
     <KeyDrawer {...props}>
       <FlexContainer align='flex-start' justify='space-between'>
         <FlexContainer width='80%' justify='flex-start' direction='column'>
-          <InputWithIcon icon={<SearchIcon />} bind={searchTermBind} label='Search Keys' />
-          {isLoading ? <LinearProgress variant='indeterminate' /> : null}
-          <KeyTree searchTerm={searchTerm} namespaces={namespaces} />
+          <InputWithIcon disabled={isLoading} icon={<SearchIcon />} bind={searchTermBind} label='Search Keys' />
+          <KeyTree isLoading={isLoading} searchTerm={searchTerm} namespaces={namespaces} />
         </FlexContainer>
         <FlexContainer width='20%'>
           <SpeedDials refresh={refetch} />

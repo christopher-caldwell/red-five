@@ -30,7 +30,7 @@ testActiveConnection: ConnectionTestResponse!
 `
 
 export const ConnectionMutations = `#graphql
-createConnection(connection: ConnectionInput!): MutationResult
+createConnection(connection: ConnectionInput!, makeActive: Boolean): MutationResult
 removeConnection(id: String!): MutationResult
 makeConnectionActive(id: String): MutationResult
 `

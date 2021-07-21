@@ -9,9 +9,9 @@ import Fuse from 'fuse.js'
 import { NameSpacedKeys, Key } from 'generated'
 import { activeKeyAtom } from 'store'
 import { Routes } from 'router/routes'
-import { KeysTreeView, NoResultsAlert } from './elements'
+import { KeysTreeView, NoResultsAlert, LoadingSpinner } from './elements'
 
-const KeyTree: FC<Props> = ({ namespaces, searchTerm }) => {
+const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
   const { pathname } = useLocation()
   const { push } = useHistory()
   const setActiveKey = useSetRecoilState(activeKeyAtom)
@@ -27,6 +27,8 @@ const KeyTree: FC<Props> = ({ namespaces, searchTerm }) => {
     },
     [setActiveKey, push, pathname]
   )
+
+  if (isLoading) return <LoadingSpinner variant='indeterminate' />
   return (
     <KeysTreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
       {results.length ? (
@@ -78,6 +80,7 @@ type Namespace = Pick<NameSpacedKeys, 'name'> & {
 interface Props {
   namespaces: Namespace[]
   searchTerm: string
+  isLoading: boolean
 }
 
 export default KeyTree

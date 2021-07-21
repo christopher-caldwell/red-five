@@ -13,6 +13,9 @@ export const Window = styled.div`
   flex-flow: column-reverse;
   padding: 1%;
   overflow: scroll;
-  height: 70vh;
+  height: 65vh;
   margin-top: 10px;
+  @media screen and (min-width: 1500px) {
+    height: 70vh;
+  }
 `

@@ -72,6 +72,7 @@ export type Mutation = {
 
 export type MutationCreateConnectionArgs = {
   connection: ConnectionInput;
+  makeActive?: Maybe<Scalars['Boolean']>;
 };
 
 

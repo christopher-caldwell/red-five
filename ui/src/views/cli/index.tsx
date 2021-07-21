@@ -1,26 +1,34 @@
 import { FC, useCallback, ChangeEvent, FormEvent, useState } from 'react'
-// import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
-import { FormControl, InputLabel, Switch, FormControlLabel, LinearProgress, InputBase } from '@material-ui/core'
+import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
 import { ClientError } from 'graphql-request'
 import ChevronRight from '@material-ui/icons/ChevronRight'
-import { InlineSuggest } from 'react-inline-suggest'
 import 'react-inline-suggest/dist/react-inline-suggest.css'
 
 import { useSendCliCommandMutation, useTestActiveConnectionQuery } from 'generated'
-import { useInput } from 'hooks'
 import CLIWindow from 'components/cli'
 import { FlexContainer, Snackbar } from 'components/shared'
 import Status from 'components/cli/status'
 import { useUpdateSettings } from 'utils/settings'
-import { removeItemFromLocalStorage, previousOutputKey } from 'utils/local-storage'
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+  previousOutputKey,
+  previousCommandsKey,
+  pushToLocalStorageArray
+} from 'utils/local-storage'
 import { Container, CommandPrompt } from './elements'
 
+const previousCommandsFromLS = getItemFromLocalStorage<string[]>(previousCommandsKey) || []
+
 const Cli: FC = () => {
-  const [newCommand, setCommand] = useState('')
-  const handleChangeCommand = useCallback((e: FormEvent<HTMLInputElement>) => {
-    setCommand(e.currentTarget.value)
+  const [previousCommands, setPreviousCommands] = useState(previousCommandsFromLS)
+  const [command, setCommand] = useState('')
+  const handleChangeCommand = useCallback((newCommand: string) => {
+    setCommand(newCommand)
   }, [])
-  const [command, commandBind, { resetValue: resetCommand }] = useInput('')
+  const resetCommand = useCallback(() => {
+    setCommand('')
+  }, [])
   const [iseSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const { settings, updateSettings, isUpdateSettingsError } = useUpdateSettings()
   const { data: isConnectedData, isError: isConnectedError } = useTestActiveConnectionQuery()
@@ -45,6 +53,8 @@ const Cli: FC = () => {
   const sendCommand = useCallback(
     async (event: FormEvent<HTMLFormElement | HTMLButtonElement>) => {
       event.preventDefault()
+      pushToLocalStorageArray(previousCommandsKey, command, true)
+      setPreviousCommands(currentCommands => [...currentCommands, command])
       mutate({ command })
       if (!error) resetCommand()
     },
@@ -64,12 +74,21 @@ const Cli: FC = () => {
         {isLoading ? <LinearProgress variant='indeterminate' /> : null}
         <CLIWindow response={response} />
         <form onSubmit={sendCommand}>
-          <InlineSuggest
-            value={newCommand}
-            onChange={handleChangeCommand}
-            haystack={['yooooooo']}
-            onMatch={v => console.log(v)}
-            ignoreCase={false}
+          <CommandPrompt
+            onInputChange={handleChangeCommand}
+            suggestions={previousCommands}
+            textFieldProps={{
+              variant: 'outlined',
+              margin: 'normal',
+              fullWidth: true,
+              InputProps: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <ChevronRight />
+                  </InputAdornment>
+                )
+              }
+            }}
           />
 
           <button type='submit' hidden={true} onSubmit={sendCommand} />
