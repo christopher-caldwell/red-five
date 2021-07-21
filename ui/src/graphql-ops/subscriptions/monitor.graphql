@@ -1,0 +1,6 @@
+subscription monitorMessage {
+  monitorMessage {
+    time
+    args
+  }
+}

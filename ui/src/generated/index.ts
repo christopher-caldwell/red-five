@@ -56,6 +56,18 @@ export type KeyInput = {
   ttl: Scalars['Int'];
 };
 
+export type MonitoringMessage = {
+  time: Scalars['Float'];
+  args: Array<Scalars['String']>;
+  source: Scalars['String'];
+  database: Scalars['String'];
+};
+
+export type MonitoringStatus = {
+  isMonitoring: Scalars['Boolean'];
+  activeConnectionId: Scalars['String'];
+};
+
 export type Mutation = {
   createConnection?: Maybe<MutationResult>;
   removeConnection?: Maybe<MutationResult>;
@@ -64,11 +76,13 @@ export type Mutation = {
   removeKey?: Maybe<MutationResult>;
   setSettings?: Maybe<MutationResult>;
   sendCliCommand?: Maybe<CliResponse>;
+  toggleMonitoring?: Maybe<MutationResult>;
 };
 
 
 export type MutationCreateConnectionArgs = {
   connection: ConnectionInput;
+  makeActive?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -101,6 +115,11 @@ export type MutationSendCliCommandArgs = {
   command: Scalars['String'];
 };
 
+
+export type MutationToggleMonitoringArgs = {
+  isMonitoring: Scalars['Boolean'];
+};
+
 export type MutationResult = {
   status: Scalars['Int'];
   message?: Maybe<Scalars['String']>;
@@ -125,6 +144,7 @@ export type Query = {
   keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
   settings: Settings;
+  monitoringStatus?: Maybe<MonitoringStatus>;
 };
 
 
@@ -157,6 +177,10 @@ export type Settings = {
 export type SettingsInput = {
   willPromptBeforeDelete: Scalars['Boolean'];
   willSaveCliOutput: Scalars['Boolean'];
+};
+
+export type Subscription = {
+  monitorMessage: MonitoringMessage;
 };
 
 export type CreateConnectionMutationVariables = Exact<{
@@ -208,10 +232,22 @@ export type SetSettingsMutationVariables = Exact<{
 
 export type SetSettingsMutation = { setSettings?: Maybe<Pick<MutationResult, 'message'>> };
 
+export type ToggleMonitoringMutationVariables = Exact<{
+  isMonitoring: Scalars['Boolean'];
+}>;
+
+
+export type ToggleMonitoringMutation = { toggleMonitoring?: Maybe<Pick<MutationResult, 'status'>> };
+
 export type ActiveConnectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ActiveConnectionQuery = { activeConnection?: Maybe<Pick<Connection, 'id' | 'name'>> };
+
+export type MonitoringStatusQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MonitoringStatusQuery = { monitoringStatus?: Maybe<Pick<MonitoringStatus, 'isMonitoring'>> };
 
 export type ConnectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -242,6 +278,11 @@ export type TestActiveConnectionQueryVariables = Exact<{ [key: string]: never; }
 
 
 export type TestActiveConnectionQuery = { testActiveConnection: Pick<ConnectionTestResponse, 'connected'> };
+
+export type MonitorMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MonitorMessageSubscription = { monitorMessage: Pick<MonitoringMessage, 'time' | 'args'> };
 
 
 export const CreateConnectionDocument = `
@@ -352,6 +393,21 @@ export const useSetSettingsMutation = <
       (variables?: SetSettingsMutationVariables) => runQuery<SetSettingsMutation, SetSettingsMutationVariables>(SetSettingsDocument, variables)(),
       options
     );
+export const ToggleMonitoringDocument = `
+    mutation toggleMonitoring($isMonitoring: Boolean!) {
+  toggleMonitoring(isMonitoring: $isMonitoring) {
+    status
+  }
+}
+    `;
+export const useToggleMonitoringMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<ToggleMonitoringMutation, TError, ToggleMonitoringMutationVariables, TContext>) => 
+    useMutation<ToggleMonitoringMutation, TError, ToggleMonitoringMutationVariables, TContext>(
+      (variables?: ToggleMonitoringMutationVariables) => runQuery<ToggleMonitoringMutation, ToggleMonitoringMutationVariables>(ToggleMonitoringDocument, variables)(),
+      options
+    );
 export const ActiveConnectionDocument = `
     query activeConnection {
   activeConnection {
@@ -373,6 +429,27 @@ export const useActiveConnectionQuery = <
       options
     );
 useActiveConnectionQuery.getKey = (variables?: ActiveConnectionQueryVariables) => ['activeConnection', variables];
+
+export const MonitoringStatusDocument = `
+    query monitoringStatus {
+  monitoringStatus {
+    isMonitoring
+  }
+}
+    `;
+export const useMonitoringStatusQuery = <
+      TData = MonitoringStatusQuery,
+      TError = unknown
+    >(
+      variables?: MonitoringStatusQueryVariables, 
+      options?: UseQueryOptions<MonitoringStatusQuery, TError, TData>
+    ) => 
+    useQuery<MonitoringStatusQuery, TError, TData>(
+      ['monitoringStatus', variables],
+      runQuery<MonitoringStatusQuery, MonitoringStatusQueryVariables>(MonitoringStatusDocument, variables),
+      options
+    );
+useMonitoringStatusQuery.getKey = (variables?: MonitoringStatusQueryVariables) => ['monitoringStatus', variables];
 
 export const ConnectionsDocument = `
     query connections {
@@ -494,3 +571,12 @@ export const useTestActiveConnectionQuery = <
       options
     );
 useTestActiveConnectionQuery.getKey = (variables?: TestActiveConnectionQueryVariables) => ['testActiveConnection', variables];
+
+export const MonitorMessageDocument = `
+    subscription monitorMessage {
+  monitorMessage {
+    time
+    args
+  }
+}
+    `;

@@ -5,9 +5,15 @@ const MonitorSchema = `#graphql
     isMonitoring: Boolean!
     activeConnectionId: String!
   }
+  type MonitoringMessage {
+    time: Float!
+    args: [String!]!
+    source: String!
+    database: String!
+  }
 `
 
-export const ConnectionQueries = `#graphql
+export const MonitorQueries = `#graphql
 monitoringStatus: MonitoringStatus
 `
 
@@ -16,7 +22,7 @@ toggleMonitoring(isMonitoring: Boolean!): MutationResult
 `
 
 export const MonitorSubscriptions = `#graphql
-monitor: String!
+monitorMessage: MonitoringMessage!
 `
 
 export const FinalMonitorSchema = stitchSchema(MonitorSchema)

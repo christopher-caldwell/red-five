@@ -1,6 +1,6 @@
 import { JsonDB } from 'node-json-db'
 
-import { Settings, Connection } from './generated'
+import { Settings, Connection, MonitoringStatus } from './generated'
 
 /** A standard mutation response.
  *
@@ -29,6 +29,7 @@ export interface AppConfig {
   connections: Connection[]
   activeConnection?: string
   settings?: Settings
+  isMonitoring: MonitoringStatus
 }
 
 export * from './generated'

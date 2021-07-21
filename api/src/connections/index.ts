@@ -4,6 +4,7 @@ import { JsonDB } from 'node-json-db'
 import { getActiveConnectionConfig } from '@/db'
 
 export const connections: Record<string, Redis> = {}
+export const monitoredConnections: Record<string, Redis> = {}
 
 export const getActiveConnection = (Client: JsonDB): Redis => {
   const activeConnectionConfig = getActiveConnectionConfig(Client)

@@ -1,8 +1,11 @@
-import { getActiveConnectionConfig } from '@/db'
+import { getActiveConnectionConfig, createIfNotExists } from '@/db'
 import { Resolver, MonitoringStatus } from '@/interfaces'
 
 export const monitoringStatus: Resolver<MonitoringStatus> = async ({}, { Client }) => {
   const connection = getActiveConnectionConfig(Client)
   if (!connection) throw new Error('No active connection')
-  return Client.getObject<MonitoringStatus>('/isMonitoring')
+  return createIfNotExists<MonitoringStatus>(Client, '/isMonitoring', {
+    isMonitoring: false,
+    activeConnectionId: connection.id
+  })
 }

@@ -6,7 +6,7 @@ import { ConnectionMutations, ConnectionQueries, ConnectionsSchema } from './con
 import { KeyMutations, KeyQueries, KeysSchema } from './keys'
 import { SettingsMutations, SettingsQueries, FinalSettingsSchema } from './settings'
 import { CliMutations, CliSchema } from './cli'
-import { FinalMonitorSchema, MonitorMutations } from './monitor' // MonitorSubscriptions
+import { FinalMonitorSchema, MonitorQueries, MonitorMutations, MonitorSubscriptions } from './monitor'
 
 const schemas = stitchSchema(
   ConnectionsSchema,
@@ -18,7 +18,7 @@ const schemas = stitchSchema(
 )
 const queries = `#graphql
   type Query {
-    ${stitchSchema(ConnectionQueries, KeyQueries, SettingsQueries)}
+    ${stitchSchema(ConnectionQueries, KeyQueries, SettingsQueries, MonitorQueries)}
   }
 `
 
@@ -30,7 +30,7 @@ const mutations = `#graphql
 
 const subscriptions = `#graphql
   type Subscription {
-    greetings: String
+    ${stitchSchema(MonitorSubscriptions)}
   }
 `
 

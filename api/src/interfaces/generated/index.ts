@@ -58,6 +58,14 @@ export type KeyInput = {
   ttl: Scalars['Int'];
 };
 
+export type MonitoringMessage = {
+  __typename?: 'MonitoringMessage';
+  time: Scalars['Float'];
+  args: Array<Scalars['String']>;
+  source: Scalars['String'];
+  database: Scalars['String'];
+};
+
 export type MonitoringStatus = {
   __typename?: 'MonitoringStatus';
   isMonitoring: Scalars['Boolean'];
@@ -145,6 +153,7 @@ export type Query = {
   keys: Array<Key>;
   namespacedKeys: NamespaceKeyResult;
   settings: Settings;
+  monitoringStatus?: Maybe<MonitoringStatus>;
 };
 
 
@@ -180,7 +189,7 @@ export type SettingsInput = {
   willSaveCliOutput: Scalars['Boolean'];
 };
 
-export type Subscriptions = {
-  __typename?: 'Subscriptions';
-  monitor: Scalars['String'];
+export type Subscription = {
+  __typename?: 'Subscription';
+  monitorMessage: MonitoringMessage;
 };

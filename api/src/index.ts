@@ -9,30 +9,35 @@ import './connections'
 import { resolvers, schema, subscription } from './schema'
 
 const app = express()
-const db = loadConfig()
-
 app.use(cors())
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    rootValue: resolvers,
-    context: { Client: db }
-  })
-)
 
-const server = app.listen(5000, () => {
-  const wsServer = new ws.Server({
-    server,
-    path: '/graphql'
-  })
-
-  useServer(
-    {
+const run = async () => {
+  const db = await loadConfig()
+  app.use(
+    '/graphql',
+    graphqlHTTP({
       schema,
-      roots: { subscription }
-    },
-    wsServer
+      rootValue: resolvers,
+      context: { Client: db }
+    })
   )
-  console.log(`🚀 Skynet is active`)
-})
+
+  const server = app.listen(5000, () => {
+    const wsServer = new ws.Server({
+      server,
+      path: '/graphql'
+    })
+
+    useServer(
+      {
+        schema,
+        roots: { subscription },
+        context: { Client: db }
+      },
+      wsServer
+    )
+    console.log(`🚀 Skynet is active`)
+  })
+}
+
+run()
