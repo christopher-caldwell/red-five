@@ -6,10 +6,9 @@ import cors from 'cors'
 
 import { loadConfig } from './db'
 import './connections'
-import { resolvers, schema } from './schema'
+import { resolvers, schema, subscription } from './schema'
 
 const app = express()
-
 const db = loadConfig()
 
 app.use(cors())
@@ -23,12 +22,17 @@ app.use(
 )
 
 const server = app.listen(5000, () => {
-  // create and use the websocket server
   const wsServer = new ws.Server({
     server,
     path: '/graphql'
   })
 
-  useServer({ schema }, wsServer)
+  useServer(
+    {
+      schema,
+      roots: { subscription }
+    },
+    wsServer
+  )
   console.log(`🚀 Skynet is active`)
 })

@@ -1,13 +1,26 @@
 import { FC, useEffect } from 'react'
 
-import { subscribe } from 'client/subscriptions'
+import { execute } from 'client/subscriptions'
 
-const onNext = (incoming: string) => console.log('incoming', incoming)
+// const onNext = (incoming: string) => console.log('incoming', incoming)
 
 const Monitor: FC = () => {
   useEffect(() => {
-    const main = () => subscribe<string>('subscription { monitor }', onNext)
-    main()
+    const main = async () => {
+      await execute<string>(
+        {
+          query: 'subscription { greetings }'
+        },
+        data => {
+          console.log('data', data)
+        }
+      )
+    }
+    try {
+      main()
+    } catch (error) {
+      console.error(error)
+    }
   }, [])
 
   return <div>Testing 1,2,3</div>
