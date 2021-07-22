@@ -1,40 +1,36 @@
 import { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react'
 import { useQueryClient } from 'react-query'
-import { useRecoilValue } from 'recoil'
+import { ClientError } from 'graphql-request'
 
-import { useKeyQuery, useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery } from 'generated'
-import { activeKeyAtom } from 'store'
+import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, Key } from 'generated'
 import { Snackbar } from 'components/shared'
 import { useInput } from 'hooks'
 
 const connectionsKey = useConnectionsQuery.getKey()
 const namespacedKeys = useNamespacedKeysQuery.getKey()
 
-export const useEditKeys = () => {
+export const useEditKeys = (
+  key: Pick<Key, 'value' | 'type' | 'ttl'> | undefined,
+  refetchKey: () => void,
+  keyId?: string
+) => {
   const queryClient = useQueryClient()
-  const keyId = useRecoilValue(activeKeyAtom)
   const [shouldViewAsJson, setShouldViewAsJson] = useState(false)
   const [isSnackbarShown, setIsSnackbarShown] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const { data, isLoading, isError, refetch } = useKeyQuery(
-    {
-      id: keyId || ''
-    },
-    {
-      enabled: !!keyId
-    }
-  )
 
-  const { mutateAsync: setKey, isLoading: isSetLoading } = useSetKeyMutation({
+  const {
+    mutateAsync: setKey,
+    isLoading: isSetLoading,
+    error: isEditError
+  } = useSetKeyMutation<ClientError>({
     onSuccess() {
-      refetch()
+      refetchKey()
       setIsSnackbarShown(true)
       queryClient.invalidateQueries(connectionsKey)
       queryClient.invalidateQueries(namespacedKeys)
     }
   })
-
-  const key = data?.key
   const [editedTtl, editedTtlBind, { setValue: setEditedTtl, resetValue: resetEditedTtl }] = useInput('')
   const [editedValue, editedValueBind, { setValue: setEditedValue, resetValue: resetEditedValue }] = useInput('')
 
@@ -68,13 +64,13 @@ export const useEditKeys = () => {
   const EditSnackbar = useMemo(
     () => (
       <Snackbar
-        severity={isError ? 'error' : 'success'}
-        message={isError ? 'Something went wrong' : 'Done'}
+        severity={isEditError ? 'error' : 'success'}
+        message={isEditError ? 'Something went wrong' : 'Done'}
         setIsOpen={setIsSnackbarShown}
         isOpen={isSnackbarShown}
       />
     ),
-    [isSnackbarShown, setIsSnackbarShown, isError]
+    [isSnackbarShown, setIsSnackbarShown, isEditError]
   )
 
   return {
@@ -88,8 +84,6 @@ export const useEditKeys = () => {
     handleSaveKey,
     shouldViewAsJson,
     isEditing,
-    isLoading,
-    isError,
     isSetLoading,
     EditSnackbar
   }

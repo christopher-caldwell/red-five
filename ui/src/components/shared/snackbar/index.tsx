@@ -23,5 +23,5 @@ interface Props {
   severity: AlertProps['severity']
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
-  autoHideDuration?: number
+  autoHideDuration?: number | null
 }

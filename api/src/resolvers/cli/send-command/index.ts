@@ -1,16 +1,18 @@
 import { serializeError } from 'serialize-error'
+
 import { Resolver, CliResponse } from '@/interfaces'
 import { getActiveConnection } from '@/connections'
+import { stitchArrayValuesIntoString } from '@/utils'
 
 export const sendCliCommand: Resolver<CliResponse, GetOneKeyArgs> = async ({ command }, { Client }) => {
   const redis = getActiveConnection(Client)
   try {
     const { baseCommand, commandArgs = [] } = parseCommand(command)
     const response = await redis.send_command(baseCommand, commandArgs)
-    console.log('response', response)
+    const formattedResponse = stitchArrayValuesIntoString(response)
     return {
       time: Date.now(),
-      message: response,
+      message: formattedResponse,
       command
     }
   } catch (e) {
