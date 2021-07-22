@@ -1,4 +1,4 @@
-mutation toggleMonitoring($isMonitoring: Boolean!){
+mutation toggleMonitoring($isMonitoring: Boolean!) {
   toggleMonitoring(isMonitoring: $isMonitoring) {
     status
   }

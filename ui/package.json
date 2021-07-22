@@ -34,11 +34,12 @@
     "format": "prettier --write src",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "lint": "tsc --noEmit && eslint --ext .tsx,.ts,.js src",
+    "pre-build": "sh scripts/pre-build.sh",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "nodemon --exec \"yarn graphql:codegen\" --ext .graphql --delay 5",
     "start": ". env/.env.local && react-scripts start",
     "start:codegen": "concurrently \"yarn start\" \"yarn graphql:codegen:watch\"",
-    "build": "react-scripts build",
+    "build": ". env/.env && react-scripts build",
     "test": "react-scripts test"
   },
   "browserslist": {

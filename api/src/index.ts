@@ -22,7 +22,7 @@ const run = async () => {
     })
   )
 
-  const server = app.listen(5000, () => {
+  const server = app.listen(5001, () => {
     const wsServer = new ws.Server({
       server,
       path: '/graphql'
@@ -38,6 +38,14 @@ const run = async () => {
     )
     console.log(`🚀 Skynet is active`)
   })
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+    const path = require('path')
+    app.get('*', (_, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+  }
 }
 
 run()
