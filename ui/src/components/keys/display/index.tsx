@@ -6,10 +6,10 @@ import Highlight from 'react-highlight.js'
 import stringify from 'json-stringify-pretty-compact'
 
 import { FlexContainer, Button, BottomFab } from 'components/shared'
-import KeyMeta from './Meta'
+import KeyMeta from './meta'
 import { ViewAsJsonFormControl, HighlightContainer } from './elements'
-import { useEditKeys } from './useEditKeys'
-import { useRemoveKey } from './useRemoveKey'
+import { useEditKeys } from './hooks/useEditKeys'
+import { useRemoveKey } from './hooks/useRemoveKey'
 import 'styles/theme.css'
 
 const Display: FC<Props> = ({ width }) => {

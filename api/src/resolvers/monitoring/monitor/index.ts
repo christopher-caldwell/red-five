@@ -20,16 +20,13 @@ export const monitorMessage: SubscriptionResolver<{ monitorMessage: MonitoringMe
     resolve()
     promise = new Promise(r => (resolve = r))
   })
-  monitoredInstance.on('done', () => {
-    done = true
-  })
   monitoredInstance.on('end', () => {
-    console.log('done')
+    console.log('end')
     done = true
   })
   while (!done) {
     await promise
-    yield { monitorMessage: messages[0] }
+    if (messages[0]) yield { monitorMessage: messages[0] }
     messages = []
   }
 }

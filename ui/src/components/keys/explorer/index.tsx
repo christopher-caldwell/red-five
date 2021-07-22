@@ -1,11 +1,11 @@
 import { FC, SetStateAction, Dispatch } from 'react'
 import SearchIcon from '@material-ui/icons/Search'
 
-import SpeedDials from 'components/shared/speed-dial'
 import { useActiveConnectionQuery, useNamespacedKeysQuery } from 'generated'
 import { useInput } from 'hooks/useInput'
 import { FlexContainer, InputWithIcon } from 'components/shared'
-import KeyDrawer from './KeyDrawer'
+import KeyDrawer from './key-drawer'
+import SpeedDials from './speed-dial'
 import KeyTree from './key-tree'
 
 const Explorer: FC<Props> = props => {

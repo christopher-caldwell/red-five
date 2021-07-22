@@ -19,6 +19,7 @@ export const toggleMonitoring: Resolver<MutationResult, ToggleMonitoringArgs> = 
   } else {
     const monitoredConnection = monitoredConnections[activeConnectionId]
     if (monitoredConnection) monitoredConnection.disconnect()
+    else throw new Error('Cannot find connection to disconnect from')
   }
   return {
     status: 200
