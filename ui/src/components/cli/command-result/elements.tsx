@@ -13,5 +13,5 @@ export const TimeContainer = styled(FlexContainer)`
 
 export const MessageContainer = styled.div`
   width: 100%;
-  margin: 10px 0;
+  padding: 10px 0;
 `

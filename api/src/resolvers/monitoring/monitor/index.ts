@@ -16,13 +16,11 @@ export const monitorMessage: SubscriptionResolver<{ monitorMessage: MonitoringMe
   let messages: MonitoringMessage[] = []
   let done = false
   monitoredInstance.on('monitor', (time: string, args: string[], source: string, database: string) => {
-    console.log({ time, args, source, database })
     messages.push({ time: Number(time) * 1000, args, source, database })
     resolve()
     promise = new Promise(r => (resolve = r))
   })
   monitoredInstance.on('done', () => {
-    console.log('done')
     done = true
   })
   monitoredInstance.on('end', () => {

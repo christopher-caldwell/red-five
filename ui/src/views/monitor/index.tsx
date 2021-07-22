@@ -1,6 +1,7 @@
-import { FC, useState, useEffect, useCallback, ChangeEvent } from 'react'
+import { FC, useState, useEffect, useCallback, ChangeEvent, useRef } from 'react'
 import { Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
 import { useQueryClient } from 'react-query'
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
 
 import { Window } from 'components/cli/elements'
 import { execute } from 'client/subscriptions'
@@ -20,7 +21,7 @@ const isMonitoringKey = useMonitoringStatusQuery.getKey()
 const Monitor: FC = () => {
   const [messages, setMessages] = useState<MonitoringMessage[]>([])
   const queryClient = useQueryClient()
-  const { data: isConnectedData, isError: isConnectedError } = useTestActiveConnectionQuery()
+  const { data: isConnectedData, isError: isConnectedError } = useTestActiveConnectionQuery({}, { staleTime: 0 })
   const isConnected = !!isConnectedData && !isConnectedError
   const { data, isLoading } = useMonitoringStatusQuery()
   const { mutate } = useToggleMonitoringMutation({
@@ -29,6 +30,7 @@ const Monitor: FC = () => {
     }
   })
 
+  const virtuosoRef = useRef<VirtuosoHandle>(null)
   const isMonitoring = !!data?.monitoringStatus?.isMonitoring
 
   const handleMonitoringToggle = useCallback(
@@ -45,8 +47,7 @@ const Monitor: FC = () => {
           query: 'subscription { monitorMessage { time args source } }'
         },
         data => {
-          console.log('data', data)
-          setMessages(currentMessages => [data?.data?.monitorMessage, ...currentMessages])
+          setMessages(currentMessages => [...currentMessages, data?.data?.monitorMessage])
         }
       )
     }
@@ -69,9 +70,15 @@ const Monitor: FC = () => {
         </FlexContainer>
         {isLoading ? <LinearProgress variant='indeterminate' /> : null}
         <Window>
-          {messages.map(result => (
-            <MonitorMessage key={result.time} {...result} />
-          ))}
+          <Virtuoso
+            style={{ height: '700px' }}
+            ref={virtuosoRef}
+            data={messages}
+            followOutput='smooth'
+            itemContent={(_, message) => {
+              return <MonitorMessage {...message} />
+            }}
+          />
         </Window>
       </Container>
     </>
