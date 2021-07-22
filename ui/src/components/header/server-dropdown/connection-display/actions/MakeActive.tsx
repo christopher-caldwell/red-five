@@ -6,10 +6,10 @@ import { useMakConnectionActiveMutation, Connection } from 'generated'
 import { FlexContainer } from 'components/shared'
 
 const MakeActive: FC<Connection> = ({ id, isActive }) => {
-  const queryCache = useQueryClient().getQueryCache()
+  const queryClient = useQueryClient()
   const { mutate } = useMakConnectionActiveMutation({
     onSuccess() {
-      queryCache.clear()
+      queryClient.invalidateQueries()
     }
   })
 
