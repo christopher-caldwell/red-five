@@ -1,16 +1,14 @@
 const { resolve } = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const nodeExternals = require('webpack-node-externals')
 
 const rootPath = resolve(process.cwd())
-const srcPath = resolve(rootPath, '/src')
+const srcPath = resolve(rootPath, '/src/index.ts')
 
 const config = {
   mode: 'production',
   stats: 'minimal',
   context: rootPath,
   entry: srcPath,
-  // externals: [nodeExternals()],
   resolve: {
     alias: {
       '@': resolve(process.cwd(), 'src/')
@@ -27,10 +25,7 @@ const config = {
     rules: [
       {
         test: /\.ts(x?)$/,
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true
-        }
+        loader: 'ts-loader'
       }
     ]
   }
