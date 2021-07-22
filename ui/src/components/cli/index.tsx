@@ -16,7 +16,7 @@ const CLIWindow: FC<Props> = ({ response }) => {
     const { time, message, command } = response || {}
     if (!time || !command) return
     setMessages(currentMessages => {
-      const newOutput = [{ message, time, command }, ...currentMessages]
+      const newOutput = [...currentMessages, { message, time, command }]
       if (settings?.willSaveCliOutput) writeToLocalStorage(previousOutputKey, newOutput)
       return newOutput
     })
@@ -26,6 +26,7 @@ const CLIWindow: FC<Props> = ({ response }) => {
     <Window>
       <Virtuoso
         data={messages}
+        followOutput='smooth'
         initialTopMostItemIndex={messages.length - 1}
         itemContent={(_, message) => {
           return <CommandResult {...message} />

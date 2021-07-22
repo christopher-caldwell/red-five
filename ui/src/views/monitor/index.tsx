@@ -7,6 +7,7 @@ import { Window } from 'components/cli/elements'
 import { execute } from 'client/subscriptions'
 import { Container } from 'views/cli/elements'
 import { FlexContainer } from 'components/shared'
+import MonitoringDisclaimer from 'components/monitor/disclaimer'
 import Status from 'components/cli/status'
 import MonitorMessage from 'components/monitor/monitor-message'
 import {
@@ -63,10 +64,13 @@ const Monitor: FC = () => {
       <Container>
         <FlexContainer justify='space-between'>
           <Status isConnected={isConnected && isMonitoring} />
-          <FormControlLabel
-            control={<Switch checked={isMonitoring} onChange={handleMonitoringToggle} color='primary' />}
-            label='Monitor this connection'
-          />
+          <FlexContainer>
+            <FormControlLabel
+              control={<Switch checked={isMonitoring} onChange={handleMonitoringToggle} color='primary' />}
+              label='Monitor this connection'
+            />
+            <MonitoringDisclaimer />
+          </FlexContainer>
         </FlexContainer>
         {isLoading ? <LinearProgress variant='indeterminate' /> : null}
         <Window>
