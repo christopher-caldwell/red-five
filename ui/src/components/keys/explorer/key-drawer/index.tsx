@@ -1,7 +1,7 @@
 import { FC, useRef, Dispatch, SetStateAction } from 'react'
 import { Drawer } from '@material-ui/core'
 
-import { Root, Dragger } from './key-tree/elements'
+import { Root, Dragger } from '../key-tree/elements'
 import styles from './drawer.module.sass'
 
 let isResizing = false

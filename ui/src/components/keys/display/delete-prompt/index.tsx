@@ -17,7 +17,7 @@ const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
 
   const toggleSuppressDialog = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
-      await updateSettings('willPromptBeforeDelete', event.target.checked)
+      updateSettings('willPromptBeforeDelete', event.target.checked)
       setWillSuppressDialogs(event.target.checked)
     },
     [setWillSuppressDialogs, updateSettings]

@@ -1,5 +1,6 @@
-import { FC, useMemo } from 'react'
+import { FC, useMemo, memo } from 'react'
 import ChevronRight from '@material-ui/icons/ChevronRight'
+import deepEqual from 'fast-deep-equal'
 
 import { standardFormatDate } from 'utils/dates'
 import { FlexContainer } from 'components/shared'
@@ -24,4 +25,4 @@ const CommandResult: FC<Props> = ({ time, message, command }) => {
 
 interface Props extends CliResponse {}
 
-export default CommandResult
+export default memo(CommandResult, deepEqual)

@@ -1,36 +1,24 @@
 import { ChangeEvent, FC, useCallback } from 'react'
 import { Checkbox } from '@material-ui/core'
-
-import {
-  useMakConnectionActiveMutation,
-  useConnectionsQuery,
-  Connection,
-  useNamespacedKeysQuery,
-  useActiveConnectionQuery
-} from 'generated'
-import { FlexContainer } from 'components/shared'
 import { useQueryClient } from 'react-query'
 
-const connectionsKey = useConnectionsQuery.getKey()
-const namespacedKeys = useNamespacedKeysQuery.getKey()
-const activeConnectionKey = useActiveConnectionQuery.getKey()
+import { useMakConnectionActiveMutation, Connection } from 'generated'
+import { FlexContainer } from 'components/shared'
 
 const MakeActive: FC<Connection> = ({ id, isActive }) => {
-  const queryClient = useQueryClient()
-  const { mutateAsync } = useMakConnectionActiveMutation({
+  const queryCache = useQueryClient().getQueryCache()
+  const { mutate } = useMakConnectionActiveMutation({
     onSuccess() {
-      queryClient.invalidateQueries(connectionsKey)
-      queryClient.invalidateQueries(namespacedKeys)
-      queryClient.invalidateQueries(activeConnectionKey)
+      queryCache.clear()
     }
   })
 
   const makeConnectionActive = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       if (!event.target.checked) return
-      await mutateAsync({ id })
+      mutate({ id })
     },
-    [mutateAsync, id]
+    [mutate, id]
   )
 
   return (

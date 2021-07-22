@@ -5,5 +5,5 @@ export enum Routes {
   CLI = '/cli',
   Health = '/health',
   Settings = '/settings',
-  Connections = '/connections'
+  Monitor = '/monitor'
 }

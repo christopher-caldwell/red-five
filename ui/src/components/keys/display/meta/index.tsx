@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { UseInputBind } from 'hooks'
 import { activeKeyAtom } from 'store'
 import { Key } from 'generated'
-import { KeyTitle, KeyTitleWrapper, TtlEditor } from './elements'
+import { KeyTitle, KeyTitleWrapper, TtlEditor } from '../elements'
 
 const KeyMeta: FC<Props> = ({ ttl, type, isEditing, bind }) => {
   const keyId = useRecoilValue(activeKeyAtom)

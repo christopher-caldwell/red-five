@@ -1,23 +1,25 @@
+import { Routes } from 'router/routes'
+
 export const links: Link[] = [
   {
-    to: '/keys',
+    to: Routes.Keys,
     label: 'Keys'
   },
+  // {
+  //   to: Routes.Health,
+  //   label: 'Health'
+  // },
   {
-    to: '/health',
-    label: 'Health'
-  },
-  {
-    to: '/cli',
+    to: Routes.CLI,
     label: 'CLI'
   },
   {
-    to: '/connections',
-    label: 'Connections'
+    to: Routes.Monitor,
+    label: 'Monitor'
   }
 ]
 
 export interface Link {
-  to: string
+  to: Routes
   label: string
 }
