@@ -32,7 +32,7 @@ const config = {
 }
 
 if (process.env.ANALYZE) {
-  config.plugins.push(
+  config.push(
     new BundleAnalyzerPlugin({
       analyzerMode: 'static'
     })
