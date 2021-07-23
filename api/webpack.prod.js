@@ -17,7 +17,7 @@ const config = {
   },
   output: {
     path: resolve(__dirname, 'build'),
-    filename: 'index.js'
+    filename: 'server.js'
   },
   target: 'node',
   plugins: [],
