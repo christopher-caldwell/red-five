@@ -1,6 +1,6 @@
 {
-  "name": "red-five",
-  "version": "1.0.0",
+  "name": "@caldwell619/red-five",
+  "version": "0.0.1",
   "repository": "https://github.com/christopher-caldwell/red-five.git",
   "author": "Christopher Caldwell <62559469+christopher-caldwell@users.noreply.github.com>",
   "license": "MIT",
@@ -14,6 +14,9 @@
   "bin": {
     "red-five": "./bin/index.js"
   },
+  "files": [
+    "bin/"
+  ],
   "dependencies": {
     "concurrently": "^6.2.0"
   }
