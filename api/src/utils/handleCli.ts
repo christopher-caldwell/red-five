@@ -3,7 +3,7 @@ import { hideBin } from 'yargs/helpers'
 import openBrowser from 'open'
 
 import { port } from '@/constants'
-import { setToInMemoryCache, logLevelKey } from '@/cache'
+import { logger } from '@/utils/logger'
 
 /** Handles the parsing of cmd line args, sets the config accordingly */
 export const handleCli = async () => {
@@ -16,7 +16,6 @@ export const handleCli = async () => {
       describe: 'Open browser.'
     })
     .options('log-level', {
-      // open local web-browser to connect to web ui on startup of server daemon too
       type: 'string',
       default: 'silent',
       describe: 'Log level of the running app'
@@ -26,6 +25,10 @@ export const handleCli = async () => {
     .alias('version', 'v')
     .strict().argv
 
-  if (open) await openBrowser(`http://localhost:${port}`)
-  setToInMemoryCache(logLevelKey, logLevel)
+  if (open) {
+    setTimeout(async () => {
+      await openBrowser(`http://localhost:${port}/keys`)
+    }, 4000)
+  }
+  logger.silent = logLevel === 'silent'
 }

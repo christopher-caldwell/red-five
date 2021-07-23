@@ -9,7 +9,7 @@
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "nodemon --exec \"yarn graphql:codegen\" --watch src/schema/* --delay 5",
     "dev": "nodemon --exec \"yarn start\" --ext .ts",
-    "start": ". env/.env.local && ts-node -r tsconfig-paths/register src/index.ts --open",
+    "start": ". env/.env.local && ts-node -r tsconfig-paths/register src/index.ts",
     "pre-build": "sh scripts/pre-build.sh",
     "build": "webpack --config webpack.prod.js",
     "analyze": "export ANALYZE=true && yarn build"
