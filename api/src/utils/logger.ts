@@ -2,20 +2,12 @@
 import winston from 'winston'
 
 const { format } = winston
-const { colorize, splat, simple, combine, json } = format
+const { colorize, splat, combine, simple } = format
 
 const isTest = process.env.ENV === 'test'
 
-export const conditionalColorize = () => {
-  return process.env.STAGE === 'local' ? colorize() : json()
-}
-
 export const logger = winston.createLogger({
-  format: combine(
-    conditionalColorize(),
-    splat(), // allows for value subs like `%s`
-    simple()
-  ),
+  format: combine(colorize(), splat(), simple()),
   silent: isTest,
   transports: [new winston.transports.Console()]
 })

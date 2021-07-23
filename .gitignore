@@ -2,3 +2,6 @@ dist
 node_modules
 .env.local
 build
+
+bin/client
+bin/index.js
