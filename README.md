@@ -58,6 +58,12 @@ Choose the checkbox of the connection you'd like to "make active". All operation
 
 Currently, only auth strings are supported for auth. This was all I needed, but feel free to upvote [this issue](https://github.com/christopher-caldwell/red-five/issues/7) if you'd like more options.
 
+## Configuration
+
+Your configuration is stored on your local machine at `~/.redfive/config.json`. Feel free to add your own connections manually, referencing [this structure](api/src/interfaces/index.ts#L28-L33).
+
+It is validated on load, so don't be worried about the structure being off. If you don't want to use the GUI to add your own connections, you can so here.
+
 ## Keys
 
 The is the core feature. Seeing keys, values, and TTLs. You can also edit TTLs, and the value of said key.
