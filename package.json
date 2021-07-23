@@ -12,7 +12,7 @@
     "build": "sh scripts/build.sh"
   },
   "bin": {
-    "red-five": "./bin/bin.js"
+    "red-five": "./bin/index.js"
   },
   "dependencies": {
     "concurrently": "^6.2.0"

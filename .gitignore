@@ -4,4 +4,4 @@ node_modules
 build
 
 bin/client
-bin/server.js
+bin/index.js
