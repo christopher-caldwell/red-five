@@ -2,11 +2,15 @@ import { FC, useState, useCallback } from 'react'
 import { Dialog, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
+import UpArrowIcon from '@material-ui/icons/ArrowUpward'
 
+import { useActiveConnectionQuery } from 'generated'
 import ConnectionNameInputs from './Inputs'
-import { DialogTitle, CloseDialogButton } from './elements'
+import { DialogTitle, CloseDialogButton, IndicatorIconContainer } from './elements'
 
 const CreateConnectionDialog: FC = () => {
+  const { data } = useActiveConnectionQuery()
+  const connectionName = data?.activeConnection?.name
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = useCallback(() => {
@@ -20,6 +24,11 @@ const CreateConnectionDialog: FC = () => {
     <>
       <IconButton onClick={handleClickOpen}>
         <AddIcon />
+        {connectionName ? null : (
+          <IndicatorIconContainer>
+            <UpArrowIcon />
+          </IndicatorIconContainer>
+        )}
       </IconButton>
       <Dialog onClose={handleClose} open={open}>
         <DialogTitle disableTypography>
