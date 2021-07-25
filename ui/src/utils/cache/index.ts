@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query'
 import { useConnectionsQuery, useNamespacedKeysQuery } from 'generated'
 
 const connectionsKey = useConnectionsQuery.getKey()
-const namespacedKeys = useNamespacedKeysQuery.getKey()
+const namespacedKeys = useNamespacedKeysQuery.getKey({})
 
 export const useInvalidateAllKeys = () => {
   const queryClient = useQueryClient()
