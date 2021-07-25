@@ -1,21 +1,22 @@
 import { Dispatch, FC, SetStateAction, useCallback } from 'react'
-import { useQueryClient } from 'react-query'
 import Alert from '@material-ui/lab/Alert'
 
 import { useInput } from 'hooks/useInput'
 import { Button, BaseTextField, PasswordTextField } from 'components/shared'
 import { ConnectionInput, useCreateConnectionMutation } from 'generated'
 import { DialogContent, DialogActions } from './elements'
+import { useInvalidateAllKeys } from 'utils'
 
 const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
-  const queryClient = useQueryClient()
+  const invalidateAllKeys = useInvalidateAllKeys()
   const {
-    mutateAsync: createConnection,
+    mutate: createConnection,
     isLoading,
     isError
   } = useCreateConnectionMutation({
     onSuccess() {
-      queryClient.invalidateQueries(['connections'])
+      invalidateAllKeys()
+      handleClose(false)
     }
   })
 
@@ -24,7 +25,7 @@ const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
   const [port, portBind] = useInput('')
   const [password, passwordBind] = useInput('')
 
-  const create = useCallback(async () => {
+  const create = useCallback(() => {
     const connection: ConnectionInput = {
       host,
       port: Number(port),
@@ -32,9 +33,8 @@ const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
       protocol: 'http',
       password: password || undefined
     }
-    await createConnection({ connection })
-    handleClose(false)
-  }, [createConnection, connectionName, port, host, handleClose, password])
+    createConnection({ connection })
+  }, [createConnection, connectionName, port, host, password])
 
   return (
     <>
