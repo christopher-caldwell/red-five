@@ -5,5 +5,6 @@ export enum Routes {
   CLI = '/cli',
   Health = '/health',
   Settings = '/settings',
-  Monitor = '/monitor'
+  Monitor = '/monitor',
+  NoConnectionFallback = '/no-connection'
 }

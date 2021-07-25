@@ -4,11 +4,14 @@ import { CircularProgress, IconButton } from '@material-ui/core'
 
 import { useRemoveConnectionMutation } from 'generated'
 import { Snackbar } from 'components/shared'
+import { useInvalidateAllKeys } from 'utils'
 
 const RemoveConnection: FC<Props> = ({ id }) => {
+  const invalidateAllKeys = useInvalidateAllKeys()
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const { mutate, isLoading, isError } = useRemoveConnectionMutation({
     onSettled() {
+      invalidateAllKeys()
       setIsSnackbarOpen(true)
     }
   })
