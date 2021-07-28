@@ -6,7 +6,7 @@ export const settings: Resolver<Settings> = async ({}, { Client }) => {
     willPromptBeforeDelete: true,
     willSaveCliOutput: false,
     cliWipeBehavior: 'wipe',
-    cliMessagePersistLimit: Infinity,
+    cliMessagePersistLimit: 0,
     keysRefreshInterval: -1
   })
 }

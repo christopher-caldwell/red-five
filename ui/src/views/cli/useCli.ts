@@ -1,6 +1,5 @@
 import { useCallback, ChangeEvent, FormEvent, useState } from 'react'
 import { ClientError } from 'graphql-request'
-import 'react-inline-suggest/dist/react-inline-suggest.css'
 
 import { useSendCliCommandMutation, useTestActiveConnectionQuery } from 'generated'
 import { useUpdateSettings } from 'utils/settings'

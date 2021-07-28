@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
 import ChevronRight from '@material-ui/icons/ChevronRight'
-import 'react-inline-suggest/dist/react-inline-suggest.css'
 
 import CLIWindow from 'components/cli'
 import { FlexContainer, Snackbar } from 'components/shared'

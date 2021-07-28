@@ -15,7 +15,7 @@ export const YesOrNoSetting: FC<Props> = ({ label, onChange, defaultAnswer }) =>
   )
 
   return (
-    <FlexContainer width='100%' justify='space-between'>
+    <FlexContainer width='100%' justify='space-between' align='baseline'>
       <h4>{label}</h4>
       <Switch color='primary' checked={isChecked} onChange={handleLocalChange} />
     </FlexContainer>

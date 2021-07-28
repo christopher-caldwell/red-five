@@ -1,5 +1,5 @@
 import { FC } from 'react'
 
 export const MonitorSettings: FC = () => {
-  return <div>Montiro</div>
+  return <h2>Nothing yet.</h2>
 }

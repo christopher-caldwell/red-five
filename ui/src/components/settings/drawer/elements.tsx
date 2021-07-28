@@ -10,12 +10,11 @@ export const Content = styled.main`
   padding: 16px;
   margin-left: ${drawerWidth}px;
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   width: 100%;
+  padding: 0 15%;
   & > div {
-    padding: 2% 0;
-    width: 50vw;
+    margin: 5% 0;
   }
 `
 
