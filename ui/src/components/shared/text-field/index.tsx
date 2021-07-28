@@ -8,7 +8,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import { UseInputBind } from 'hooks/useInput'
 
 export const BaseTextField: FC<TextFieldProps> = props => (
-  <TextField {...props} variant='outlined' margin='normal' fullWidth={props.fullWidth || true} autoCapitalize='none' />
+  <TextField variant='outlined' margin='normal' fullWidth={props.fullWidth || true} autoCapitalize='none' {...props} />
 )
 
 export type SpecialInputProps = UseInputBind & { autoComplete?: string; label?: string }

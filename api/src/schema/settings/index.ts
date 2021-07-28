@@ -1,14 +1,19 @@
 import { stitchSchema } from '@/utils'
 
-// namespaces separated by `:`
 const SettingsSchema = `#graphql
   type Settings {
     willPromptBeforeDelete: Boolean!
     willSaveCliOutput: Boolean!
+    cliWipeBehavior: String!
+    cliMessagePersistLimit: Float!
+    keysRefreshInterval: Float!
   }
   input SettingsInput {
     willPromptBeforeDelete: Boolean!
     willSaveCliOutput: Boolean!
+    cliWipeBehavior: String!
+    cliMessagePersistLimit: Float!
+    keysRefreshInterval: Float!
   }
 `
 

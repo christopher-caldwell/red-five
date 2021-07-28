@@ -13,7 +13,7 @@ import { SettingsLink } from './elements'
 
 const Header: FC = () => {
   return (
-    <AppBar position='fixed'>
+    <AppBar position='fixed' style={{ zIndex: 1000000 }}>
       <Toolbar variant='dense'>
         <FlexContainer justify='space-between' width='100%' height='45px'>
           <FlexContainer>

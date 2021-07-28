@@ -9,6 +9,7 @@ const Keys = lazy(() => import('views/keys'))
 const CLI = lazy(() => import('views/cli'))
 const Monitor = lazy(() => import('views/monitor'))
 const NoConnectionFallback = lazy(() => import('views/no-connection-fallback'))
+const Settings = lazy(() => import('views/settings'))
 
 const Router: FC = () => (
   <>
@@ -20,6 +21,7 @@ const Router: FC = () => (
           <Route path={Routes.Keys} component={Keys} />
           <Route path={Routes.CLI} component={CLI} />
           <Route path={Routes.NoConnectionFallback} component={NoConnectionFallback} />
+          <Route path={Routes.Settings} component={Settings} />
         </Switch>
       </Spacer>
     </Suspense>

@@ -4,7 +4,10 @@ export enum Routes {
   CreateKey = '/keys/create',
   CLI = '/cli',
   Health = '/health',
-  Settings = '/settings',
   Monitor = '/monitor',
-  NoConnectionFallback = '/no-connection'
+  NoConnectionFallback = '/no-connection',
+  Settings = '/settings',
+  KeysSettings = '/settings/keys',
+  MonitorSettings = '/settings/monitor',
+  CliSettings = '/settings/cli'
 }

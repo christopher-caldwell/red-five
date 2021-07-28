@@ -1,6 +1,6 @@
-import { FlexContainer } from 'components/shared'
 import { FC } from 'react'
 
+import { FlexContainer } from 'components/shared'
 import { LinkContainer } from '../elements'
 import { Link } from './links'
 import styles from './index.module.sass'

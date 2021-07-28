@@ -2,5 +2,8 @@ query settings {
   settings {
     willPromptBeforeDelete
     willSaveCliOutput
+    cliWipeBehavior
+    cliMessagePersistLimit
+    keysRefreshInterval
   }
 }

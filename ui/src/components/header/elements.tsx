@@ -1,24 +1,21 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import { IconButton } from '@material-ui/core'
+import styled from 'styled-components'
 import SettingsIcon from '@material-ui/icons/Settings'
+
+import { FlexContainer } from 'components/shared'
+import { Routes } from 'router/routes'
+import styles from './links/index.module.sass'
 
 export const LinkContainer = styled(NavLink)`
   margin-left: 30px;
   height: 100%;
 `
 
-const SettingsIconButton = styled(IconButton)`
-  margin-left: 30px !important;
-  margin-top: 5px !important;
-`
-
 export const SettingsLink: FC = () => (
-  <SettingsIconButton>
-    <Link to='/settings'>
+  <LinkContainer to={Routes.KeysSettings} activeClassName={styles.activeLink}>
+    <FlexContainer height='100%'>
       <SettingsIcon />
-    </Link>
-  </SettingsIconButton>
+    </FlexContainer>
+  </LinkContainer>
 )

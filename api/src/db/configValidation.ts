@@ -13,8 +13,11 @@ const ConnectionSchema = joi.object<Connection>().keys({
 })
 
 const SettingsSchema = joi.object<Settings>().keys({
-  willPromptBeforeDelete: joi.bool().required(),
-  willSaveCliOutput: joi.bool().required()
+  willPromptBeforeDelete: joi.bool(),
+  willSaveCliOutput: joi.bool(),
+  cliWipeBehavior: joi.string(),
+  cliMessagePersistLimit: joi.number(),
+  keysRefreshInterval: joi.number()
 })
 
 const MonitoringSchema = joi.object<MonitoringStatus>().keys({
