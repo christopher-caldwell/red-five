@@ -40,6 +40,12 @@ The goal is to be simple. This doesn't try to do too much, or is a complete solu
 
 If you'd like to see something new, [submit an issue](https://github.com/christopher-caldwell/red-five/issues/new)!
 
+## Contributing
+
+If you're interested in contributing, follow [these](docs/contributing.md) steps.
+
+If you're interested in the tech stack, check out [this quick writeup](docs/contributing.md#tech-stack)
+
 ## Connections
 
 If you do not have any configured connections, you will be redirected to a page to create one.
@@ -121,3 +127,4 @@ Slide the toggle to begin monitoring
 > :warning: Monitoring will reduce the performance of the instance.
 
 If you leave this page, you will still be monitoring that instance until you turn it off, or kill the server.
+
