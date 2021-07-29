@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { CircularProgress, ClickAwayListener, Popper } from '@material-ui/core'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import { useHistory } from 'react-router'
+import { Redirect } from 'react-router'
 
 import { Routes } from 'router/routes'
 import { useActiveConnectionQuery } from 'generated'
@@ -11,12 +11,14 @@ import { ConnectionSelectMenuButton, ConnectionContainer } from './elements'
 import styles from './connectionsDisplay.module.sass'
 
 const ConnectionMenu: FC = () => {
-  const { push } = useHistory()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { data, isLoading } = useActiveConnectionQuery()
 
   const connectionName = data?.activeConnection?.name
-  if (!connectionName) push(Routes.NoConnectionFallback)
+  if (!connectionName) {
+    if (anchorEl) setAnchorEl(null)
+    return <Redirect to={Routes.NoConnectionFallback} />
+  }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
