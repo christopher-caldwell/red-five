@@ -21,7 +21,7 @@ export const loadConfig = async () => {
   const existingConfig = JSON.parse(readFileSync(pathToConfig).toString()) as AppConfig
   validateAppConfig(existingConfig)
   mapExistingConnections(existingConfig)
-  await mapExistingMonitoredConnection(existingConfig.isMonitoring)
+  await mapExistingMonitoredConnection(existingConfig.isMonitoring || {})
   return new JsonDB(new Config(pathToConfig, true, false, '/'))
 }
 

@@ -8,7 +8,7 @@ import { useInput } from 'hooks'
 import { activeKeyAtom } from 'store'
 import { keyActionConfirmation } from 'utils/routing'
 
-const namespacedKey = useNamespacedKeysQuery.getKey()
+const namespacedKey = useNamespacedKeysQuery.getKey({})
 
 export const useCreateKey = () => {
   const setActiveKey = useSetRecoilState(activeKeyAtom)

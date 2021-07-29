@@ -7,7 +7,7 @@ import { Snackbar } from 'components/shared'
 import { useInput } from 'hooks'
 
 const connectionsKey = useConnectionsQuery.getKey()
-const namespacedKeys = useNamespacedKeysQuery.getKey()
+const namespacedKeys = useNamespacedKeysQuery.getKey({})
 
 export const useEditKeys = (
   key: Pick<Key, 'value' | 'type' | 'ttl'> | undefined,

@@ -14,3 +14,7 @@ export const Container = styled.div`
 export const CommandPrompt = styled(InlineSuggest)`
   width: 100%;
 `
+
+export const LoadingContainer = styled.div`
+  height: 10px;
+`
