@@ -34,12 +34,12 @@ const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
       <DialogContent>
         <FormControlLabel
           control={<Checkbox checked={willSuppressDialogs} onChange={toggleSuppressDialog} name='checkedA' />}
-          label='Suppress this dialog in the future?'
+          label='Do not show this dialog in the future?'
         />
       </DialogContent>
       <DialogActions>
         <Button text='Cancel' onClick={handleClose} />
-        <Button text='Subscribe' onClick={handleClose} />
+        <Button text='Remove' onClick={handleClose} />
       </DialogActions>
     </Dialog>
   )

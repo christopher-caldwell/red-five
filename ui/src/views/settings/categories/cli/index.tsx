@@ -3,19 +3,27 @@ import { FC, useEffect, useState } from 'react'
 import { useDebounce } from 'hooks'
 import { useUpdateSettings } from 'utils'
 import { SettingsSelect, TextSetting } from 'components/settings/options'
+import { SettingsProps } from '../shared'
 
-export const CliSettings: FC = () => {
-  const { settings, updateSettings } = useUpdateSettings()
+export const CliSettings: FC<SettingsProps> = ({ setErrorMessage, setIsSnackbarShown }) => {
+  const { settings, updateSettings, isUpdateSettingsError } = useUpdateSettings()
   const existingBehavior = settings?.cliWipeBehavior || ''
-  const existingMessagePersistLimit = settings?.cliMessagePersistLimit || ''
-  const [numberOfMessagesToKeep, setNumberOfMessages] = useState('-1')
+  const existingMessagePersistLimit = settings?.cliMessagePersistLimit || '-1'
+  const [numberOfMessagesToKeep, setNumberOfMessages] = useState(existingMessagePersistLimit)
+
+  // TODO: Refactor into re-usable hook
+  useEffect(() => {
+    if (isUpdateSettingsError) setErrorMessage('Something went wrong')
+    else setErrorMessage(undefined)
+  }, [isUpdateSettingsError, setErrorMessage])
 
   const debouncedExistingMessagePersistLimit = useDebounce(numberOfMessagesToKeep, 500)
 
   useEffect(() => {
-    if (debouncedExistingMessagePersistLimit === existingMessagePersistLimit) return
+    if (Number(debouncedExistingMessagePersistLimit) === existingMessagePersistLimit) return
     updateSettings('cliMessagePersistLimit', Number(debouncedExistingMessagePersistLimit))
-  }, [updateSettings, debouncedExistingMessagePersistLimit, existingMessagePersistLimit])
+    setIsSnackbarShown(true)
+  }, [updateSettings, debouncedExistingMessagePersistLimit, existingMessagePersistLimit, setIsSnackbarShown])
 
   return (
     <>

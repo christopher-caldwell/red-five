@@ -25,8 +25,9 @@ export const useCli = () => {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const { settings, updateSettings, isUpdateSettingsError } = useUpdateSettings()
   const { data: isConnectedData, isError: isConnectedError } = useTestActiveConnectionQuery()
+
   const isConnected = !!isConnectedData && !isConnectedError
-  const { willSaveCliOutput = false } = settings || {}
+  const willSaveCliOutput = settings?.willSaveCliOutput
 
   const saveCliOutputHandler = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {

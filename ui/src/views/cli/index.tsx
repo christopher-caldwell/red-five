@@ -5,7 +5,7 @@ import ChevronRight from '@material-ui/icons/ChevronRight'
 import CLIWindow from 'components/cli'
 import { FlexContainer, Snackbar } from 'components/shared'
 import Status from 'components/cli/status'
-import { Container, CommandPrompt } from './elements'
+import { Container, CommandPrompt, LoadingContainer } from './elements'
 import { useCli } from './useCli'
 
 const Cli: FC = () => {
@@ -33,7 +33,9 @@ const Cli: FC = () => {
             label='Save CLI output to local storage'
           />
         </FlexContainer>
-        {isLoading ? <LinearProgress variant='indeterminate' /> : null}
+        <LoadingContainer>
+          <LinearProgress hidden={!isLoading} variant='indeterminate' />
+        </LoadingContainer>
         <CLIWindow response={response} />
         <form onSubmit={sendCommand}>
           <CommandPrompt

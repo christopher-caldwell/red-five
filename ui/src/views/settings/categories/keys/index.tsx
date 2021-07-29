@@ -1,31 +1,49 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { convertTimeToMs } from '@caldwell619/ms'
 import { isNumber } from '@material-ui/data-grid'
 
 import { useUpdateSettings } from 'utils'
 import { YesOrNoSetting, TextSetting } from 'components/settings/options'
 import { useDebounce } from 'hooks'
+import { SettingsProps } from '../shared'
 
-export const KeysSettings: FC = () => {
-  const { settings, updateSettings } = useUpdateSettings()
+export const KeysSettings: FC<SettingsProps> = ({ setErrorMessage, setIsSnackbarShown }) => {
+  const { settings, updateSettings, isUpdateSettingsError } = useUpdateSettings()
   const existingTime = settings?.keysRefreshInterval.toString() || '-1'
   const [time, setTime] = useState('-1')
 
   const debouncedTime = useDebounce(time, 500)
+
+  // TODO: refactor into hook
+  useEffect(() => {
+    if (isUpdateSettingsError) setErrorMessage('Something went wrong')
+    else setErrorMessage(undefined)
+  }, [isUpdateSettingsError, setErrorMessage])
 
   useEffect(() => {
     if (debouncedTime === existingTime) return
     // No refresh
     if (debouncedTime === '-1') updateSettings('keysRefreshInterval', -1)
     const convertedMs = convertTimeToMs(debouncedTime)
-    if (isNumber(convertedMs)) updateSettings('keysRefreshInterval', convertedMs)
-  }, [debouncedTime, updateSettings, existingTime])
+    if (isNumber(convertedMs)) {
+      updateSettings('keysRefreshInterval', convertedMs)
+      setIsSnackbarShown(true)
+    }
+  }, [debouncedTime, updateSettings, existingTime, setIsSnackbarShown])
+
+  const updateMessageSuppressionDialog = useCallback(
+    (newSetting: boolean) => {
+      updateSettings('willPromptBeforeDelete', newSetting)
+      setIsSnackbarShown(true)
+    },
+    [updateSettings, setIsSnackbarShown]
+  )
 
   return (
     <>
       <YesOrNoSetting
-        label='Suppress the dialog to ask before deleting keys'
-        onChange={newSetting => updateSettings('willPromptBeforeDelete', newSetting)}
+        label='Ask for confirmation before deleting keys or connections'
+        onChange={updateMessageSuppressionDialog}
         defaultAnswer={settings?.willPromptBeforeDelete || false}
       />
       <TextSetting
