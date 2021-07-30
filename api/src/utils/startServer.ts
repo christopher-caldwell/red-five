@@ -1,11 +1,10 @@
 import ws from 'ws'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { graphqlHTTP } from 'express-graphql'
-import express, { RequestHandler } from 'express'
+import express from 'express'
 import { join } from 'path'
 import cors from 'cors'
-import { json } from 'body-parser'
-import { parse } from 'graphql'
+import { DefinitionNode } from 'graphql'
 
 import { loadConfig } from '@/db'
 import { schema, resolvers, subscription } from '@/schema'
@@ -13,37 +12,40 @@ import { handleCli } from '@/utils/handleCli'
 import { logger } from '@/utils/logger'
 import '@/connections'
 
-const loggingMiddleware: RequestHandler = (req, res, next) => {
-  const queryDefinition = parse(req.body.query).definitions[0]
-  //@ts-ignore - Types are wrong
-  const operation = queryDefinition.operation || 'query'
-  //@ts-ignore - Types are wrong
-  const queryName = queryDefinition?.name?.value || 'unknown'
-  logger.info('Incoming request from: %s for %s %s', req.headers.origin, operation, queryName)
-  next()
+const loggingMiddleware = (queryDefinition: DefinitionNode): void => {
+  try {
+    //@ts-ignore - Types are wrong
+    const operation = queryDefinition?.operation || 'query'
+    //@ts-ignore - Types are wrong
+    const queryName = queryDefinition?.name?.value || 'unknown'
+    logger.info('Incoming %s for %s', operation, queryName)
+  } catch (e) {
+    // it's fine
+  }
 }
 
 const app = express()
 app.use(cors())
-app.use(json())
-app.use(loggingMiddleware)
+const root = join(__dirname, 'client', 'build')
+app.use(express.static(root))
+app.get('*', (_, res) => {
+  res.sendFile('index.html', { root })
+})
 
 export const startServer = async () => {
   await handleCli()
-  if (process.env.NODE_ENV === 'production') {
-    const root = join(__dirname, 'client', 'build')
-    app.use(express.static(root))
-    app.get('*', (_, res) => {
-      res.sendFile('index.html', { root })
-    })
-  }
   const db = await loadConfig()
   app.use(
     '/graphql',
     graphqlHTTP({
       schema,
       rootValue: resolvers,
-      context: { Client: db }
+      context: { Client: db },
+      extensions(info) {
+        const queryDefinition = info.document.definitions[0]
+        loggingMiddleware(queryDefinition)
+        return undefined
+      }
     })
   )
 

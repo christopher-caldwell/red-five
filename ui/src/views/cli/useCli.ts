@@ -19,9 +19,6 @@ export const useCli = () => {
   const handleChangeCommand = useCallback((newCommand: string) => {
     setCommand(newCommand)
   }, [])
-  const resetCommand = useCallback(() => {
-    setCommand('')
-  }, [])
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const { settings, updateSettings, isUpdateSettingsError } = useUpdateSettings()
   const { data: isConnectedData, isError: isConnectedError } = useTestActiveConnectionQuery()
@@ -49,9 +46,8 @@ export const useCli = () => {
       pushToLocalStorageArray(previousCommandsKey, command, true)
       setPreviousCommands(currentCommands => [...currentCommands, command])
       mutate({ command })
-      if (!error) resetCommand()
     },
-    [mutate, command, resetCommand, error]
+    [mutate, command]
   )
 
   return {
