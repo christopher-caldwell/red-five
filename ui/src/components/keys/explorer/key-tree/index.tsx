@@ -3,6 +3,7 @@ import { TreeItem } from '@material-ui/lab'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Fuse from 'fuse.js'
+import styles from './index.module.sass'
 
 import { KeysTreeView, NoResultsAlert, LoadingSpinner } from './elements'
 import { useKeyTree, handleSearchResults, Props } from './useKeyTree'
@@ -18,10 +19,11 @@ const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
           const KeySearch = new Fuse(namespace?.keys || [], { keys: ['key'], includeScore: true })
           const keyResults = handleSearchResults(KeySearch, searchTerm, namespace?.keys || [])
           return (
-            <TreeItem nodeId={`${namespace?.name}-${index}`} key={namespace?.name} label={namespace?.name}>
-              {keyResults.map(key => (
+            <TreeItem nodeId={namespace?.name} key={index} label={namespace?.name}>
+              {keyResults.map((key, subIndex) => (
                 <TreeItem
-                  nodeId={`${namespace?.name}-${key}`}
+                  classes={{ selected: styles.selected }}
+                  nodeId={`${namespace?.name}-${subIndex}`}
                   key={key?.key}
                   label={key?.key}
                   onClick={() => handleKeySelect(key?.key)}
