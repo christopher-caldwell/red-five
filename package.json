@@ -1,11 +1,10 @@
 {
   "name": "@caldwell619/red-five",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": "https://github.com/christopher-caldwell/red-five.git",
   "author": "Christopher Caldwell <62559469+christopher-caldwell@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "yarn --cwd api && yarn --cwd ui",
     "server": "yarn --cwd api dev",
     "ui": "yarn --cwd ui start",
     "dev": "concurrently \"yarn server\" \"yarn ui\"",
