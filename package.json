@@ -1,6 +1,6 @@
 {
   "name": "@caldwell619/red-five",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "repository": "https://github.com/christopher-caldwell/red-five.git",
   "author": "Christopher Caldwell <62559469+christopher-caldwell@users.noreply.github.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "build:publish": "sh scripts/build.sh",
     "release": "standard-version",
     "publish-release": "git push --follow-tags origin master && yarn publish",
-    "deploy": "sh scripts/publish.sh"
+    "publish:release": "sh scripts/publish.sh"
   },
   "bin": "bin/bin.js",
   "files": [
