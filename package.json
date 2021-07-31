@@ -8,13 +8,17 @@
     "server": "yarn --cwd api dev",
     "ui": "yarn --cwd ui start",
     "dev": "concurrently \"yarn server\" \"yarn ui\"",
-    "build": "sh scripts/build.sh"
+    "build:publish": "sh scripts/build.sh",
+    "release": "standard-version",
+    "publish-release": "git push --follow-tags origin master && yarn publish",
+    "deploy": "sh scripts/publish.sh"
   },
   "bin": "bin/bin.js",
   "files": [
     "bin/"
   ],
   "devDependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "standard-version": "^9.3.1"
   }
 }
