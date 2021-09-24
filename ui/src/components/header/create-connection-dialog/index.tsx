@@ -4,7 +4,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import UpArrowIcon from '@material-ui/icons/ArrowUpward'
 
-import { useActiveConnectionQuery } from 'generated'
+import { useActiveConnectionQuery } from '@/generated'
 import ConnectionNameInputs from './Inputs'
 import { DialogTitle, CloseDialogButton, IndicatorIconContainer } from './elements'
 

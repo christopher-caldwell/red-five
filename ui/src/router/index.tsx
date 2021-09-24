@@ -2,13 +2,13 @@ import { FC, Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Header from 'components/header'
+import Header from '@/components/header'
 import { Routes } from './routes'
 
-const Keys = lazy(() => import('views/keys'))
-const CLI = lazy(() => import('views/cli'))
-const Monitor = lazy(() => import('views/monitor'))
-const NoConnectionFallback = lazy(() => import('views/no-connection-fallback'))
+const Keys = lazy(() => import('@/views/keys'))
+const CLI = lazy(() => import('@/views/cli'))
+const Monitor = lazy(() => import('@/views/monitor'))
+const NoConnectionFallback = lazy(() => import('@/views/no-connection-fallback'))
 
 const Router: FC = () => (
   <>

@@ -2,7 +2,7 @@ import { FC, lazy, Suspense } from 'react'
 import { CircularProgress, LinearProgress } from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Delete'
 
-import { FlexContainer, BottomFab } from 'components/shared'
+import { FlexContainer, BottomFab } from '@/components/shared'
 import { useRemoveKey, useFetchKey } from './hooks'
 
 const KeyData = lazy(() => import('./key-data'))

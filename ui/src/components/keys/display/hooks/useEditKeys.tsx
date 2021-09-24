@@ -2,9 +2,9 @@ import { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react'
 import { useQueryClient } from 'react-query'
 import { ClientError } from 'graphql-request'
 
-import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, Key } from 'generated'
-import { Snackbar } from 'components/shared'
-import { useInput } from 'hooks'
+import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, Key } from '@/generated'
+import { Snackbar } from '@/components/shared'
+import { useInput } from '@/hooks'
 
 const connectionsKey = useConnectionsQuery.getKey()
 const namespacedKeys = useNamespacedKeysQuery.getKey({})
@@ -12,7 +12,8 @@ const namespacedKeys = useNamespacedKeysQuery.getKey({})
 export const useEditKeys = (
   key: Pick<Key, 'value' | 'type' | 'ttl'> | undefined,
   refetchKey: () => void,
-  keyId?: string
+  keyId?: string,
+  keyFetchError?: Error | null
 ) => {
   const queryClient = useQueryClient()
   const [shouldViewAsJson, setShouldViewAsJson] = useState(false)
@@ -39,6 +40,10 @@ export const useEditKeys = (
     resetEditedTtl()
     resetEditedValue()
   }, [keyId, resetEditedValue, resetEditedTtl])
+
+  useEffect(() => {
+    if (keyFetchError) resetEditedValue()
+  }, [keyFetchError, resetEditedValue])
 
   useEffect(() => {
     if (!key) return

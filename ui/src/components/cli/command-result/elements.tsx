@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FlexContainer } from 'components/shared'
+import { FlexContainer } from '@/components/shared'
 
 export const CommandTitle = styled.h3`
   color: ${({ theme }) => theme.brandColor};

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { brandColor } from 'constants/styles'
+import { brandColor } from '@/constants/styles'
 
 const Logo: FC<Props> = ({ width = 50, stackColor = brandColor }) => {
   return (

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FormControlLabel } from '@material-ui/core'
 
-import { BaseTextField } from 'components/shared'
+import { BaseTextField } from '@/components/shared'
 
 interface KeyTitleProps {
   padding?: string

@@ -1,6 +1,6 @@
 import { stringify } from 'query-string'
 
-import { Routes } from 'router/routes'
+import { Routes } from '@/router/routes'
 
 export const keyActionConfirmation = {
   pathname: Routes.Keys,

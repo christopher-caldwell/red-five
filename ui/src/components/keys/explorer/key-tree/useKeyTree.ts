@@ -3,9 +3,9 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import Fuse from 'fuse.js'
 
-import { NameSpacedKeys, Key } from 'generated'
-import { activeKeyAtom } from 'store'
-import { Routes } from 'router/routes'
+import { NameSpacedKeys, Key } from '@/generated'
+import { activeKeyAtom } from '@/store'
+import { Routes } from '@/router/routes'
 
 export const useKeyTree = (namespaces: Props['namespaces'], searchTerm: Props['searchTerm']) => {
   const { pathname } = useLocation()

@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
 
-import { Routes } from 'router/routes'
-import { useActiveConnectionQuery } from 'generated'
-import { FlexContainer } from 'components/shared'
+import { Routes } from '@/router/routes'
+import { useActiveConnectionQuery } from '@/generated'
+import { FlexContainer } from '@/components/shared'
 
 const NoConnectionFallback: FC = () => {
   const { push } = useHistory()

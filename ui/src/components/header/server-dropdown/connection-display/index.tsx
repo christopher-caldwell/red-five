@@ -6,7 +6,7 @@ import { LinearProgress } from '@material-ui/core'
 import EditConnection from './actions/Edit'
 import RemoveConnection from './actions/Remove'
 import MakeActive from './actions/MakeActive'
-import { useConnectionsQuery, Connection } from 'generated'
+import { useConnectionsQuery, Connection } from '@/generated'
 import { Container, DataGridOuterContainer, DataGridInnerContainer } from './elements'
 
 const ConnectionDisplay: FC = () => {

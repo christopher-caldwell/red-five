@@ -6,7 +6,7 @@ import {
   IconButton as MuiIconButton
 } from '@material-ui/core'
 
-import { verticalBounceKeyFrame } from 'constants/styles'
+import { verticalBounceKeyFrame } from '@/constants/styles'
 
 export const DialogContent = styled(MuiDialogContent)`
   padding: 16px;

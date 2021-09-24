@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { LinearProgress } from '@material-ui/core'
 import { TreeView, Alert } from '@material-ui/lab'
 
-import { warning } from 'constants/styles'
-import { FlexContainer } from 'components/shared'
+import { warning } from '@/constants/styles'
+import { FlexContainer } from '@/components/shared'
 
 export const Root = styled(FlexContainer)`
   z-index: 1;

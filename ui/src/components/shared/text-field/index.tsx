@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 
-import { UseInputBind } from 'hooks/useInput'
+import { UseInputBind } from '@/hooks/useInput'
 
 export const BaseTextField: FC<TextFieldProps> = props => (
   <TextField {...props} variant='outlined' margin='normal' fullWidth={props.fullWidth || true} autoCapitalize='none' />

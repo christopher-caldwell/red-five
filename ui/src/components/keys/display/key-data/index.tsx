@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { Switch, TextField } from '@material-ui/core'
 import Highlight from 'react-highlight.js'
 import stringify from 'json-stringify-pretty-compact'
-import 'styles/theme.css'
+import '@/styles/theme.css'
 
-import { Key } from 'generated'
-import { FlexContainer, Button } from 'components/shared'
+import { Key } from '@/generated'
+import { FlexContainer, Button } from '@/components/shared'
 import KeyMeta from '../meta'
 import { ViewAsJsonFormControl, HighlightContainer } from '../elements'
 import { useEditKeys } from '../hooks'
@@ -22,7 +22,16 @@ const KeyData: FC<Props> = ({ keyId, targetKey, refetchKey, keyFetchError }) => 
     isEditing,
     isSetLoading,
     EditSnackbar
-  } = useEditKeys(targetKey, refetchKey, keyId)
+  } = useEditKeys(targetKey, refetchKey, keyId, keyFetchError)
+
+  const getStringifiedJson = () => {
+    try {
+      return stringify(JSON.parse(targetKey?.value || ''))
+    } catch (e) {
+      return 'Error parsing JSON'
+    }
+  }
+
   return keyId ? (
     <>
       <KeyMeta keyId={keyId} {...(targetKey || {})} isEditing={isEditing} bind={editedTtlBind} />
@@ -50,7 +59,7 @@ const KeyData: FC<Props> = ({ keyId, targetKey, refetchKey, keyFetchError }) => 
       />
       {shouldViewAsJson ? (
         <HighlightContainer>
-          <Highlight language='json'>{stringify(JSON.parse(targetKey?.value || ''))}</Highlight>
+          <Highlight language='json'>{getStringifiedJson()}</Highlight>
         </HighlightContainer>
       ) : (
         <>

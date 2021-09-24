@@ -1,15 +1,15 @@
 import { useCallback, ChangeEvent, FormEvent, useState } from 'react'
 import { ClientError } from 'graphql-request'
 
-import { useSendCliCommandMutation, useTestActiveConnectionQuery } from 'generated'
-import { useUpdateSettings } from 'utils/settings'
+import { useSendCliCommandMutation, useTestActiveConnectionQuery } from '@/generated'
+import { useUpdateSettings } from '@/utils/settings'
 import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
   previousOutputKey,
   previousCommandsKey,
   pushToLocalStorageArray
-} from 'utils/local-storage'
+} from '@/utils/local-storage'
 
 const previousCommandsFromLS = getItemFromLocalStorage<string[]>(previousCommandsKey) || []
 

@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 
-import { ThemeProvider } from 'constants/theme'
-import Router from 'router'
+import { ThemeProvider } from '@/constants/theme'
+import Router from '@/router'
 
 const queryClient = new QueryClient({
   defaultOptions: {

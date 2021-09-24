@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { CliResponse, Maybe, useSettingsQuery } from 'generated'
-import { previousOutputKey } from 'constants/localStorage'
-import { getItemFromLocalStorage, writeToLocalStorage } from 'utils/local-storage'
+import { CliResponse, Maybe, useSettingsQuery } from '@/generated'
+import { previousOutputKey } from '@/constants/localStorage'
+import { getItemFromLocalStorage, writeToLocalStorage } from '@/utils/local-storage'
 
 export const useCliWindow = (response: Props['response']) => {
   const [messages, setMessages] = useState<CliResponseMessage[]>(potentialPreviousOutput || [])
