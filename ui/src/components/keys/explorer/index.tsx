@@ -1,9 +1,9 @@
 import { FC, SetStateAction, Dispatch } from 'react'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { useActiveConnectionQuery, useNamespacedKeysQuery } from 'generated'
-import { useInput } from 'hooks/useInput'
-import { FlexContainer, InputWithIcon } from 'components/shared'
+import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@/generated'
+import { useInput } from '@/hooks/useInput'
+import { FlexContainer, InputWithIcon } from '@/components/shared'
 import KeyDrawer from './key-drawer'
 import SpeedDials from './speed-dial'
 import KeyTree from './key-tree'

@@ -11,3 +11,6 @@ export const logger = winston.createLogger({
   silent: isTest,
   transports: [new winston.transports.Console()]
 })
+
+console.log = function () {}
+console.error = function () {}

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Alert } from '@material-ui/lab'
 
-import { BaseTextField, FlexContainer, Button } from 'components/shared'
+import { BaseTextField, FlexContainer, Button } from '@/components/shared'
 import { Title } from './elements'
 import { useCreateKey } from './useCreateKey'
 

@@ -3,10 +3,10 @@ import { useQueryClient } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
-import { useSetKeyMutation, useNamespacedKeysQuery } from 'generated'
-import { useInput } from 'hooks'
-import { activeKeyAtom } from 'store'
-import { keyActionConfirmation } from 'utils/routing'
+import { useSetKeyMutation, useNamespacedKeysQuery } from '@/generated'
+import { useInput } from '@/hooks'
+import { activeKeyAtom } from '@/store'
+import { keyActionConfirmation } from '@/utils/routing'
 
 const namespacedKey = useNamespacedKeysQuery.getKey({})
 

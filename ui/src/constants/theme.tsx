@@ -3,7 +3,7 @@ import { DefaultTheme, createGlobalStyle, ThemeProvider as ScThemeProvider } fro
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-import { brandColor } from 'constants/styles'
+import { brandColor } from '@/constants/styles'
 
 const GlobalStyle = createGlobalStyle`
   body {

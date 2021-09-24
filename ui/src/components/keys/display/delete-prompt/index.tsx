@@ -2,9 +2,9 @@ import { FC, useCallback, useState, ChangeEvent, Dispatch, SetStateAction } from
 import { Dialog, DialogActions, Checkbox, DialogContent, FormControlLabel } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 
-import { DialogTitle, CloseDialogButton } from 'components/header/create-connection-dialog/elements'
-import { Button } from 'components/shared'
-import { useUpdateSettings } from 'utils/settings'
+import { DialogTitle, CloseDialogButton } from '@/components/header/create-connection-dialog/elements'
+import { Button } from '@/components/shared'
+import { useUpdateSettings } from '@/utils/settings'
 
 const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
   const [willSuppressDialogs, setWillSuppressDialogs] = useState(false)

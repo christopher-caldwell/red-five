@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 
-import { standardFormatDate } from 'utils/dates'
-import { FlexContainer } from 'components/shared'
-import { MonitoringMessage } from 'generated'
-import { MessageContainer, CommandTitle, Container } from 'components/cli/command-result/elements'
+import { standardFormatDate } from '@/utils/dates'
+import { FlexContainer } from '@/components/shared'
+import { MonitoringMessage } from '@/generated'
+import { MessageContainer, CommandTitle, Container } from '@/components/cli/command-result/elements'
 
 const MonitorMessage: FC<Props> = ({ time, args }) => {
   const formattedTime = useMemo(() => standardFormatDate(time), [time])

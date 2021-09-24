@@ -2,10 +2,10 @@ import { useCallback, useMemo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useResetRecoilState } from 'recoil'
 
-import { activeKeyAtom } from 'store'
-import { useRemoveKeyMutation, useSettingsQuery } from 'generated'
-import { useInvalidateAllKeys } from 'utils/cache'
-import { keyActionConfirmation } from 'utils/routing'
+import { activeKeyAtom } from '@/store'
+import { useRemoveKeyMutation, useSettingsQuery } from '@/generated'
+import { useInvalidateAllKeys } from '@/utils/cache'
+import { keyActionConfirmation } from '@/utils/routing'
 import DeletePromptDialog from '../delete-prompt'
 
 export const useRemoveKey = (key?: string) => {

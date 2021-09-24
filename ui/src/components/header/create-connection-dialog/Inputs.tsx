@@ -1,11 +1,11 @@
 import { Dispatch, FC, SetStateAction, useCallback } from 'react'
 import Alert from '@material-ui/lab/Alert'
 
-import { useInput } from 'hooks/useInput'
-import { Button, BaseTextField, PasswordTextField } from 'components/shared'
-import { ConnectionInput, useCreateConnectionMutation } from 'generated'
+import { useInput } from '@/hooks/useInput'
+import { Button, BaseTextField, PasswordTextField } from '@/components/shared'
+import { ConnectionInput, useCreateConnectionMutation } from '@/generated'
 import { DialogContent, DialogActions } from './elements'
-import { useInvalidateAllKeys } from 'utils'
+import { useInvalidateAllKeys } from '@/utils'
 
 const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
   const invalidateAllKeys = useInvalidateAllKeys()

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { warning, green } from 'constants/styles'
+import { warning, green } from '@/constants/styles'
 
 interface StatusProps {
   isConnected: boolean

@@ -2,9 +2,9 @@ import { FC, useState, useCallback } from 'react'
 import RemoveIcon from '@material-ui/icons/Delete'
 import { CircularProgress, IconButton } from '@material-ui/core'
 
-import { useRemoveConnectionMutation } from 'generated'
-import { Snackbar } from 'components/shared'
-import { useInvalidateAllKeys } from 'utils'
+import { useRemoveConnectionMutation } from '@/generated'
+import { Snackbar } from '@/components/shared'
+import { useInvalidateAllKeys } from '@/utils'
 
 const RemoveConnection: FC<Props> = ({ id }) => {
   const invalidateAllKeys = useInvalidateAllKeys()

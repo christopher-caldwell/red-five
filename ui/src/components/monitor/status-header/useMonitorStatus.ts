@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback } from 'react'
 import { useQueryClient } from 'react-query'
 
-import { client } from 'client/subscriptions'
-import { useTestActiveConnectionQuery, useMonitoringStatusQuery, useToggleMonitoringMutation } from 'generated'
+import { client } from '@/client/subscriptions'
+import { useTestActiveConnectionQuery, useMonitoringStatusQuery, useToggleMonitoringMutation } from '@/generated'
 
 const isMonitoringKey = useMonitoringStatusQuery.getKey()
 

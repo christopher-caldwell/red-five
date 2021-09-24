@@ -2,8 +2,8 @@ import { ChangeEvent, FC, useCallback } from 'react'
 import { Checkbox } from '@material-ui/core'
 import { useQueryClient } from 'react-query'
 
-import { useMakConnectionActiveMutation, Connection } from 'generated'
-import { FlexContainer } from 'components/shared'
+import { useMakConnectionActiveMutation, Connection } from '@/generated'
+import { FlexContainer } from '@/components/shared'
 
 const MakeActive: FC<Connection> = ({ id, isActive }) => {
   const queryClient = useQueryClient()

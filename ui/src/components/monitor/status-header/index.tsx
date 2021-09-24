@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Switch, FormControlLabel } from '@material-ui/core'
 
-import { FlexContainer } from 'components/shared'
-import MonitoringDisclaimer from 'components/monitor/disclaimer'
-import Status from 'components/cli/status'
+import { FlexContainer } from '@/components/shared'
+import MonitoringDisclaimer from '@/components/monitor/disclaimer'
+import Status from '@/components/cli/status'
 import { useMonitorStatus } from './useMonitorStatus'
 
 const MonitoringStatusHeader: FC = () => {

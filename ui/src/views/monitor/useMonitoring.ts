@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { VirtuosoHandle } from 'react-virtuoso'
 
-import { execute } from 'client/subscriptions'
-import { useMonitoringStatusQuery, MonitoringMessage } from 'generated'
+import { execute } from '@/client/subscriptions'
+import { useMonitoringStatusQuery, MonitoringMessage } from '@/generated'
 
 export const useMonitoring = () => {
   const [messages, setMessages] = useState<MonitoringMessage[]>([])
@@ -14,12 +14,15 @@ export const useMonitoring = () => {
   // TODO: error handling of this
   useEffect(() => {
     const run = () =>
-      execute<{ data: { monitorMessage: MonitoringMessage } }>(
+      execute<{ monitorMessage: MonitoringMessage }>(
         {
           query: 'subscription { monitorMessage { time args source } }'
         },
         data => {
-          setMessages(currentMessages => [...currentMessages, data?.data?.monitorMessage])
+          setMessages(currentMessages => {
+            if (!data?.monitorMessage) return currentMessages
+            else return [...currentMessages, data.monitorMessage]
+          })
         }
       )
     if (isMonitoring) run()

@@ -1,6 +1,6 @@
 import { createClient, SubscribePayload, ClientOptions, Client } from 'graphql-ws'
 
-import { GRAPHQL_WEB_SOCKET_ENDPOINT as url } from 'constants/index'
+import { GRAPHQL_WEB_SOCKET_ENDPOINT as url } from '@/constants/index'
 
 function createRestartableClient(options: ClientOptions): RestartableClient {
   let restartRequested = false
@@ -52,11 +52,11 @@ export const client = createRestartableClient({
   url
 })
 
-export async function execute<T>(payload: SubscribePayload, onNext: (incomingData: T) => void) {
-  return new Promise<T>((resolve, reject) => {
-    let result: T
+export async function execute<T>(payload: SubscribePayload, onNext: (incomingData: T | null | undefined) => void) {
+  return new Promise<T | null | undefined>((resolve, reject) => {
+    let result: T | null | undefined
     client.subscribe<T>(payload, {
-      next: data => {
+      next: ({ data }) => {
         result = data
         onNext(data)
       },

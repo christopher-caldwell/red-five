@@ -2,9 +2,9 @@ import { FC, useMemo, memo } from 'react'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import deepEqual from 'fast-deep-equal'
 
-import { standardFormatDate } from 'utils/dates'
-import { FlexContainer } from 'components/shared'
-import { CliResponse } from 'generated'
+import { standardFormatDate } from '@/utils/dates'
+import { FlexContainer } from '@/components/shared'
+import { CliResponse } from '@/generated'
 import { MessageContainer, CommandTitle, Container, TimeContainer } from './elements'
 
 const CommandResult: FC<Props> = ({ time, message, command }) => {

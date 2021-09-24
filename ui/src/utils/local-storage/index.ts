@@ -18,4 +18,4 @@ export const pushToLocalStorageArray = <TData>(key: string, newItem: TData, crea
   writeToLocalStorage(key, updatedArray)
 }
 
-export * from 'constants/localStorage'
+export * from '@/constants/localStorage'

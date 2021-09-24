@@ -1,4 +1,4 @@
-import { FlexContainer } from 'components/shared'
+import { FlexContainer } from '@/components/shared'
 import { FC } from 'react'
 
 import { LinkContainer } from '../elements'

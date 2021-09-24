@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useQueryClient } from 'react-query'
 
-import { useSettingsQuery, useSetSettingsMutation, Settings } from 'generated'
+import { useSettingsQuery, useSetSettingsMutation, Settings } from '@/generated'
 
 const settingsKey = useSettingsQuery.getKey()
 
