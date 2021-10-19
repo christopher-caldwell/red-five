@@ -4,6 +4,12 @@
 
 A Redis dashboard that aims to be easy on the eyes, and easy to use.
 
+## Screenshots
+
+It's impossible to do a live demo, as there would need to be a running Redis server, roles, auth etc. 
+
+As a result, a collection of screens can be found [here](./docs/screenshots.md) to illustrate how the app looks when running. 
+
 ## Highlights
 
 Browser based dashboard powered by Node that lets you see into your Redis instances.
@@ -42,7 +48,7 @@ If you'd like to see something new, [submit an issue](https://github.com/christo
 
 ## Contributing
 
-If you're interested in contributing, follow [these](docs/contributing.md) steps.
+If you're interested in contributing, follow [these](docs/contributing.md) steps ( WIP ).
 
 If you're interested in the tech stack, check out [this quick writeup](docs/contributing.md#tech-stack)
 
@@ -127,4 +133,3 @@ Slide the toggle to begin monitoring
 > :warning: Monitoring will reduce the performance of the instance.
 
 If you leave this page, you will still be monitoring that instance until you turn it off, or kill the server.
-
