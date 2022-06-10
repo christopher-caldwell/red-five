@@ -1,4 +1,5 @@
 import ws from 'ws'
+import adze from 'adze'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { graphqlHTTP } from 'express-graphql'
 import express from 'express'
@@ -9,16 +10,17 @@ import { DefinitionNode } from 'graphql'
 import { loadConfig } from '@/db'
 import { schema, resolvers, subscription } from '@/schema'
 import { handleCli } from '@/utils/handleCli'
-import { logger } from '@/utils/logger'
 import '@/connections'
 
 const loggingMiddleware = (queryDefinition: DefinitionNode): void => {
+  const logger = adze().label('requestMiddleware')
+  if (process.env.RED_FIVE_LOG_LEVEL === 'true') logger.silent
   try {
     //@ts-ignore - Types are wrong
     const operation = queryDefinition?.operation || 'query'
     //@ts-ignore - Types are wrong
     const queryName = queryDefinition?.name?.value || 'unknown'
-    logger.info('Incoming %s for %s', operation, queryName)
+    logger.info(`Incoming ${operation} for ${queryName}`)
   } catch (e) {
     // it's fine
   }
@@ -63,6 +65,6 @@ export const startServer = async () => {
       },
       wsServer
     )
-    console.log(`🚀 Skynet is active`)
+    adze().info(`🚀 Skynet is active`)
   })
 }

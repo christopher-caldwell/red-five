@@ -1,11 +1,11 @@
 import { v4 as uuid } from 'uuid'
+import adze from 'adze'
 import Redis from 'ioredis'
 import { JsonDB } from 'node-json-db'
 
 import { Connection } from '@/interfaces'
 import { connections } from '@/connections'
 import { Resolver, ConnectionInput, MutationResult } from '@/interfaces'
-import { logger } from '@/utils'
 import { makeConnectionActive } from '../make-active'
 import { activeConnection as getActiveConnection } from '../active'
 
@@ -30,12 +30,13 @@ export const createConnection: Resolver<MutationResult, CreateConnectionArgs> = 
   }
 }
 
+const logger = adze().label('handleActiveConnectionSearch')
 const handleActiveConnectionSearch = async (Client: JsonDB): Promise<boolean> => {
   try {
     const activeConnection = await getActiveConnection({}, { Client })
     return !!activeConnection
   } catch (e) {
-    logger.error('%o', e)
+    logger.error('Error fetting active connection', e)
     return false
   }
 }
