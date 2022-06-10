@@ -13,5 +13,4 @@ export const stitchArrayValuesIntoString = (
   }, '')
 }
 
-export * from './logger'
 export * from './startServer'

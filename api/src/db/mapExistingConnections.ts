@@ -1,10 +1,11 @@
 import Redis, { Redis as IRedis } from 'ioredis'
+import adze from 'adze'
 
 import { AppConfig, MonitoringStatus } from '@/interfaces'
 import { connections, monitoredConnections } from '@/connections'
 import { maxRetriesToConnect } from '@/constants'
-import { logger } from '@/utils/logger'
 
+const logger = adze().label('mapExistingConnections')
 export const mapExistingConnections = ({ connections: existingConnections }: AppConfig): void => {
   existingConnections.forEach(({ id, host, port, password }) => {
     connections[id] = new Redis({

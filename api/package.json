@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@types/yargs": "^17.0.2",
+    "adze": "^1.9.0",
     "bufferutil": "^4.0.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",

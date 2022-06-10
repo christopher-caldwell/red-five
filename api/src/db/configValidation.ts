@@ -25,7 +25,7 @@ const MonitoringSchema = joi.object<MonitoringStatus>().keys({
 const AppConfigSchema = joi.object<AppConfig>().keys({
   connections: joi.array().items(ConnectionSchema),
   activeConnection: joi.string().allow(''),
-  settings: SettingsSchema.not().required(),
+  settings: SettingsSchema.default(() => ({})),
   isMonitoring: MonitoringSchema
 })
 
