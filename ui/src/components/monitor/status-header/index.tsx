@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Switch, FormControlLabel } from '@material-ui/core'
+import { Switch, FormControlLabel } from '@mui/material'
 
 import { FlexContainer } from '@/components/shared'
 import MonitoringDisclaimer from '@/components/monitor/disclaimer'

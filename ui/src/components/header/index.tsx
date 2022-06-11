@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar } from '@material-ui/core'
+import { AppBar, Toolbar } from '@mui/material'
 
 import { FlexContainer } from '@/components/shared'
 import Logo from '@/components/svg/logo'

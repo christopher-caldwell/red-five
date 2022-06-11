@@ -1,5 +1,5 @@
 import { FC, SetStateAction, Dispatch } from 'react'
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@mui/icons-material/Search'
 
 import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@/generated'
 import { useInput } from '@/hooks/useInput'

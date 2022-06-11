@@ -1,9 +1,7 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
-import { IconButton } from '@material-ui/core'
-import SettingsIcon from '@material-ui/icons/Settings'
+import { Link, NavLink } from 'react-router-dom'
+import { IconButton, styled } from '@mui/material'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 export const LinkContainer = styled(NavLink)`
   margin-left: 30px;

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Switch, TextField } from '@material-ui/core'
+import { Switch, TextField } from '@mui/material'
 import Highlight from 'react-highlight.js'
 import stringify from 'json-stringify-pretty-compact'
 import '@/styles/theme.css'

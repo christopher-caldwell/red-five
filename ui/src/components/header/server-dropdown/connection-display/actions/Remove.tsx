@@ -1,6 +1,6 @@
 import { FC, useState, useCallback } from 'react'
-import RemoveIcon from '@material-ui/icons/Delete'
-import { CircularProgress, IconButton } from '@material-ui/core'
+import RemoveIcon from '@mui/icons-material/Delete'
+import { CircularProgress, IconButton } from '@mui/material'
 
 import { useRemoveConnectionMutation } from '@/generated'
 import { Snackbar } from '@/components/shared'

@@ -1,10 +1,10 @@
-import styled from 'styled-components'
 import {
   DialogContent as MuiDialogContent,
   DialogActions as MuiDialogActions,
   DialogTitle as MuiDialogTitle,
-  IconButton as MuiIconButton
-} from '@material-ui/core'
+  IconButton as MuiIconButton,
+  styled
+} from '@mui/material'
 
 import { verticalBounceKeyFrame } from '@/constants/styles'
 
@@ -29,7 +29,7 @@ export const CloseDialogButton = styled(MuiIconButton)`
   color: #9e9e9e;
 `
 
-export const IndicatorIconContainer = styled.div`
+export const IndicatorIconContainer = styled('div')`
   position: absolute;
   /* Matches padding of icon button */
   right: 12px;

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import { styled } from '@mui/material'
 
-export const Window = styled.div`
+export const Window = styled('div')`
   width: 100%;
   /* top: 150px; */
   border: 0.5px solid gray;

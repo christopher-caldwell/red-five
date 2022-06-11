@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Alert } from '@material-ui/lab'
+import { Alert } from '@mui/material'
 
 import { BaseTextField, FlexContainer, Button } from '@/components/shared'
 import { Title } from './elements'

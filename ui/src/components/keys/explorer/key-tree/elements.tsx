@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { LinearProgress } from '@material-ui/core'
-import { TreeView, Alert } from '@material-ui/lab'
+import { styled } from '@mui/material'
+import { LinearProgress } from '@mui/material'
+import { TreeView, Alert } from '@mui/material'
 
 import { warning } from '@/constants/styles'
 import { FlexContainer } from '@/components/shared'
@@ -14,7 +14,7 @@ export const Root = styled(FlexContainer)`
   }
 `
 
-export const Dragger = styled.div`
+export const Dragger = styled('div')`
   width: 5px;
   cursor: ew-resize;
   padding: 4px 0 0;

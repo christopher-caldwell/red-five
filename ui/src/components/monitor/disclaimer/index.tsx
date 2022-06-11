@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from 'react'
-import { Dialog, DialogContent, IconButton, DialogContentText, DialogActions } from '@material-ui/core'
-import InfoIcon from '@material-ui/icons/Info'
+import { Dialog, DialogContent, IconButton, DialogContentText, DialogActions } from '@mui/material'
+import InfoIcon from '@mui/icons-material/Info'
 
 import { Button } from '@/components/shared'
 import { DialogTitle } from '@/components/header/create-connection-dialog/elements'

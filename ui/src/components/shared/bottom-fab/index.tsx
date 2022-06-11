@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { CircularProgress, Fab, FabProps } from '@material-ui/core'
+import { CircularProgress, Fab, FabProps } from '@mui/material'
 
 import { Container } from './elements'
 

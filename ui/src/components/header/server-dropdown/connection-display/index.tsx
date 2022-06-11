@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { Alert } from '@material-ui/lab'
 import { DataGrid, GridColDef } from '@material-ui/data-grid'
-import { LinearProgress } from '@material-ui/core'
+import { Alert, LinearProgress } from '@mui/material'
 
 import EditConnection from './actions/Edit'
 import RemoveConnection from './actions/Remove'

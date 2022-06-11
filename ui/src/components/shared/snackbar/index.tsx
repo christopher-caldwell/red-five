@@ -1,6 +1,6 @@
 import { FC, SyntheticEvent, Dispatch, SetStateAction } from 'react'
-import { Alert, AlertProps } from '@material-ui/lab'
-import { Snackbar as MuiSnackbar } from '@material-ui/core'
+import { Alert, AlertProps } from '@mui/material'
+import { Snackbar as MuiSnackbar } from '@mui/material'
 
 export const Snackbar: FC<Props> = ({ severity, message, isOpen, setIsOpen, autoHideDuration = 1500 }) => {
   const handleClose = (_?: SyntheticEvent, reason?: string) => {

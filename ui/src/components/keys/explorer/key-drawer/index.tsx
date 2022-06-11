@@ -1,5 +1,5 @@
 import { FC, useRef, Dispatch, SetStateAction } from 'react'
-import { Drawer } from '@material-ui/core'
+import { Drawer } from '@mui/material'
 
 import { Root, Dragger } from '../key-tree/elements'
 import styles from './drawer.module.sass'

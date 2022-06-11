@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import SpeedDial from '@material-ui/lab/SpeedDial'
+import { styled } from '@mui/material'
+import SpeedDial from '@mui/material/SpeedDial'
 
 export const SpeedDialContainer = styled(SpeedDial)`
   padding-top: 10px;

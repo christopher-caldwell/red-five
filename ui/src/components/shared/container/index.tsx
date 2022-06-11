@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@mui/material'
 
 interface FlexContainerProps {
   justify?: 'center' | 'flex-start' | 'flex-end' | 'space-evenly' | 'space-between'
@@ -9,7 +9,7 @@ interface FlexContainerProps {
   padding?: string
   margin?: string
 }
-export const FlexContainer = styled.div<FlexContainerProps>`
+export const FlexContainer = styled('div')<FlexContainerProps>`
   display: flex;
   justify-content: ${({ justify = 'center' }) => justify};
   align-items: ${({ align = 'center' }) => align};

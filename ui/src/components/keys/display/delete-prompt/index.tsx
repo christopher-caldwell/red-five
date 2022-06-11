@@ -1,6 +1,6 @@
 import { FC, useCallback, useState, ChangeEvent, Dispatch, SetStateAction } from 'react'
-import { Dialog, DialogActions, Checkbox, DialogContent, FormControlLabel } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
+import { Dialog, DialogActions, Checkbox, DialogContent, FormControlLabel } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 import { DialogTitle, CloseDialogButton } from '@/components/header/create-connection-dialog/elements'
 import { Button } from '@/components/shared'

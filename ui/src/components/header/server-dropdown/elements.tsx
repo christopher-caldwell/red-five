@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-import { Button } from '@material-ui/core'
+import { styled, Button } from '@mui/material'
 
 export const ConnectionSelectMenuButton = styled(Button)`
   & svg {
@@ -7,7 +6,7 @@ export const ConnectionSelectMenuButton = styled(Button)`
   }
 `
 
-export const ConnectionContainer = styled.div`
+export const ConnectionContainer = styled('div')`
   z-index: 9000000000000;
   & button {
     text-transform: none;

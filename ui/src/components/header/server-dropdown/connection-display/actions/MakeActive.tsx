@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useCallback } from 'react'
-import { Checkbox } from '@material-ui/core'
+import { Checkbox } from '@mui/material'
 import { useQueryClient } from 'react-query'
 
 import { useMakConnectionActiveMutation, Connection } from '@/generated'

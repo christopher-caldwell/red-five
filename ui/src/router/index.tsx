@@ -1,6 +1,6 @@
 import { FC, Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from '@mui/material'
 
 import Header from '@/components/header'
 import { Routes } from './routes'
@@ -26,7 +26,7 @@ const Router: FC = () => (
   </>
 )
 
-const Spacer = styled.div`
+const Spacer = styled('div')`
   margin-top: 60px;
 `
 

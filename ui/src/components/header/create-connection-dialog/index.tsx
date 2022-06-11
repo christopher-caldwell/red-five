@@ -1,8 +1,8 @@
 import { FC, useState, useCallback } from 'react'
-import { Dialog, IconButton } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
-import AddIcon from '@material-ui/icons/Add'
-import UpArrowIcon from '@material-ui/icons/ArrowUpward'
+import { Dialog, IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
+import UpArrowIcon from '@mui/icons-material/ArrowUpward'
 
 import { useActiveConnectionQuery } from '@/generated'
 import ConnectionNameInputs from './Inputs'

@@ -1,5 +1,5 @@
 import { FC, useMemo, memo } from 'react'
-import ChevronRight from '@material-ui/icons/ChevronRight'
+import ChevronRight from '@mui/icons-material/ChevronRight'
 import deepEqual from 'fast-deep-equal'
 
 import { standardFormatDate } from '@/utils/dates'

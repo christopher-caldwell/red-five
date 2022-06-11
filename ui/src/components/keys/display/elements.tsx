@@ -1,17 +1,17 @@
-import styled from 'styled-components'
-import { FormControlLabel } from '@material-ui/core'
+import { styled } from '@mui/material'
+import { FormControlLabel } from '@mui/material'
 
 import { BaseTextField } from '@/components/shared'
 
 interface KeyTitleProps {
   padding?: string
 }
-export const KeyTitle = styled.span<KeyTitleProps>`
+export const KeyTitle = styled('span')<KeyTitleProps>`
   margin-left: 10px;
   ${({ padding }) => (padding ? `padding: ${padding};` : '')}
 `
-export const KeyTitleWrapper = styled.h2`
-  color: ${({ theme }) => theme.brandColor};
+export const KeyTitleWrapper = styled('h2')`
+  color: ${({ theme }) => theme.palette.primary.main};
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -23,7 +23,7 @@ export const ViewAsJsonFormControl = styled(FormControlLabel)`
   padding-top: 2%;
 `
 
-export const HighlightContainer = styled.div`
+export const HighlightContainer = styled('div')`
   width: 100%;
   height: 50vh;
 `

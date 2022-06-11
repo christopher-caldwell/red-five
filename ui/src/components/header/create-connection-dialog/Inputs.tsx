@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useCallback } from 'react'
-import Alert from '@material-ui/lab/Alert'
+import { Alert } from '@mui/material'
 
 import { useInput } from '@/hooks/useInput'
 import { Button, BaseTextField, PasswordTextField } from '@/components/shared'

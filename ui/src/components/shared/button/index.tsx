@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import styled from 'styled-components'
-import { Button as MuiButton, CircularProgress } from '@material-ui/core'
+import { styled } from '@mui/material'
+import { Button as MuiButton, CircularProgress } from '@mui/material'
 
 export const Button: FC<Props> = ({ onClick, disabled, isLoading, text }) => {
   return (

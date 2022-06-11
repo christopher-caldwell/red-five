@@ -1,6 +1,6 @@
 import { FC, lazy, Suspense } from 'react'
-import { CircularProgress, LinearProgress } from '@material-ui/core'
-import RemoveIcon from '@material-ui/icons/Delete'
+import { CircularProgress, LinearProgress } from '@mui/material'
+import RemoveIcon from '@mui/icons-material/Delete'
 
 import { FlexContainer, BottomFab } from '@/components/shared'
 import { useRemoveKey, useFetchKey } from './hooks'

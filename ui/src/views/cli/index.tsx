@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
-import ChevronRight from '@material-ui/icons/ChevronRight'
+import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@mui/material'
+import ChevronRight from '@mui/icons-material/ChevronRight'
 
 import CLIWindow from '@/components/cli'
 import { FlexContainer, Snackbar } from '@/components/shared'
