@@ -31,7 +31,7 @@ const CreateConnectionDialog: FC = () => {
         )}
       </IconButton>
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle disableTypography>
+        <DialogTitle>
           <h2>Create a new connection</h2>
           <CloseDialogButton aria-label='close' onClick={handleClose}>
             <CloseIcon />

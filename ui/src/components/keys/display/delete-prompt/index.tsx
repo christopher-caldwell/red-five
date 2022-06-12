@@ -25,7 +25,7 @@ const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle disableTypography>
+      <DialogTitle>
         <h2>Are you sure you want to delete this key?</h2>
         <CloseDialogButton aria-label='close' onClick={handleClose}>
           <CloseIcon />

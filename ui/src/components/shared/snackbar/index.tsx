@@ -1,11 +1,8 @@
-import { FC, SyntheticEvent, Dispatch, SetStateAction } from 'react'
-import { Alert, AlertProps } from '@mui/material'
-import { Snackbar as MuiSnackbar } from '@mui/material'
+import { FC, Dispatch, SetStateAction } from 'react'
+import { Snackbar as MuiSnackbar, Alert, AlertProps } from '@mui/material'
 
 export const Snackbar: FC<Props> = ({ severity, message, isOpen, setIsOpen, autoHideDuration = 1500 }) => {
-  const handleClose = (_?: SyntheticEvent, reason?: string) => {
-    // Prevents clicking away to close -- not sure if this will stay
-    if (reason === 'clickaway') return
+  const handleClose = () => {
     setIsOpen(false)
   }
 

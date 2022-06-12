@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
-import { LinearProgress } from '@mui/material'
-import { TreeView, Alert } from '@mui/material'
+import { LinearProgress, Alert } from '@mui/material'
+import { TreeView } from '@mui/lab'
 
 import { warning } from '@/constants/styles'
 import { FlexContainer } from '@/components/shared'

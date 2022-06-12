@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { TreeItem } from '@mui/material'
+import { TreeItem } from '@mui/lab'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Fuse from 'fuse.js'
-import styles from './index.module.sass'
 
 import { KeysTreeView, NoResultsAlert, LoadingSpinner } from './elements'
 import { useKeyTree, handleSearchResults, Props } from './useKeyTree'
+import styles from './index.module.sass'
 
 const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
   const { results, handleKeySelect } = useKeyTree(namespaces, searchTerm)
