@@ -1,13 +1,13 @@
-import { FC, useMemo, memo } from 'react'
+import { FC, useMemo } from 'react'
 import ChevronRight from '@mui/icons-material/ChevronRight'
-import deepEqual from 'fast-deep-equal'
+
+import { styled } from '@mui/material'
 
 import { standardFormatDate } from '@/utils/dates'
 import { FlexContainer } from '@/components'
 import { CliResponse } from '@/generated'
-import { MessageContainer, CommandTitle, Container, TimeContainer } from './elements'
 
-const CommandResult: FC<Props> = ({ time, message, command }) => {
+export const CommandResult: FC<Props> = ({ time, message, command }) => {
   const formattedTime = useMemo(() => standardFormatDate(time), [time])
   return (
     <Container>
@@ -23,6 +23,18 @@ const CommandResult: FC<Props> = ({ time, message, command }) => {
   )
 }
 
-interface Props extends CliResponse {}
+const CommandTitle = styled('h3')`
+  color: ${({ theme }) => theme.palette.primary.main};
+`
+const Container = styled('div')``
 
-export default memo(CommandResult, deepEqual)
+const TimeContainer = styled(FlexContainer)`
+  margin-left: 20px;
+`
+
+const MessageContainer = styled('div')`
+  width: 100%;
+  padding: 10px 0;
+`
+
+interface Props extends CliResponse {}
