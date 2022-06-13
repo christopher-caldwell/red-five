@@ -2,7 +2,7 @@ import { FC, useCallback, useState, ChangeEvent, Dispatch, SetStateAction } from
 import { Dialog, DialogActions, Checkbox, DialogContent, FormControlLabel } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
-import { DialogTitle, CloseDialogButton } from '@/features/header/create-connection-dialog/elements'
+import { DialogTitle, CloseDialogButton } from '@/features/connections/components/create-connection-dialog/elements'
 import { Button } from '@/components'
 import { useUpdateSettings } from '@/utils/settings'
 
