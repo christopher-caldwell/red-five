@@ -6,7 +6,7 @@ import { DialogTitle, CloseDialogButton } from '@/features/header/create-connect
 import { Button } from '@/components'
 import { useUpdateSettings } from '@/utils/settings'
 
-const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
+export const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
   const [willSuppressDialogs, setWillSuppressDialogs] = useState(false)
 
   const { updateSettings } = useUpdateSettings()
@@ -22,6 +22,11 @@ const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
     },
     [setWillSuppressDialogs, updateSettings]
   )
+
+  const handleDelete = useCallback(() => {
+    removeKey()
+    handleClose()
+  }, [removeKey, handleClose])
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -39,7 +44,7 @@ const DeletePrompt: FC<Props> = ({ removeKey, open, setOpen }) => {
       </DialogContent>
       <DialogActions>
         <Button text='Cancel' onClick={handleClose} />
-        <Button text='Subscribe' onClick={handleClose} />
+        <Button text='Delete' onClick={handleDelete} />
       </DialogActions>
     </Dialog>
   )
@@ -50,5 +55,3 @@ interface Props {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
-
-export default DeletePrompt

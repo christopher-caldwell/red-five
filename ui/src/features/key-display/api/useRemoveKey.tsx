@@ -6,7 +6,7 @@ import { activeKeyAtom } from '@/store'
 import { useRemoveKeyMutation, useSettingsQuery } from '@/generated'
 import { useInvalidateAllKeys } from '@/utils/cache'
 import { keyActionConfirmation } from '@/utils/routing'
-import DeletePromptDialog from '../delete-prompt'
+import { DeletePrompt as DeletePromptDialog } from '../components'
 
 export const useRemoveKey = (key?: string) => {
   const [open, setOpen] = useState(false)

@@ -1,11 +1,10 @@
-import { FC, lazy, Suspense } from 'react'
-import { CircularProgress, LinearProgress } from '@mui/material'
+import { FC } from 'react'
+import { LinearProgress } from '@mui/material'
 import RemoveIcon from '@mui/icons-material/Delete'
 
 import { FlexContainer, BottomFab } from '@/components'
-import { useRemoveKey, useFetchKey } from './hooks'
-
-const KeyData = lazy(() => import('./key-data'))
+import { useRemoveKey, useFetchKey } from './api'
+import { KeyData } from './components'
 
 const Display: FC<Props> = ({ width }) => {
   const { isKeyFetchLoading, ErrorSnackbar, key, keyId, refetchKey, keyFetchError } = useFetchKey()
@@ -16,9 +15,7 @@ const Display: FC<Props> = ({ width }) => {
       <FlexContainer padding='1%' width={`calc(100% - ${width}px)`} justify='flex-start' direction='column'>
         {isKeyFetchLoading ? <LinearProgress variant='indeterminate' /> : null}
         {ErrorSnackbar}
-        <Suspense fallback={<CircularProgress variant='indeterminate' />}>
-          <KeyData targetKey={key} keyId={keyId} refetchKey={refetchKey} keyFetchError={keyFetchError} />
-        </Suspense>
+        <KeyData targetKey={key} keyId={keyId} refetchKey={refetchKey} keyFetchError={keyFetchError} />
       </FlexContainer>
       {keyId ? (
         <BottomFab
