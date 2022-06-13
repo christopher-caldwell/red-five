@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import { Alert } from '@mui/material'
+import { Alert, styled } from '@mui/material'
 
 import { BaseTextField, FlexContainer, Button } from '@/components'
-import { Title } from './elements'
-import { useCreateKey } from './useCreateKey'
+import { useCreateKey } from './api'
 
-const CreateKey: FC<Props> = ({ width }) => {
+export const CreateKey: FC<Props> = ({ width }) => {
   const { isError, keyNameBind, keyTtlBind, keyValueBind, isLoading, handleSaveKey } = useCreateKey()
 
   return (
@@ -25,6 +24,10 @@ const CreateKey: FC<Props> = ({ width }) => {
     </FlexContainer>
   )
 }
+
+const Title = styled('h1')`
+  width: 100%;
+`
 
 interface Props {
   width: number

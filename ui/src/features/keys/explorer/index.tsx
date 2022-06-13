@@ -6,7 +6,7 @@ import { useInput } from '@/hooks/useInput'
 import { FlexContainer, InputWithIcon } from '@/components'
 import { SpeedDials, KeyDrawer, KeyTree } from './components'
 
-const Explorer: FC<Props> = props => {
+export const KeyExplorer: FC<Props> = props => {
   const { data: activeConnectionData } = useActiveConnectionQuery()
   const { data, isLoading, refetch } = useNamespacedKeysQuery({}, { enabled: !!activeConnectionData })
   const [searchTerm, searchTermBind] = useInput('')
@@ -32,5 +32,3 @@ interface Props {
   width: number
   setWidth: Dispatch<SetStateAction<number>>
 }
-
-export default Explorer

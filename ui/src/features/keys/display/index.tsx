@@ -6,7 +6,7 @@ import { FlexContainer, BottomFab } from '@/components'
 import { useRemoveKey, useFetchKey } from './api'
 import { KeyData } from './components'
 
-const Display: FC<Props> = ({ width }) => {
+export const KeyDisplay: FC<Props> = ({ width }) => {
   const { isKeyFetchLoading, ErrorSnackbar, key, keyId, refetchKey, keyFetchError } = useFetchKey()
   const { DeletePrompt, isRemoveKeyLoading, openRemoveDialogOrRemoveKey } = useRemoveKey(keyId)
 
@@ -32,5 +32,3 @@ const Display: FC<Props> = ({ width }) => {
 interface Props {
   width: number
 }
-
-export default Display
