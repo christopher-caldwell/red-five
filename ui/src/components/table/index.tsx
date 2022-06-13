@@ -18,7 +18,7 @@ import {
 
 import { TablePaginationActions, UsePaginationResult } from './Pagination'
 
-export const DataTable = function <TData extends object & { id?: number }>({
+export const DataTable = function <TData extends object & { id?: string }>({
   items,
   columns,
   isLoading,

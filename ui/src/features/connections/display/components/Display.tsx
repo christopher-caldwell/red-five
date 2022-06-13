@@ -1,15 +1,16 @@
 import { FC } from 'react'
 // import { DataGrid, GridColDef } from '@material-ui/data-grid'
 import { styled, Paper, Alert, LinearProgress } from '@mui/material'
+import { Column } from 'react-table'
 
-// import EditConnection from './actions/Edit'
-// import RemoveConnection from './actions/Remove'
-// import MakeActive from './actions/MakeActive'
-import { useConnectionsQuery } from '@/generated'
+import { DataTable, usePagination } from '@/components'
+import { useConnectionsQuery, Connection } from '@/generated'
+import { MakeActive, EditConnection, RemoveConnection } from './'
 
 export const ConnectionDisplay: FC = () => {
-  const { isLoading, isError } = useConnectionsQuery()
-  // const connections: Connection[] = data?.connections || []
+  const { isFetching, isError, data } = useConnectionsQuery()
+  const { page, rowsPerPage, ...rest } = usePagination()
+  const connections: Connection[] = data?.connections || []
   return (
     <Container elevation={2}>
       {isError ? (
@@ -17,11 +18,19 @@ export const ConnectionDisplay: FC = () => {
           Something went wrong
         </Alert>
       ) : null}
-      {isLoading ? <LinearProgress variant='indeterminate' /> : null}
+      {isFetching ? <LinearProgress variant='indeterminate' /> : null}
       <div>
         <DataGridOuterContainer>
           <DataGridInnerContainer>
-            {/* <DataGrid disableColumnSelector disableSelectionOnClick columns={columns} rows={connections} /> */}
+            <DataTable<Connection>
+              total={connections.length}
+              items={connections}
+              isLoading={isFetching}
+              columns={columns}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              {...rest}
+            />
           </DataGridInnerContainer>
         </DataGridOuterContainer>
       </div>
@@ -29,31 +38,40 @@ export const ConnectionDisplay: FC = () => {
   )
 }
 
-const Container = styled(Paper)`
-  padding: 20px !important;
-  min-width: 30vw;
-`
-
-const DataGridOuterContainer = styled('div')`
-  height: 300px;
-  width: 40vw;
-`
-
-const DataGridInnerContainer = styled('div')`
-  display: flex;
-  height: 100%;
-`
+const columns: Column<Connection>[] = [
+  {
+    Header: 'Active',
+    accessor: 'isActive',
+    Cell: ({ row }) => {
+      return <MakeActive {...(row.values as Connection)} />
+    }
+  },
+  {
+    Header: 'Name',
+    accessor: 'name'
+  },
+  {
+    Header: 'Host',
+    accessor: 'host'
+  },
+  {
+    Header: 'Edit',
+    accessor: 'id',
+    Cell: ({ row }) => {
+      return (
+        <>
+          <EditConnection id={row.values.id} />
+          <RemoveConnection id={row.values.id} />
+        </>
+      )
+    }
+  }
+]
 
 // const columns: GridColDef[] = [
 //   {
-//     field: 'isActive',
-//     headerName: 'Active',
-//     flex: 0.25,
-//     disableColumnMenu: true,
-//     sortable: false,
 //     renderCell: params => <MakeActive {...(params.row as Connection)} />
 //   },
-//   { field: 'name', headerName: 'Name', flex: 0.35, disableColumnMenu: true },
 //   {
 //     field: 'host',
 //     headerName: 'Host',
@@ -73,6 +91,22 @@ const DataGridInnerContainer = styled('div')`
 //           <RemoveConnection id={id} />
 //         </>
 //       )
+
 //     }
 //   }
 // ]
+
+const Container = styled(Paper)`
+  padding: 20px !important;
+  min-width: 30vw;
+`
+
+const DataGridOuterContainer = styled('div')`
+  height: 300px;
+  width: 40vw;
+`
+
+const DataGridInnerContainer = styled('div')`
+  display: flex;
+  height: 100%;
+`
