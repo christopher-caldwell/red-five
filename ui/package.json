@@ -26,6 +26,7 @@
     "react-json-view": "^1.21.3",
     "react-query": "^3.18.1",
     "react-router-dom": "^5.2.0",
+    "react-table": "^7.8.0",
     "react-virtuoso": "^1.9.6",
     "recoil": "^0.3.1",
     "serialize-error": "^8.1.0"
@@ -70,6 +71,7 @@
     "@types/react-highlight": "^0.12.3",
     "@types/react-highlight.js": "^1.0.1",
     "@types/react-router-dom": "^5.1.8",
+    "@types/react-table": "^7.7.12",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.4",
     "@types/styled-components": "^5.1.11",

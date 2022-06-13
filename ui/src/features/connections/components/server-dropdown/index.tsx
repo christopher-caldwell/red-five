@@ -10,7 +10,7 @@ import ConnectionDisplay from './connection-display'
 import { ConnectionSelectMenuButton, ConnectionContainer } from './elements'
 import styles from './connectionsDisplay.module.sass'
 
-const ConnectionMenu: FC = () => {
+export const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { data, isLoading } = useActiveConnectionQuery()
 
@@ -48,5 +48,3 @@ const ConnectionMenu: FC = () => {
     </ClickAwayListener>
   )
 }
-
-export default ConnectionMenu

@@ -5,11 +5,9 @@ import { AppBar, Toolbar } from '@mui/material'
 import { FlexContainer } from '@/components'
 import Logo from '@/components/svg/logo'
 import { Routes } from '@/router/routes'
-import { links } from './links/links'
-import NavLink from './links/NavLink'
-import Menu from './server-dropdown/Menu'
-import CreateServerDialog from './create-connection-dialog'
-import { SettingsLink } from './elements'
+import { links } from '@/constants/links'
+import { SettingsLink, NavLink } from './components'
+import { CreateConnectionDialog, ConnectionMenu } from '@/features/connections'
 
 const Header: FC = () => {
   return (
@@ -20,14 +18,14 @@ const Header: FC = () => {
             <Link to={Routes.Home}>
               <Logo width={70} stackColor='white' />
             </Link>
-            <Menu />
+            <ConnectionMenu />
           </FlexContainer>
           <FlexContainer align='center' justify='space-between' height='100%'>
             {links.map(link => (
               <NavLink key={link.to} {...link} />
             ))}
             <SettingsLink />
-            <CreateServerDialog />
+            <CreateConnectionDialog />
           </FlexContainer>
         </FlexContainer>
       </Toolbar>

@@ -8,7 +8,7 @@ import { useActiveConnectionQuery } from '@/generated'
 import ConnectionNameInputs from './Inputs'
 import { DialogTitle, CloseDialogButton, IndicatorIconContainer } from './elements'
 
-const CreateConnectionDialog: FC = () => {
+export const CreateConnectionDialog: FC = () => {
   const { data } = useActiveConnectionQuery()
   const connectionName = data?.activeConnection?.name
   const [open, setOpen] = useState(false)
@@ -47,5 +47,3 @@ export interface DialogTitleProps {
   id: string
   onClose: () => void
 }
-
-export default CreateConnectionDialog

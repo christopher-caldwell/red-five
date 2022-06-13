@@ -1,11 +1,12 @@
 import { FC } from 'react'
+import { styled } from '@mui/material'
+import { NavLink as RouterLink } from 'react-router-dom'
 
 import { FlexContainer } from '@/components'
-import { LinkContainer } from '../elements'
-import { Link } from './links'
+import { Link } from '@/constants/links'
 import styles from './index.module.sass'
 
-const NavLink: FC<Link> = ({ to, label }) => {
+export const NavLink: FC<Link> = ({ to, label }) => {
   return (
     <LinkContainer to={to} activeClassName={styles.activeLink}>
       <FlexContainer height='100%'>{label}</FlexContainer>
@@ -13,4 +14,7 @@ const NavLink: FC<Link> = ({ to, label }) => {
   )
 }
 
-export default NavLink
+const LinkContainer = styled(RouterLink)`
+  margin-left: 30px;
+  height: 100%;
+`
