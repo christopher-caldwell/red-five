@@ -1,14 +1,13 @@
 import { FC } from 'react'
 // import { DataGrid, GridColDef } from '@material-ui/data-grid'
-import { Alert, LinearProgress } from '@mui/material'
+import { styled, Paper, Alert, LinearProgress } from '@mui/material'
 
 // import EditConnection from './actions/Edit'
 // import RemoveConnection from './actions/Remove'
 // import MakeActive from './actions/MakeActive'
 import { useConnectionsQuery } from '@/generated'
-import { Container, DataGridOuterContainer, DataGridInnerContainer } from './elements'
 
-const ConnectionDisplay: FC = () => {
+export const ConnectionDisplay: FC = () => {
   const { isLoading, isError } = useConnectionsQuery()
   // const connections: Connection[] = data?.connections || []
   return (
@@ -29,6 +28,21 @@ const ConnectionDisplay: FC = () => {
     </Container>
   )
 }
+
+const Container = styled(Paper)`
+  padding: 20px !important;
+  min-width: 30vw;
+`
+
+const DataGridOuterContainer = styled('div')`
+  height: 300px;
+  width: 40vw;
+`
+
+const DataGridInnerContainer = styled('div')`
+  display: flex;
+  height: 100%;
+`
 
 // const columns: GridColDef[] = [
 //   {
@@ -62,5 +76,3 @@ const ConnectionDisplay: FC = () => {
 //     }
 //   }
 // ]
-
-export default ConnectionDisplay

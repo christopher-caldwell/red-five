@@ -1,13 +1,12 @@
 import { FC, useState } from 'react'
-import { CircularProgress, ClickAwayListener, Popper } from '@mui/material'
+import { CircularProgress, ClickAwayListener, Popper, styled, Button } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { Redirect } from 'react-router'
 
 import { Routes } from '@/router/routes'
 import { useActiveConnectionQuery } from '@/generated'
-import ConnectionDisplay from './connection-display'
-import { ConnectionSelectMenuButton, ConnectionContainer } from './elements'
+import { ConnectionDisplay } from './components'
 import styles from './connectionsDisplay.module.sass'
 
 export const ConnectionMenu: FC = () => {
@@ -48,3 +47,17 @@ export const ConnectionMenu: FC = () => {
     </ClickAwayListener>
   )
 }
+
+const ConnectionSelectMenuButton = styled(Button)`
+  color: white;
+  & svg {
+    margin-left: 10px;
+  }
+`
+
+const ConnectionContainer = styled('div')`
+  z-index: 9000000000000;
+  & button {
+    text-transform: none;
+  }
+`

@@ -2,7 +2,7 @@ import { FC } from 'react'
 import EditIcon from '@mui/icons-material/Edit'
 import { IconButton } from '@mui/material'
 
-const EditConnection: FC<Props> = ({ id }) => {
+export const EditConnection: FC<Props> = ({ id }) => {
   return (
     <IconButton>
       <EditIcon />
@@ -13,5 +13,3 @@ const EditConnection: FC<Props> = ({ id }) => {
 interface Props {
   id: string | number
 }
-
-export default EditConnection
