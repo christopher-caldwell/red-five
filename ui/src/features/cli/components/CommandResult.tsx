@@ -23,16 +23,16 @@ export const CommandResult: FC<Props> = ({ time, message, command }) => {
   )
 }
 
-const CommandTitle = styled('h3')`
+export const CommandTitle = styled('h3')`
   color: ${({ theme }) => theme.palette.primary.main};
 `
-const Container = styled('div')``
+export const Container = styled('div')``
 
-const TimeContainer = styled(FlexContainer)`
+export const TimeContainer = styled(FlexContainer)`
   margin-left: 20px;
 `
 
-const MessageContainer = styled('div')`
+export const MessageContainer = styled('div')`
   width: 100%;
   padding: 10px 0;
 `

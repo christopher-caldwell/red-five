@@ -2,16 +2,16 @@ import { FC } from 'react'
 import { Switch, FormControlLabel } from '@mui/material'
 
 import { FlexContainer } from '@/components'
-import MonitoringDisclaimer from '@/features/monitor/disclaimer'
-import Status from '@/features/cli/status'
-import { useMonitorStatus } from './useMonitorStatus'
+import { CliStatus } from '@/features/cli/components'
+import { MonitoringDisclaimer } from './Disclaimer'
+import { useMonitorStatus } from '../api'
 
 export const MonitoringStatusHeader: FC = () => {
   const { isConnected, isMonitoring, handleMonitoringToggle } = useMonitorStatus()
 
   return (
     <FlexContainer justify='space-between'>
-      <Status isConnected={isConnected && isMonitoring} />
+      <CliStatus isConnected={isConnected && isMonitoring} />
       <FlexContainer>
         <FormControlLabel
           control={<Switch checked={isMonitoring} onChange={handleMonitoringToggle} color='primary' />}

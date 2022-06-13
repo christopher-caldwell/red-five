@@ -3,7 +3,7 @@ import { styled } from '@mui/material'
 
 import { warning, green } from '@/constants/styles'
 
-const CliStatus: FC<Props> = ({ isConnected }) => {
+export const CliStatus: FC<Props> = ({ isConnected }) => {
   const displayText = useMemo(() => (isConnected ? 'Connected' : 'Not Connected'), [isConnected])
   return <Status isConnected={isConnected}>{displayText}</Status>
 }
@@ -19,5 +19,3 @@ const Status = styled('h1')<StatusProps>`
 interface Props {
   isConnected: boolean
 }
-
-export default CliStatus

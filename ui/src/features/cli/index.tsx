@@ -5,7 +5,7 @@ import { styled } from '@mui/material'
 import { CommandResult } from './components'
 import { useCliWindow, Props } from './api'
 
-const CLIWindow: FC<Props> = ({ response }) => {
+export const CLIWindow: FC<Props> = ({ response }) => {
   const { messages } = useCliWindow(response)
 
   return (
@@ -22,7 +22,7 @@ const CLIWindow: FC<Props> = ({ response }) => {
   )
 }
 
-const Window = styled('div')`
+export const Window = styled('div')`
   width: 100%;
   /* top: 150px; */
   border: 0.5px solid gray;
@@ -41,4 +41,5 @@ const Window = styled('div')`
   }
 `
 
-export default CLIWindow
+export * from './components'
+export * from './api'

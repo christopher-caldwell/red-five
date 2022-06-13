@@ -4,7 +4,7 @@ import ChevronRight from '@mui/icons-material/ChevronRight'
 import { standardFormatDate } from '@/utils/dates'
 import { FlexContainer } from '@/components'
 import { MonitoringMessage } from '@/generated'
-import { MessageContainer, CommandTitle, Container } from '@/features/cli/command-result/elements'
+import { MessageContainer, CommandTitle, Container } from '@/features/cli/components'
 
 export const MonitorMessage: FC<Props> = ({ time, args }) => {
   const formattedTime = useMemo(() => standardFormatDate(time), [time])

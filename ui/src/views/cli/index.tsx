@@ -2,9 +2,8 @@ import { FC } from 'react'
 import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@mui/material'
 import ChevronRight from '@mui/icons-material/ChevronRight'
 
-import CLIWindow from '@/features/cli'
+import { CLIWindow, CliStatus } from '@/features/cli'
 import { FlexContainer, Snackbar } from '@/components'
-import Status from '@/features/cli/status'
 import { Container, CommandPrompt, LoadingContainer } from './elements'
 import { useCli } from './useCli'
 
@@ -27,7 +26,7 @@ const Cli: FC = () => {
     <>
       <Container>
         <FlexContainer justify='space-between'>
-          <Status isConnected={isConnected} />
+          <CliStatus isConnected={isConnected} />
           <FormControlLabel
             control={<Switch checked={willSaveCliOutput} onChange={saveCliOutputHandler} color='primary' />}
             label='Save CLI output to local storage'
