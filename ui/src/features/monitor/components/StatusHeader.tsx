@@ -6,7 +6,7 @@ import MonitoringDisclaimer from '@/features/monitor/disclaimer'
 import Status from '@/features/cli/status'
 import { useMonitorStatus } from './useMonitorStatus'
 
-const MonitoringStatusHeader: FC = () => {
+export const MonitoringStatusHeader: FC = () => {
   const { isConnected, isMonitoring, handleMonitoringToggle } = useMonitorStatus()
 
   return (
@@ -22,5 +22,3 @@ const MonitoringStatusHeader: FC = () => {
     </FlexContainer>
   )
 }
-
-export default MonitoringStatusHeader

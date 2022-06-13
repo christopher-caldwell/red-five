@@ -5,7 +5,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import { Button } from '@/components'
 import { DialogTitle } from '@/features/header/create-connection-dialog/elements'
 
-const MonitoringDisclaimer: FC = () => {
+export const MonitoringDisclaimer: FC = () => {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = useCallback(() => {
@@ -47,5 +47,3 @@ const MonitoringDisclaimer: FC = () => {
     </>
   )
 }
-
-export default MonitoringDisclaimer

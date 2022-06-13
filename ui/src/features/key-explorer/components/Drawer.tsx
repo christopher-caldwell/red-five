@@ -1,11 +1,10 @@
 import { FC, useRef, Dispatch, SetStateAction } from 'react'
 import { Drawer, colors } from '@mui/material'
 
-import { Root, Dragger } from '../key-tree/elements'
-import styles from './drawer.module.sass'
+import { Root, Dragger } from './key-tree/elements'
 
 let isResizing = false
-const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
+export const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
   const sidebarPanelRef = useRef<HTMLDivElement>(null)
   const sidebarCurrent = sidebarPanelRef?.current
 
@@ -43,9 +42,6 @@ const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
         variant='permanent'
         open
         anchor='left'
-        classes={{
-          paper: styles.drawerPaper
-        }}
         PaperProps={{
           style: { width },
           sx: {
@@ -67,5 +63,3 @@ interface Props {
 
 const minWidth = 200
 const maxWidth = 500
-
-export default KeyDrawer

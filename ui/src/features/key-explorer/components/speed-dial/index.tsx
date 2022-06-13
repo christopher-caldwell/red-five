@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { SpeedDialContainer } from './elements'
 import { useSpeedDial } from './useSpeedDial'
 
-const SpeedDials: FC<Props> = ({ refresh }) => {
+export const SpeedDials: FC<Props> = ({ refresh }) => {
   const { open, handleClose, handleGoToAdd, handleOpen } = useSpeedDial()
 
   return (
@@ -32,5 +32,3 @@ type Refresh = (options?: RefetchOptions) => Promise<QueryObserverResult>
 interface Props {
   refresh: Refresh
 }
-
-export default SpeedDials

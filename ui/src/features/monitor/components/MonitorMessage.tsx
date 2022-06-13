@@ -6,7 +6,7 @@ import { FlexContainer } from '@/components'
 import { MonitoringMessage } from '@/generated'
 import { MessageContainer, CommandTitle, Container } from '@/features/cli/command-result/elements'
 
-const MonitorMessage: FC<Props> = ({ time, args }) => {
+export const MonitorMessage: FC<Props> = ({ time, args }) => {
   const formattedTime = useMemo(() => standardFormatDate(time), [time])
   const formattedArgs = useMemo(
     () => args.reduce((fullCommand, currentSegment) => fullCommand + ' ' + currentSegment, ''),
@@ -26,5 +26,3 @@ const MonitorMessage: FC<Props> = ({ time, args }) => {
 }
 
 interface Props extends MonitoringMessage {}
-
-export default MonitorMessage

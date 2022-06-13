@@ -4,9 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@/generated'
 import { useInput } from '@/hooks/useInput'
 import { FlexContainer, InputWithIcon } from '@/components'
-import KeyDrawer from './key-drawer'
-import SpeedDials from './speed-dial'
-import KeyTree from './key-tree'
+import { SpeedDials, KeyDrawer, KeyTree } from './components'
 
 const Explorer: FC<Props> = props => {
   const { data: activeConnectionData } = useActiveConnectionQuery()

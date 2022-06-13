@@ -5,8 +5,8 @@ import { parse } from 'query-string'
 import { useActiveConnectionQuery } from '@/generated'
 import { Routes } from '@/router/routes'
 import { FlexContainer, Snackbar } from '@/components'
-import Explorer from '@/features/keys/explorer'
-import Display from '@/features/keys/display'
+import Explorer from '@/features/key-explorer'
+import Display from '@/features/key-display'
 import CreateKey from './create'
 
 const Keys: FC = () => {

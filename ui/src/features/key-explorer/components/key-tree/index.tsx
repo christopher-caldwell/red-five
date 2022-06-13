@@ -8,7 +8,7 @@ import { KeysTreeView, NoResultsAlert, LoadingSpinner } from './elements'
 import { useKeyTree, handleSearchResults, Props } from './useKeyTree'
 import styles from './index.module.sass'
 
-const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
+export const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
   const { results, handleKeySelect } = useKeyTree(namespaces, searchTerm)
 
   if (isLoading) return <LoadingSpinner variant='indeterminate' />
@@ -40,5 +40,3 @@ const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
     </KeysTreeView>
   )
 }
-
-export default KeyTree
