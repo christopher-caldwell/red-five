@@ -5,8 +5,7 @@ import AddIcon from '@mui/icons-material/Add'
 import UpArrowIcon from '@mui/icons-material/ArrowUpward'
 
 import { useActiveConnectionQuery } from '@/generated'
-import ConnectionNameInputs from './Inputs'
-import { DialogTitle, CloseDialogButton, IndicatorIconContainer } from './elements'
+import { ConnectionNameInputs, DialogTitle, CloseDialogButton, IndicatorIconContainer } from './components'
 
 export const CreateConnectionDialog: FC = () => {
   const { data } = useActiveConnectionQuery()
@@ -47,3 +46,6 @@ export interface DialogTitleProps {
   id: string
   onClose: () => void
 }
+
+export * from './components'
+export * from './api'

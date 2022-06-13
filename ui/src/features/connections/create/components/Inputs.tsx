@@ -1,40 +1,13 @@
-import { Dispatch, FC, SetStateAction, useCallback } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import { Alert } from '@mui/material'
 
-import { useInput } from '@/hooks/useInput'
 import { Button, BaseTextField, PasswordTextField } from '@/components'
-import { ConnectionInput, useCreateConnectionMutation } from '@/generated'
 import { DialogContent, DialogActions } from './elements'
-import { useInvalidateAllKeys } from '@/utils'
+import { useCreateConnection } from '../api'
 
-const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
-  const invalidateAllKeys = useInvalidateAllKeys()
-  const {
-    mutate: createConnection,
-    isLoading,
-    isError
-  } = useCreateConnectionMutation({
-    onSuccess() {
-      invalidateAllKeys()
-      handleClose(false)
-    }
-  })
-
-  const [connectionName, connectionNameBind] = useInput('')
-  const [host, hostBind] = useInput('')
-  const [port, portBind] = useInput('')
-  const [password, passwordBind] = useInput('')
-
-  const create = useCallback(() => {
-    const connection: ConnectionInput = {
-      host,
-      port: Number(port),
-      name: connectionName,
-      protocol: 'http',
-      password: password || undefined
-    }
-    createConnection({ connection })
-  }, [createConnection, connectionName, port, host, password])
+export const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
+  const { isError, isLoading, hostBind, portBind, passwordBind, connectionNameBind, create } =
+    useCreateConnection(handleClose)
 
   return (
     <>
@@ -71,5 +44,3 @@ const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
 interface Props {
   handleClose: Dispatch<SetStateAction<boolean>>
 }
-
-export default ConnectionNameInputs

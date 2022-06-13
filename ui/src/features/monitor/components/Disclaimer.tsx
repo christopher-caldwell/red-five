@@ -3,7 +3,7 @@ import { Dialog, DialogContent, IconButton, DialogContentText, DialogActions } f
 import InfoIcon from '@mui/icons-material/Info'
 
 import { Button } from '@/components'
-import { DialogTitle } from '@/features/connections/components/create-connection-dialog/elements'
+import { DialogTitle } from '@/features/connections'
 
 export const MonitoringDisclaimer: FC = () => {
   const [open, setOpen] = useState(false)
