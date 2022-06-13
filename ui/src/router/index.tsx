@@ -2,7 +2,7 @@ import { FC, Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { styled } from '@mui/material'
 
-import Header from '@/components/header'
+import Header from '@/features/header'
 import { Routes } from './routes'
 
 const Keys = lazy(() => import('@/views/keys'))

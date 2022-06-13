@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { LinearProgress } from '@mui/material'
 import { Virtuoso } from 'react-virtuoso'
 
-import { Window } from '@/components/cli/elements'
+import { Window } from '@/features/cli/elements'
 import { Container } from '@/views//cli/elements'
-import MonitoringStatusHeader from '@/components/monitor/status-header'
-import MonitorMessage from '@/components/monitor/monitor-message'
+import MonitoringStatusHeader from '@/features/monitor/status-header'
+import MonitorMessage from '@/features/monitor/monitor-message'
 
 import { useMonitoring } from './useMonitoring'
 

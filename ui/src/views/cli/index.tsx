@@ -2,9 +2,9 @@ import { FC } from 'react'
 import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@mui/material'
 import ChevronRight from '@mui/icons-material/ChevronRight'
 
-import CLIWindow from '@/components/cli'
-import { FlexContainer, Snackbar } from '@/components/shared'
-import Status from '@/components/cli/status'
+import CLIWindow from '@/features/cli'
+import { FlexContainer, Snackbar } from '@/components'
+import Status from '@/features/cli/status'
 import { Container, CommandPrompt, LoadingContainer } from './elements'
 import { useCli } from './useCli'
 

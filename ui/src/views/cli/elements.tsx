@@ -1,7 +1,7 @@
 import { styled } from '@mui/material'
 import { InlineSuggest } from '@caldwell619/mui-inline-suggest'
 
-import { FlexContainer } from '@/components/shared'
+import { FlexContainer } from '@/components'
 
 export const Title = styled('h1')`
   margin-right: 30px;
