@@ -3,7 +3,7 @@ import { useHistory } from 'react-router'
 
 import { Routes } from '@/router/routes'
 import { useActiveConnectionQuery } from '@/generated'
-import { FlexContainer } from '@/components/shared'
+import { FlexContainer } from '@/components'
 
 const NoConnectionFallback: FC = () => {
   const { push } = useHistory()

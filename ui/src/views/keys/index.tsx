@@ -4,10 +4,8 @@ import { parse } from 'query-string'
 
 import { useActiveConnectionQuery } from '@/generated'
 import { Routes } from '@/router/routes'
-import { FlexContainer, Snackbar } from '@/components/shared'
-import Explorer from '@/components/keys/explorer'
-import Display from '@/components/keys/display'
-import CreateKey from './create'
+import { FlexContainer, Snackbar } from '@/components'
+import { CreateKey, KeyDisplay, KeyExplorer } from '@/features/keys'
 
 const Keys: FC = () => {
   const { push } = useHistory()
@@ -29,10 +27,10 @@ const Keys: FC = () => {
   return (
     <>
       <FlexContainer margin='1% 0 0 0' padding='1%' justify='flex-end' width='100vw'>
-        <Explorer width={width} setWidth={setWidth} />
+        <KeyExplorer width={width} setWidth={setWidth} />
         <Switch>
           <Route path={path + '/create'} render={() => <CreateKey width={width} />} />
-          <Route path={path} render={() => <Display width={width} />} />
+          <Route path={path} render={() => <KeyDisplay width={width} />} />
         </Switch>
       </FlexContainer>
       {confirmation ? (

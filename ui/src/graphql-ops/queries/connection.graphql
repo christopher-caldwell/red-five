@@ -1,0 +1,9 @@
+query Connection($id: String!) {
+  connection(id: $id) {
+    name
+    isActive
+    port
+    host
+    password
+  }
+}

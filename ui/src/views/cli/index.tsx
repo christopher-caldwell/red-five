@@ -1,10 +1,9 @@
 import { FC } from 'react'
-import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@material-ui/core'
-import ChevronRight from '@material-ui/icons/ChevronRight'
+import { InputAdornment, Switch, FormControlLabel, LinearProgress } from '@mui/material'
+import ChevronRight from '@mui/icons-material/ChevronRight'
 
-import CLIWindow from '@/components/cli'
-import { FlexContainer, Snackbar } from '@/components/shared'
-import Status from '@/components/cli/status'
+import { CLIWindow, CliStatus } from '@/features/cli'
+import { FlexContainer, Snackbar } from '@/components'
 import { Container, CommandPrompt, LoadingContainer } from './elements'
 import { useCli } from './useCli'
 
@@ -27,15 +26,13 @@ const Cli: FC = () => {
     <>
       <Container>
         <FlexContainer justify='space-between'>
-          <Status isConnected={isConnected} />
+          <CliStatus isConnected={isConnected} />
           <FormControlLabel
             control={<Switch checked={willSaveCliOutput} onChange={saveCliOutputHandler} color='primary' />}
             label='Save CLI output to local storage'
           />
         </FlexContainer>
-        <LoadingContainer>
-          <LinearProgress hidden={!isLoading} variant='indeterminate' />
-        </LoadingContainer>
+        <LoadingContainer>{isLoading ? <LinearProgress variant='indeterminate' /> : null}</LoadingContainer>
         <CLIWindow response={response} />
         <form onSubmit={sendCommand}>
           <CommandPrompt
