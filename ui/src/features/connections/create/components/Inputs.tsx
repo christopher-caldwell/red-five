@@ -69,7 +69,7 @@ const inputs: Config<Connection>[] = [
       control: {
         rules: {
           min: 0,
-          pattern: /$[0-9]/
+          pattern: /^[0-9]*$/
         },
         name: 'port',
         label: 'Port'

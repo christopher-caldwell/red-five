@@ -1,1 +1,1 @@
-export * from './useCreateConnection'
+export * from './useEditConnection'

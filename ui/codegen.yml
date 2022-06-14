@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://localhost:5000/graphql'
+schema: 'http://localhost:5001/graphql'
 documents: 'src/**/*.graphql'
 generates:
   src/generated/index.ts:
@@ -8,6 +8,6 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
-      fetcher: 'client#runQuery'
+      fetcher: '@/client#runQuery'
       exposeQueryKeys: true
       skipTypename: true

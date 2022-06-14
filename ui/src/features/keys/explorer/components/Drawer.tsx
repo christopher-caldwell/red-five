@@ -43,8 +43,9 @@ export const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
         open
         anchor='left'
         PaperProps={{
-          style: { width },
           sx: {
+            padding: '5% 1%',
+            width,
             backgroundColor: colors.grey[900]
           }
         }}

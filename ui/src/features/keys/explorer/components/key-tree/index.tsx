@@ -22,7 +22,7 @@ export const KeyTree: FC<Props> = ({ namespaces, searchTerm, isLoading }) => {
             <TreeItem nodeId={namespace?.name} key={index} label={namespace?.name}>
               {keyResults.map((key, subIndex) => (
                 <TreeItem
-                  classes={{ selected: styles.selected }}
+                  classes={{ ...styles }}
                   nodeId={`${namespace?.name}-${subIndex}`}
                   key={key?.key}
                   label={key?.key}

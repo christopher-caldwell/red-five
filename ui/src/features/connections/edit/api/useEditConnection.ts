@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { useContext } from 'react'
 
 import { ConnectionInput, useCreateConnectionMutation } from '@/generated'
 import { useInvalidateAllKeys } from '@/utils'
 import { UseFormReturn } from 'react-hook-form'
 import { MuiFormContext } from '@caldwell619/mui-form-generator'
 
-export const useCreateConnection = (handleClose: Dispatch<SetStateAction<boolean>>) => {
+export const useEditConnection = () => {
   const invalidateAllKeys = useInvalidateAllKeys()
   const {
     mutate: createConnection,
@@ -14,7 +14,7 @@ export const useCreateConnection = (handleClose: Dispatch<SetStateAction<boolean
   } = useCreateConnectionMutation({
     onSuccess() {
       invalidateAllKeys()
-      handleClose(false)
+      // handleClose(false)
     }
   })
   const { handleSubmit } = useContext<UseFormReturn<ConnectionInput>>(MuiFormContext)

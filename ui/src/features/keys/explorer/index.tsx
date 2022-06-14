@@ -3,8 +3,9 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@/generated'
 import { useInput } from '@/hooks/useInput'
-import { FlexContainer, InputWithIcon } from '@/components'
+import { InputWithIcon } from '@/components'
 import { SpeedDials, KeyDrawer, KeyTree } from './components'
+import { Grid } from '@mui/material'
 
 export const KeyExplorer: FC<Props> = props => {
   const { data: activeConnectionData } = useActiveConnectionQuery()
@@ -15,15 +16,17 @@ export const KeyExplorer: FC<Props> = props => {
 
   return (
     <KeyDrawer {...props}>
-      <FlexContainer align='flex-start' justify='space-between'>
-        <FlexContainer width='80%' justify='flex-start' direction='column'>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
           <InputWithIcon disabled={isLoading} icon={<SearchIcon />} bind={searchTermBind} label='Search Keys' />
-          <KeyTree isLoading={isLoading} searchTerm={searchTerm} namespaces={namespaces} />
-        </FlexContainer>
-        <FlexContainer width='20%'>
+        </Grid>
+        <Grid item xs={12}>
           <SpeedDials refresh={refetch} />
-        </FlexContainer>
-      </FlexContainer>
+        </Grid>
+        <Grid item xs={12}>
+          <KeyTree isLoading={isLoading} searchTerm={searchTerm} namespaces={namespaces} />
+        </Grid>
+      </Grid>
     </KeyDrawer>
   )
 }

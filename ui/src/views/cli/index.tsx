@@ -32,9 +32,7 @@ const Cli: FC = () => {
             label='Save CLI output to local storage'
           />
         </FlexContainer>
-        <LoadingContainer>
-          <LinearProgress hidden={!isLoading} variant='indeterminate' />
-        </LoadingContainer>
+        <LoadingContainer>{isLoading ? <LinearProgress variant='indeterminate' /> : null}</LoadingContainer>
         <CLIWindow response={response} />
         <form onSubmit={sendCommand}>
           <CommandPrompt

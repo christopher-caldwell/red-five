@@ -5,6 +5,7 @@ import ReactJsonView from 'react-json-view'
 
 import { UseInputBind } from '@/hooks'
 import { FlexContainer, Button } from '@/components'
+import { KeyQuery } from '@/generated'
 
 export const KeyDisplay: FC<Props> = ({
   shouldViewAsJson,
@@ -12,11 +13,12 @@ export const KeyDisplay: FC<Props> = ({
   keyFetchError,
   editedValueBind,
   handleSaveKey,
-  isSetLoading
+  isSetLoading,
+  targetKey
 }) => {
   return shouldViewAsJson ? (
     <HighlightContainer>
-      <ReactJsonView src={getParsedJson()} theme='monokai' style={{ backgroundColor: 'transparent' }} />
+      <ReactJsonView src={getParsedJson(targetKey?.value)} theme='monokai' style={{ backgroundColor: 'transparent' }} />
     </HighlightContainer>
   ) : (
     <>
@@ -58,4 +60,5 @@ interface Props {
   editedValueBind: UseInputBind
   handleSaveKey: () => Promise<void>
   isSetLoading: boolean
+  targetKey: KeyQuery['key'] | undefined
 }

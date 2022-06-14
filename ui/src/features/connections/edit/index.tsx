@@ -1,16 +1,29 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit'
-import { IconButton } from '@mui/material'
+import { IconButton, LinearProgress, Alert } from '@mui/material'
+import { MuiFormProvider } from '@caldwell619/mui-form-generator'
 
-// TODO: Connection Query to get the connection by ID to edit
+import { useConnectionQuery } from '@/generated'
+import { ConnectionEdit } from './components'
+
 export const EditConnection: FC<Props> = ({ id }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { data, isLoading } = useConnectionQuery({ id })
+  const connection = data?.connection
+  if (isLoading) return <LinearProgress />
+  if (!connection) return <Alert severity='error'>Cannot find the connection</Alert>
   return (
-    <IconButton>
-      <EditIcon />
-    </IconButton>
+    <MuiFormProvider props={{ defaultValues: connection }}>
+      <>
+        <IconButton onClick={() => setIsOpen(true)}>
+          <EditIcon />
+        </IconButton>
+        <ConnectionEdit isOpen={isOpen} setIsOpen={setIsOpen} />
+      </>
+    </MuiFormProvider>
   )
 }
 
 interface Props {
-  id: string | number
+  id: string
 }

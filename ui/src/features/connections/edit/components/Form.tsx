@@ -1,17 +1,18 @@
 import { Dispatch, FC, SetStateAction } from 'react'
-import { Alert } from '@mui/material'
+import { Alert, Dialog, DialogTitle, Button as MuiButton } from '@mui/material'
 import { MuiForm, Config } from '@caldwell619/mui-form-generator'
 
 import { Button } from '@/components'
 import { DialogContent, DialogActions } from './elements'
-import { useCreateConnection } from '../api'
+import { useEditConnection } from '../api'
 import { Connection } from '@/generated'
 
-export const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
-  const { isError, isLoading, create } = useCreateConnection(handleClose)
+export const ConnectionEdit: FC<Props> = ({ isOpen, setIsOpen }) => {
+  const { isError, isLoading, create } = useEditConnection()
 
   return (
-    <>
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+      <DialogTitle>Edit Connection</DialogTitle>
       <DialogContent dividers>
         {isError ? (
           <Alert variant='filled' severity='error'>
@@ -22,9 +23,12 @@ export const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
         <MuiForm inputs={inputs} gridSpacing={2} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={create} text='Connect' isLoading={isLoading} />
+        <MuiButton onClick={() => setIsOpen(false)} variant='contained' color='secondary'>
+          Cancel
+        </MuiButton>
+        <Button onClick={create} text='Save' isLoading={isLoading} />
       </DialogActions>
-    </>
+    </Dialog>
   )
 }
 
@@ -88,5 +92,6 @@ const inputs: Config<Connection>[] = [
 ]
 
 interface Props {
-  handleClose: Dispatch<SetStateAction<boolean>>
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 }

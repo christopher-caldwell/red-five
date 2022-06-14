@@ -30,6 +30,7 @@ export const KeyData: FC<Props> = ({ keyId, targetKey, refetchKey, keyFetchError
         keyFetchError={keyFetchError}
       />
       <KeyDisplay
+        targetKey={targetKey}
         isEditing={isEditing}
         shouldViewAsJson={shouldViewAsJson}
         keyFetchError={keyFetchError}

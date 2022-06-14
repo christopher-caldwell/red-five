@@ -20,7 +20,7 @@ export const SpeedDials: FC<Props> = ({ refresh }) => {
       onOpen={handleOpen}
       open={open}
       FabProps={{ size: 'small' }}
-      direction='down'
+      direction='right'
     >
       <SpeedDialAction key='refresh' icon={<RefreshIcon />} tooltipTitle='Refresh' onClick={handleClose(true)} />
       <SpeedDialAction key='add' icon={<AddIcon />} tooltipTitle='Add' onClick={handleGoToAdd} />

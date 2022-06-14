@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react'
 import { useQueryClient } from 'react-query'
 import { ClientError } from 'graphql-request'
 
-import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, Key } from '@/generated'
+import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, KeyQuery } from '@/generated'
 import { Snackbar } from '@/components'
 import { useInput } from '@/hooks'
 
@@ -10,7 +10,7 @@ const connectionsKey = useConnectionsQuery.getKey()
 const namespacedKeys = useNamespacedKeysQuery.getKey({})
 
 export const useEditKeys = (
-  key: Pick<Key, 'value' | 'type' | 'ttl'> | undefined,
+  key: KeyQuery['key'] | undefined,
   refetchKey: () => void,
   keyId?: string,
   keyFetchError?: Error | null

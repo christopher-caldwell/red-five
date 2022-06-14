@@ -67,7 +67,11 @@ export const DataTable = function <TData extends object & { id?: string }>({
           sx={{ backgroundColor: ({ palette: { background } }) => background.paper }}
         >
           {row.cells.map(cell => {
-            return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
+            return (
+              <TableCell sx={{ padding: '3px' }} {...cell.getCellProps()}>
+                {cell.render('Cell')}
+              </TableCell>
+            )
           })}
         </TableRow>
       )

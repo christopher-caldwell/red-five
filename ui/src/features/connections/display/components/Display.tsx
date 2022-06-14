@@ -42,6 +42,7 @@ const columns: Column<Connection>[] = [
   {
     Header: 'Active',
     accessor: 'isActive',
+    width: '',
     Cell: ({ row }) => {
       return <MakeActive {...(row.values as Connection)} />
     }
@@ -103,7 +104,8 @@ const Container = styled(Paper)`
 
 const DataGridOuterContainer = styled('div')`
   height: 300px;
-  width: 40vw;
+  min-width: 40vw;
+  /* width: 40vw; */
 `
 
 const DataGridInnerContainer = styled('div')`
