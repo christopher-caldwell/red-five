@@ -1,11 +1,11 @@
 import { FC } from 'react'
-// import { DataGrid, GridColDef } from '@material-ui/data-grid'
 import { styled, Paper, Alert, LinearProgress } from '@mui/material'
 import { Column } from 'react-table'
 
 import { DataTable, usePagination } from '@/components'
 import { useConnectionsQuery, Connection } from '@/generated'
-import { MakeActive, EditConnection, RemoveConnection } from './'
+import { EditConnection } from '@/features/connections/edit'
+import { MakeActive, RemoveConnection } from './'
 
 export const ConnectionDisplay: FC = () => {
   const { isFetching, isError, data } = useConnectionsQuery()

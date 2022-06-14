@@ -6,6 +6,7 @@ import UpArrowIcon from '@mui/icons-material/ArrowUpward'
 
 import { useActiveConnectionQuery } from '@/generated'
 import { ConnectionNameInputs, DialogTitle, CloseDialogButton, IndicatorIconContainer } from './components'
+import { MuiFormProvider } from '@caldwell619/mui-form-generator'
 
 export const CreateConnectionDialog: FC = () => {
   const { data } = useActiveConnectionQuery()
@@ -36,7 +37,9 @@ export const CreateConnectionDialog: FC = () => {
             <CloseIcon />
           </CloseDialogButton>
         </DialogTitle>
-        <ConnectionNameInputs handleClose={handleClose} />
+        <MuiFormProvider props={{ defaultValues: {} }}>
+          <ConnectionNameInputs handleClose={handleClose} />
+        </MuiFormProvider>
       </Dialog>
     </>
   )
