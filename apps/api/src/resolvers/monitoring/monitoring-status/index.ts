@@ -1,5 +1,6 @@
 import { getActiveConnectionConfig, createIfNotExists } from '@_api/db'
-import { Resolver, MonitoringStatus } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import { MonitoringStatus } from '@_api-types'
 
 export const monitoringStatus: Resolver<MonitoringStatus> = async (_, { Client }) => {
   const connection = getActiveConnectionConfig(Client)

@@ -1,6 +1,7 @@
-import { Resolver, Connection } from '@_api/interfaces'
 import { JsonDB } from 'node-json-db'
 
+import { Resolver } from '@_api/interfaces'
+import { Connection } from '@_api-types'
 import { createIfNotExists } from '@_api/db'
 
 export const connections: Resolver<Connection[], SearchConnectionArgs> = async (

@@ -1,6 +1,7 @@
 import asyncPool from 'tiny-async-pool'
 
-import { Resolver, Key } from '@_api/interfaces'
+import type { Key } from '@_ui-types'
+import { Resolver } from '@_api/interfaces'
 import { getActiveConnection } from '@_api/connections'
 
 const concurrencyLimit = 10

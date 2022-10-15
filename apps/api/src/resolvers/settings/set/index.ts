@@ -1,4 +1,5 @@
-import { MutationResult, Resolver, SettingsInput } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import { MutationResult, SettingsInput } from '@_api-types'
 
 export const setSettings: Resolver<MutationResult, SetSettingsArgs> = async ({ settings }, { Client }) => {
   Client.push('/settings', settings)

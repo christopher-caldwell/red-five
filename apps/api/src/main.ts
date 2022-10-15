@@ -68,3 +68,5 @@ export const startServer = async () => {
     adze().info(`🚀 Skynet is active`)
   })
 }
+
+startServer()

@@ -1,6 +1,7 @@
 import { serializeError } from 'serialize-error'
 
-import { Resolver, CliResponse } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import { CliResponse } from '@_api-types'
 import { getActiveConnection } from '@_api/connections'
 import { stitchArrayValuesIntoString } from '@_api/utils'
 

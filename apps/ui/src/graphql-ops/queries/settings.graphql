@@ -1,0 +1,6 @@
+query settings {
+  settings {
+    willPromptBeforeDelete
+    willSaveCliOutput
+  }
+}

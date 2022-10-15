@@ -1,0 +1,13 @@
+query namespacedKeys {
+  namespacedKeys {
+    allKeys {
+      key
+    }
+    namespaced {
+      name
+      keys {
+        key
+      }
+    }
+  }
+}

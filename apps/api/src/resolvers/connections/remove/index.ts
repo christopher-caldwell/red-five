@@ -1,4 +1,5 @@
-import { Resolver, MutationResult, Connection } from '@_api/interfaces'
+import { MutationResult, Connection } from '@_api-types'
+import { Resolver } from '@_api/interfaces'
 
 export const removeConnection: Resolver<MutationResult, RemoveConnectionArgs> = async ({ id }, { Client }) => {
   const indexToRemove = Client.getIndex('/connections', id, 'id')

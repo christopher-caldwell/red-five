@@ -1,4 +1,5 @@
-import { Resolver, Connection } from '@_api/interfaces'
+import { Connection } from '@_api-types'
+import { Resolver } from '@_api/interfaces'
 import { getActiveConnectionConfig } from '@_api/db'
 
 // TODO: Maybe handle this better when there are no active connections

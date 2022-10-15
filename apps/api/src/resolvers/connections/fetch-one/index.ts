@@ -1,4 +1,5 @@
-import { Resolver, Connection } from '@_api/interfaces'
+import { Connection } from '@_api-types'
+import { Resolver } from '@_api/interfaces'
 import { findById } from '@_api/db'
 
 export const connection: Resolver<Connection, FetchOneConnectionArgs> = async ({ id }, { Client }) => {

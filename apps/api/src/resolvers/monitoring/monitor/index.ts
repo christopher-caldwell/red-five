@@ -1,4 +1,5 @@
-import { SubscriptionResolver, MonitoringMessage } from '@_api/interfaces'
+import { MonitoringMessage } from '@_api-types'
+import { SubscriptionResolver } from '@_api/interfaces'
 import { monitoredConnections } from '@_api/connections'
 import { getActiveConnectionConfig } from '@_api/db'
 

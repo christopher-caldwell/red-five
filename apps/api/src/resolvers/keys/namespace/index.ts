@@ -1,4 +1,6 @@
-import { Resolver, Key, NamespaceKeyResult, NameSpacedKeys } from '@_api/interfaces'
+import type { NamespaceKeyResult, NameSpacedKeys } from '@_api-types'
+import type { Key } from '@_ui-types'
+import { Resolver } from '@_api/interfaces'
 import { keys } from '../get-all'
 
 export const namespacedKeys: Resolver<NamespaceKeyResult> = async (_, { Client }) => {

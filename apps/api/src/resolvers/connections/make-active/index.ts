@@ -1,4 +1,5 @@
-import { Resolver, MutationResult } from '@_api/interfaces'
+import { MutationResult } from '@_api-types'
+import { Resolver } from '@_api/interfaces'
 
 export const makeConnectionActive: Resolver<MutationResult, MakeConnectionActiveArgs> = async ({ id }, { Client }) => {
   Client.push('/activeConnection', id)

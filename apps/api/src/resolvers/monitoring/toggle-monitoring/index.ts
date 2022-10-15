@@ -1,6 +1,8 @@
 import { Redis } from 'ioredis'
+
 import { getActiveConnectionConfig, getActiveConnection } from '@_api/db'
-import { MutationResult, Resolver, SettingsInput } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import { MutationResult, SettingsInput } from '@_api-types'
 import { monitoredConnections } from '@_api/connections'
 
 export const toggleMonitoring: Resolver<MutationResult, ToggleMonitoringArgs> = async (

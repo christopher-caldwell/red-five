@@ -3,9 +3,9 @@ import adze from 'adze'
 import Redis from 'ioredis'
 import { JsonDB } from 'node-json-db'
 
-import { Connection } from '@_api/interfaces'
+import { Connection, ConnectionInput, MutationResult } from '@_api-types'
 import { connections } from '@_api/connections'
-import { Resolver, ConnectionInput, MutationResult } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
 import { makeConnectionActive } from '../make-active'
 import { activeConnection as getActiveConnection } from '../active'
 

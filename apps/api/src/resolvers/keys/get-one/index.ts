@@ -1,4 +1,5 @@
-import { Resolver, Key } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import { Key } from '@_api-types'
 import { getActiveConnection } from '@_api/connections'
 
 export const key: Resolver<Key, GetOneKeyArgs> = async ({ id }, { Client }) => {

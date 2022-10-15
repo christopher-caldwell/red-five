@@ -1,0 +1,5 @@
+mutation createConnection($connection: ConnectionInput!) {
+  createConnection(connection: $connection) {
+    message
+  }
+}

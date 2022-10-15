@@ -1,0 +1,6 @@
+query activeConnection {
+  activeConnection {
+    id
+    name
+  }
+}

@@ -1,4 +1,5 @@
-import { Resolver, MutationResult } from '@_api/interfaces'
+import { MutationResult } from '@_api-types'
+import { Resolver } from '@_api/interfaces'
 import { getActiveConnection } from '@_api/connections'
 
 export const removeKey: Resolver<MutationResult, RemoveKeyArgs> = async ({ key }, { Client }) => {

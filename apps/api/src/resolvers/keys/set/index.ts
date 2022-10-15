@@ -1,4 +1,5 @@
-import { Resolver, Key, MutationResult } from '@_api/interfaces'
+import { Resolver } from '@_api/interfaces'
+import type { Key, MutationResult } from '@_ui-types'
 import { getActiveConnection } from '@_api/connections'
 
 export const setKey: Resolver<MutationResult, CreateKeyArgs> = async ({ entry }, { Client }) => {
