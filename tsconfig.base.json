@@ -15,10 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@_api/*": ["apps/api/src/*"],
-      "@_ui/*": ["apps/ui/src/*"],
       "@_api-types": ["packages/shared-types/src/api.ts"],
-      "@_ui-types": ["packages/shared-types/src/ui.ts"]
+      "@_api/*": ["apps/api/src/*"],
+      "@_ui-types": ["packages/shared-types/src/ui.ts"],
+      "@_ui/*": ["apps/ui/src/*"],
+      "@red-five-2/shared-types": ["packages/shared-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
