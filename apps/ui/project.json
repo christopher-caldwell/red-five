@@ -68,6 +68,9 @@
         "lintFilePatterns": ["apps/ui/**/*.{ts,tsx,js,jsx}"]
       }
     },
+    "type-check": {
+      "executor": "./tools/executors/type-check:type-check"
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
