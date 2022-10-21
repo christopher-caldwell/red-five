@@ -8,6 +8,7 @@ const concurrencyLimit = 10
 export const keys: Resolver<Key[]> = async (_, { Client }) => {
   const redis = getActiveConnection(Client)
   const keys = await redis.keys('*')
+  if (keys.length === 0) return []
   const values = await redis.mget(keys)
 
   const ttlFetcher = (key: string) => redis.ttl(key)
