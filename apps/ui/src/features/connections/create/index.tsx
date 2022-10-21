@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add'
 import UpArrowIcon from '@mui/icons-material/ArrowUpward'
 
-import { useActiveConnectionQuery } from '@_ui/generated'
+import { useActiveConnectionQuery } from '@_ui-types'
 import { ConnectionNameInputs, DialogTitle, CloseDialogButton, IndicatorIconContainer } from './components'
 import { MuiFormProvider } from '@caldwell619/mui-form-generator'
 

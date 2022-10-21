@@ -8,7 +8,7 @@ import styles from './index.module.sass'
 
 export const NavLink: FC<Link> = ({ to, label }) => {
   return (
-    <LinkContainer to={to} activeClassName={styles.activeLink}>
+    <LinkContainer to={to} className={navData => (navData.isActive ? styles['activeLink'] : '')}>
       <FlexContainer height='100%'>{label}</FlexContainer>
     </LinkContainer>
   )

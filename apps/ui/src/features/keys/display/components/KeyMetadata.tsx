@@ -5,7 +5,7 @@ import { styled } from '@mui/material'
 import { BaseTextField } from '@_ui/components'
 import { UseInputBind } from '@_ui/hooks'
 import { activeKeyAtom } from '@_ui/store'
-import { Key } from '@_ui/generated'
+import { Key } from '@_ui-types'
 import { standardFormatDate } from '@_ui/utils'
 
 export const KeyMetadata: FC<Props> = ({ ttl, type, isEditing, bind }) => {

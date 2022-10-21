@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-import { useRemoveConnectionMutation } from '@_ui/generated'
+import { useRemoveConnectionMutation } from '@_ui-types'
 import { useInvalidateAllKeys } from '@_ui/utils'
 
 export const useRemoveConnection = (id: string) => {

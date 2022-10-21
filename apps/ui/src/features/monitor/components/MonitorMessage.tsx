@@ -3,7 +3,7 @@ import ChevronRight from '@mui/icons-material/ChevronRight'
 
 import { standardFormatDate } from '@_ui/utils/dates'
 import { FlexContainer } from '@_ui/components'
-import { MonitoringMessage } from '@_ui/generated'
+import { MonitoringMessage } from '@_ui-types'
 import { MessageContainer, CommandTitle, Container } from '@_ui/features/cli/components'
 
 export const MonitorMessage: FC<Props> = ({ time, args }) => {

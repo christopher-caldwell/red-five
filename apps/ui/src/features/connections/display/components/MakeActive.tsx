@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Checkbox } from '@mui/material'
 
-import { Connection } from '@_ui/generated'
+import { Connection } from '@_ui-types'
 import { FlexContainer } from '@_ui/components'
 import { useMakeConnectionActive } from '../api'
 

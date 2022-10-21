@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { VirtuosoHandle } from 'react-virtuoso'
 
 import { execute } from '@_ui/client/subscriptions'
-import { useMonitoringStatusQuery, MonitoringMessage } from '@_ui/generated'
+import { useMonitoringStatusQuery, MonitoringMessage } from '@_ui-types'
 
 export const useMonitoring = () => {
   const [messages, setMessages] = useState<MonitoringMessage[]>([])

@@ -30,7 +30,7 @@ In both the front and the back end directories, a command called `graphql:codege
 
 In the UI, you can import all of these hooks and interfaces from the respective `generated` directory.
 
-**UI:** `import { useFetchSomething } from '@_ui/generated'`
+**UI:** `import { useFetchSomething } from '@_ui-types'`
 **API:** `import { SomeType } from '@_ui/interfaces'`
 
 ## Tech Stack

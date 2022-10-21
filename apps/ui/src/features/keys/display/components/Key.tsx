@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { ClientError } from 'graphql-request'
 
-import { Key } from '@_ui/generated'
+import { Key } from '@_ui-types'
 import { Controls, KeyDisplay, KeyMetadata } from '.'
 import { useEditKeys } from '../api'
 import '@_ui/styles/theme.css'

@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { client } from '@_ui/client/subscriptions'
-import { useTestActiveConnectionQuery, useMonitoringStatusQuery, useToggleMonitoringMutation } from '@_ui/generated'
+import { useTestActiveConnectionQuery, useMonitoringStatusQuery, useToggleMonitoringMutation } from '@_ui-types'
 
 const isMonitoringKey = useMonitoringStatusQuery.getKey()
 

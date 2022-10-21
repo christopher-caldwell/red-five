@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { CliResponse, Maybe, useSettingsQuery } from '@_ui/generated'
+import { CliResponse, Maybe, useSettingsQuery } from '@_ui-types'
 import { previousOutputKey } from '@_ui/constants/localStorage'
 import { getItemFromLocalStorage, writeToLocalStorage } from '@_ui/utils/local-storage'
 

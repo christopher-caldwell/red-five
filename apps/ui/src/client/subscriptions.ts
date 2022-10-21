@@ -1,13 +1,15 @@
 import { createClient, SubscribePayload, ClientOptions, Client } from 'graphql-ws'
 
-import { GRAPHQL_WEB_SOCKET_ENDPOINT as url } from '@_ui/constants/index'
+import { GRAPHQL_WEB_SOCKET_ENDPOINT as url } from '@_ui/constants'
 
 function createRestartableClient(options: ClientOptions): RestartableClient {
   let restartRequested = false
   let restart = () => {
     restartRequested = true
   }
-  let close = () => {}
+  let close = () => {
+    //
+  }
 
   const client = createClient({
     ...options,

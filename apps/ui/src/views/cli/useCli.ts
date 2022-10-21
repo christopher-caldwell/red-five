@@ -1,7 +1,7 @@
 import { useCallback, ChangeEvent, FormEvent, useState } from 'react'
 import { ClientError } from 'graphql-request'
 
-import { useSendCliCommandMutation, useTestActiveConnectionQuery } from '@_ui/generated'
+import { useSendCliCommandMutation, useTestActiveConnectionQuery } from '@_ui-types'
 import { useUpdateSettings } from '@_ui/utils/settings'
 import {
   getItemFromLocalStorage,

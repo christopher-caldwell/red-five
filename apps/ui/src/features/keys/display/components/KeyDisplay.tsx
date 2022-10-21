@@ -5,7 +5,7 @@ import ReactJsonView from 'react-json-view'
 
 import { UseInputBind } from '@_ui/hooks'
 import { FlexContainer, Button } from '@_ui/components'
-import { KeyQuery } from '@_ui/generated'
+import { KeyQuery } from '@_ui-types'
 
 export const KeyDisplay: FC<Props> = ({
   shouldViewAsJson,

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { RefetchOptions, QueryObserverResult } from 'react-query'
+import { RefetchOptions, QueryObserverResult } from '@tanstack/react-query'
 import { SpeedDialIcon, SpeedDialAction } from '@mui/material'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import AddIcon from '@mui/icons-material/Add'

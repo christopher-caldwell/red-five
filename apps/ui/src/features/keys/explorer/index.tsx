@@ -1,7 +1,7 @@
 import { FC, SetStateAction, Dispatch } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 
-import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@_ui/generated'
+import { useActiveConnectionQuery, useNamespacedKeysQuery } from '@_ui-types'
 import { useInput } from '@_ui/hooks/useInput'
 import { InputWithIcon } from '@_ui/components'
 import { SpeedDials, KeyDrawer, KeyTree } from './components'

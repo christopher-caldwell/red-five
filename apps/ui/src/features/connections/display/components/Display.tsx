@@ -1,15 +1,15 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { styled, Paper, Alert, LinearProgress } from '@mui/material'
-import { Column } from 'react-table'
+import { ColumnDef, SortingState } from '@tanstack/react-table'
+import { Table } from '@caldwell619/ui-components'
 
-import { DataTable, usePagination } from '@_ui/components'
-import { useConnectionsQuery, Connection } from '@_ui/generated'
+import { useConnectionsQuery, Connection } from '@_ui-types'
 import { EditConnection } from '@_ui/features/connections/edit'
 import { MakeActive, RemoveConnection } from './'
 
 export const ConnectionDisplay: FC = () => {
+  const sortingHandler = useState<SortingState>([])
   const { isFetching, isError, data } = useConnectionsQuery()
-  const { page, rowsPerPage, ...rest } = usePagination()
   const connections: Connection[] = data?.connections || []
   return (
     <Container elevation={2}>
@@ -22,14 +22,12 @@ export const ConnectionDisplay: FC = () => {
       <div>
         <DataGridOuterContainer>
           <DataGridInnerContainer>
-            <DataTable<Connection>
+            <Table<Connection>
+              sortingHandler={sortingHandler}
               total={connections.length}
               items={connections}
               isLoading={isFetching}
               columns={columns}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              {...rest}
             />
           </DataGridInnerContainer>
         </DataGridOuterContainer>
@@ -38,64 +36,36 @@ export const ConnectionDisplay: FC = () => {
   )
 }
 
-const columns: Column<Connection>[] = [
+const columns: ColumnDef<Connection>[] = [
   {
-    Header: 'Active',
-    accessor: 'isActive',
-    width: '',
-    Cell: ({ row }) => {
-      return <MakeActive {...(row.values as Connection)} />
+    header: 'Active',
+    accessorKey: 'isActive',
+    size: 0,
+    cell: ({ row }) => {
+      return <MakeActive {...(row.original as Connection)} />
     }
   },
   {
-    Header: 'Name',
-    accessor: 'name'
+    header: 'Name',
+    accessorKey: 'name'
   },
   {
-    Header: 'Host',
-    accessor: 'host'
+    header: 'Host',
+    accessorKey: 'host'
   },
   {
-    Header: 'Edit',
-    accessor: 'id',
-    Cell: ({ row }) => {
+    header: 'Edit',
+    enableSorting: false,
+    cell: ({ row: { original } }) => {
       return (
         <>
-          <EditConnection id={row.values.id} />
-          <RemoveConnection id={row.values.id} />
+          <EditConnection id={original.id} />
+          <RemoveConnection id={original.id} />
         </>
       )
     }
   }
 ]
-
-// const columns: GridColDef[] = [
-//   {
-//     renderCell: params => <MakeActive {...(params.row as Connection)} />
-//   },
-//   {
-//     field: 'host',
-//     headerName: 'Host',
-//     flex: 0.6
-//   },
-//   {
-//     field: 'edit',
-//     headerName: 'Edit',
-//     headerAlign: 'center',
-//     flex: 0.3,
-//     disableColumnMenu: true,
-//     sortable: false,
-//     renderCell: ({ id }) => {
-//       return (
-//         <>
-//           <EditConnection id={id} />
-//           <RemoveConnection id={id} />
-//         </>
-//       )
-
-//     }
-//   }
-// ]
 
 const Container = styled(Paper)`
   padding: 20px !important;

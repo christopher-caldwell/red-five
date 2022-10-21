@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
-import { useMakConnectionActiveMutation } from '@_ui/generated'
+import { useMakConnectionActiveMutation } from '@_ui-types'
 
 export const useMakeConnectionActive = (id: string) => {
   const queryClient = useQueryClient()

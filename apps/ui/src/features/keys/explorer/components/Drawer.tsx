@@ -1,10 +1,10 @@
-import { FC, useRef, Dispatch, SetStateAction } from 'react'
+import { FC, PropsWithChildren, useRef, Dispatch, SetStateAction } from 'react'
 import { Drawer, colors } from '@mui/material'
 
 import { Root, Dragger } from './key-tree/elements'
 
 let isResizing = false
-export const KeyDrawer: FC<Props> = ({ width, setWidth, children }) => {
+export const KeyDrawer: FC<PropsWithChildren<Props>> = ({ width, setWidth, children }) => {
   const sidebarPanelRef = useRef<HTMLDivElement>(null)
   const sidebarCurrent = sidebarPanelRef?.current
 

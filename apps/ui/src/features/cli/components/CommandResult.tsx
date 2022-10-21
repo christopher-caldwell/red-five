@@ -5,7 +5,7 @@ import { styled } from '@mui/material'
 
 import { standardFormatDate } from '@_ui/utils/dates'
 import { FlexContainer } from '@_ui/components'
-import { CliResponse } from '@_ui/generated'
+import { CliResponse } from '@_ui-types'
 
 export const CommandResult: FC<Props> = ({ time, message, command }) => {
   const formattedTime = useMemo(() => standardFormatDate(time), [time])

@@ -1,23 +1,22 @@
 import { FC, useEffect, useState } from 'react'
-import { Switch, Route, useRouteMatch, useLocation, useHistory } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { parse } from 'query-string'
 
-import { useActiveConnectionQuery } from '@_ui/generated'
-import { Routes } from '@_ui/router/routes'
+import { useActiveConnectionQuery } from '@_ui-types'
+import { Routes as AvailableRoutes } from '@_ui/router/routes'
 import { FlexContainer, Snackbar } from '@_ui/components'
 import { CreateKey, KeyDisplay, KeyExplorer } from '@_ui/features/keys'
 
 const Keys: FC = () => {
-  const { push } = useHistory()
+  const navigate = useNavigate()
   const [width, setWidth] = useState(350)
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
-  const { path } = useRouteMatch()
   const { search } = useLocation()
   const { confirmation } = parse(search)
   const { data } = useActiveConnectionQuery()
 
   const connectionName = data?.activeConnection?.id
-  if (!connectionName) push(Routes.NoConnectionFallback)
+  if (!connectionName) navigate(AvailableRoutes.NoConnectionFallback)
 
   useEffect(() => {
     if (!confirmation) return
@@ -28,10 +27,10 @@ const Keys: FC = () => {
     <>
       <FlexContainer margin='1% 0 0 0' padding='1%' justify='flex-end' width='100vw'>
         <KeyExplorer width={width} setWidth={setWidth} />
-        <Switch>
-          <Route path={path + '/create'} render={() => <CreateKey width={width} />} />
-          <Route path={path} render={() => <KeyDisplay width={width} />} />
-        </Switch>
+        <Routes>
+          <Route index element={<KeyDisplay width={width} />} />
+          <Route path='/create' element={<CreateKey width={width} />} />
+        </Routes>
       </FlexContainer>
       {confirmation ? (
         <Snackbar isOpen={isSnackbarOpen} setIsOpen={setIsSnackbarOpen} severity='success' message='Done' />

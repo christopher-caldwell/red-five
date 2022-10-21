@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { ClientError } from 'graphql-request'
 
-import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, KeyQuery } from '@_ui/generated'
+import { useSetKeyMutation, useConnectionsQuery, useNamespacedKeysQuery, KeyQuery } from '@_ui-types'
 import { Snackbar } from '@_ui/components'
 import { useInput } from '@_ui/hooks'
 

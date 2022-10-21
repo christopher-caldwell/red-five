@@ -5,7 +5,7 @@ import { MuiForm, Config } from '@caldwell619/mui-form-generator'
 import { Button } from '@_ui/components'
 import { DialogContent, DialogActions } from './elements'
 import { useEditConnection } from '../api'
-import { Connection } from '@_ui/generated'
+import { Connection } from '@_ui-types'
 
 export const ConnectionEdit: FC<Props> = ({ isOpen, setIsOpen }) => {
   const { isError, isLoading, create } = useEditConnection()

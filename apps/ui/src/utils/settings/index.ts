@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
-import { useSettingsQuery, useSetSettingsMutation, Settings } from '@_ui/generated'
+import { useSettingsQuery, useSetSettingsMutation, Settings } from '@_ui-types'
 
 const settingsKey = useSettingsQuery.getKey()
 

@@ -2,10 +2,8 @@ import { FC, useState } from 'react'
 import { CircularProgress, ClickAwayListener, Popper, styled, Button } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Redirect } from 'react-router'
 
-import { Routes } from '@_ui/router/routes'
-import { useActiveConnectionQuery } from '@_ui/generated'
+import { useActiveConnectionQuery } from '@_ui-types'
 import { ConnectionDisplay } from './components'
 import styles from './connectionsDisplay.module.sass'
 
@@ -16,7 +14,7 @@ export const ConnectionMenu: FC = () => {
   const connectionName = data?.activeConnection?.name
   if (!connectionName) {
     if (anchorEl) setAnchorEl(null)
-    return <Redirect to={Routes.NoConnectionFallback} />
+    // TODO: Consider checking path and then seeing if redirect is needed
   }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -40,7 +38,7 @@ export const ConnectionMenu: FC = () => {
           {isLoading ? <CircularProgress variant='indeterminate' /> : connectionName || ''}
           {anchorEl ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </ConnectionSelectMenuButton>
-        <Popper className={styles.connectionDisplay} id={id} open={open} anchorEl={anchorEl}>
+        <Popper className={styles['connectionDisplay']} id={id} open={open} anchorEl={anchorEl}>
           <ConnectionDisplay />
         </Popper>
       </ConnectionContainer>

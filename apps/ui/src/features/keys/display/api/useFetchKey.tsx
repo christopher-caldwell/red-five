@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 import { ClientError } from 'graphql-request'
 
-import { useKeyQuery, KeyQuery } from '@_ui/generated'
+import { useKeyQuery, KeyQuery } from '@_ui-types'
 import { activeKeyAtom } from '@_ui/store'
 import { Snackbar } from '@_ui/components'
 

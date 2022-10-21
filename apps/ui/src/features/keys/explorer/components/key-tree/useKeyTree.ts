@@ -1,15 +1,15 @@
 import { useMemo, useCallback } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import Fuse from 'fuse.js'
 
-import { NameSpacedKeys, Key } from '@_ui/generated'
+import { NameSpacedKeys, Key } from '@_ui-types'
 import { activeKeyAtom } from '@_ui/store'
 import { Routes } from '@_ui/router/routes'
 
 export const useKeyTree = (namespaces: Props['namespaces'], searchTerm: Props['searchTerm']) => {
   const { pathname } = useLocation()
-  const { push } = useHistory()
+  const navigate = useNavigate()
   const setActiveKey = useSetRecoilState(activeKeyAtom)
 
   const NamespaceSearch = useMemo(() => new Fuse(namespaces, { keys: ['keys.key'], includeScore: true }), [namespaces])
@@ -19,9 +19,9 @@ export const useKeyTree = (namespaces: Props['namespaces'], searchTerm: Props['s
       if (!key) return
       setActiveKey(key)
       if (pathname === Routes.Keys) return
-      push(Routes.Keys)
+      navigate(Routes.Keys)
     },
-    [setActiveKey, push, pathname]
+    [setActiveKey, navigate, pathname]
   )
   return {
     results,

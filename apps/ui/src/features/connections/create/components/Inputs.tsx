@@ -5,7 +5,7 @@ import { MuiForm, Config } from '@caldwell619/mui-form-generator'
 import { Button } from '@_ui/components'
 import { DialogContent, DialogActions } from './elements'
 import { useCreateConnection } from '../api'
-import { Connection } from '@_ui/generated'
+import { Connection } from '@_ui-types'
 
 export const ConnectionNameInputs: FC<Props> = ({ handleClose }) => {
   const { isError, isLoading, create } = useCreateConnection(handleClose)

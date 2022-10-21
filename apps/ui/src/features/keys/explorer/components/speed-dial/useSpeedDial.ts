@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useInvalidateAllKeys } from '@_ui/utils/cache'
 import { Routes } from '@_ui/router/routes'
 
 export const useSpeedDial = () => {
   const [open, setOpen] = useState(false)
-  const { push } = useHistory()
+  const navigate = useNavigate()
   const invalidateAllKeys = useInvalidateAllKeys()
 
   const handleClose = useCallback(
@@ -20,8 +20,8 @@ export const useSpeedDial = () => {
   )
 
   const handleGoToAdd = useCallback(() => {
-    push(Routes.CreateKey)
-  }, [push])
+    navigate(Routes.CreateKey)
+  }, [navigate])
 
   const handleOpen = useCallback(() => {
     setOpen(true)

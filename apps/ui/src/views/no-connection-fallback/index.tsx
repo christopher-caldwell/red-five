@@ -1,17 +1,17 @@
 import { FC, useEffect } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import { Routes } from '@_ui/router/routes'
-import { useActiveConnectionQuery } from '@_ui/generated'
+import { useActiveConnectionQuery } from '@_ui-types'
 import { FlexContainer } from '@_ui/components'
 
 const NoConnectionFallback: FC = () => {
-  const { push } = useHistory()
+  const navigate = useNavigate()
   const { data } = useActiveConnectionQuery()
   const connectionName = data?.activeConnection?.id
   useEffect(() => {
-    if (connectionName) push(Routes.Keys)
-  }, [push, connectionName])
+    if (connectionName) navigate(Routes.Keys)
+  }, [navigate, connectionName])
 
   return (
     <FlexContainer width='100%' height='80vh'>

@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { IconButton, LinearProgress, Alert } from '@mui/material'
 import { MuiFormProvider } from '@caldwell619/mui-form-generator'
 
-import { useConnectionQuery } from '@_ui/generated'
+import { useConnectionQuery } from '@_ui-types'
 import { ConnectionEdit } from './components'
 
 export const EditConnection: FC<Props> = ({ id }) => {

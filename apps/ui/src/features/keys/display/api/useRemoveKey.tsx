@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useResetRecoilState } from 'recoil'
 
 import { activeKeyAtom } from '@_ui/store'
-import { useRemoveKeyMutation, useSettingsQuery } from '@_ui/generated'
+import { useRemoveKeyMutation, useSettingsQuery } from '@_ui-types'
 import { useInvalidateAllKeys } from '@_ui/utils/cache'
 import { keyActionConfirmation } from '@_ui/utils/routing'
 import { DeletePrompt as DeletePromptDialog } from '../components'
@@ -11,13 +11,13 @@ import { DeletePrompt as DeletePromptDialog } from '../components'
 export const useRemoveKey = (key?: string) => {
   const [open, setOpen] = useState(false)
   const resetActiveKey = useResetRecoilState(activeKeyAtom)
-  const { push } = useHistory()
+  const navigate = useNavigate()
   const invalidateAllKeys = useInvalidateAllKeys()
   const { mutateAsync, isLoading, isError } = useRemoveKeyMutation({
     onSuccess() {
       invalidateAllKeys()
       resetActiveKey()
-      push(keyActionConfirmation)
+      navigate(keyActionConfirmation)
     }
   })
 

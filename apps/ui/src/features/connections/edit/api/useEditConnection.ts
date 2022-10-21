@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ConnectionInput, useCreateConnectionMutation } from '@_ui/generated'
+import { ConnectionInput, useCreateConnectionMutation } from '@_ui-types'
 import { useInvalidateAllKeys } from '@_ui/utils'
 import { UseFormReturn } from 'react-hook-form'
 import { MuiFormContext } from '@caldwell619/mui-form-generator'
