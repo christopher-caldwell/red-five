@@ -1,6 +1,6 @@
 {
   "name": "@caldwell619/red-five",
-  "version": "0.0.0",
+  "version": "0.0.9-alpha.0",
   "license": "MIT",
   "scripts": {
     "lint": "nx run-many --all --target=lint",
@@ -12,7 +12,10 @@
     "graphql:codegen": "graphql-codegen && prettier --write packages/shared-types/src",
     "publish:version": "sh scripts/publish.sh"
   },
-  "private": true,
+  "bin": "bin/bin.js",
+  "files": [
+    "bin/"
+  ],
   "dependencies": {
     "@caldwell619/mui-form-generator": "^0.0.4",
     "@caldwell619/mui-inline-suggest": "^1.3.0",

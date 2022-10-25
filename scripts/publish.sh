@@ -29,4 +29,4 @@ fi
 
 # git push --follow-tags origin master
 
-# yarn publish --access=public
+yarn publish --access=public
