@@ -17,7 +17,7 @@ const Router: FC = () => (
       <Spacer>
         <Routes>
           <Route path={AvailableRoutes.Monitor} element={<Monitor />} />
-          <Route path={AvailableRoutes.Keys} element={<Keys />} />
+          <Route path={`${AvailableRoutes.Keys}/*`} element={<Keys />} />
           <Route path={AvailableRoutes.CLI} element={<CLI />} />
           <Route path={AvailableRoutes.NoConnectionFallback} element={<NoConnectionFallback />} />
         </Routes>

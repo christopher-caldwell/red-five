@@ -10,10 +10,12 @@ import styles from './connectionsDisplay.module.sass'
 export const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { data, isLoading } = useActiveConnectionQuery()
+  console.log('data', data)
 
   const connectionName = data?.activeConnection?.name
   if (!connectionName) {
     if (anchorEl) setAnchorEl(null)
+    return null
     // TODO: Consider checking path and then seeing if redirect is needed
   }
 

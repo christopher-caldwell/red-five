@@ -65,7 +65,7 @@ export const startServer = async () => {
       },
       wsServer
     )
-    adze().info(`🚀 Skynet is active`)
+    adze().info(`🚀 Skynet is active as port 5001`)
   })
 }
 

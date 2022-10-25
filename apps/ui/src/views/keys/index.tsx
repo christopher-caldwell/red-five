@@ -16,7 +16,10 @@ const Keys: FC = () => {
   const { data } = useActiveConnectionQuery()
 
   const connectionName = data?.activeConnection?.id
-  if (!connectionName) navigate(AvailableRoutes.NoConnectionFallback)
+
+  useEffect(() => {
+    if (!connectionName) navigate(AvailableRoutes.NoConnectionFallback)
+  }, [navigate, connectionName])
 
   useEffect(() => {
     if (!confirmation) return
