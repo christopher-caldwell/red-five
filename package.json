@@ -9,7 +9,8 @@
     "serve:ui": "nx serve ui",
     "serve:api": "yarn nx serve api",
     "serve:app": "yarn nx serve api",
-    "graphql:codegen": "graphql-codegen && prettier --write packages/shared-types/src"
+    "graphql:codegen": "graphql-codegen && prettier --write packages/shared-types/src",
+    "publish:version": "sh scripts/publish.sh"
   },
   "private": true,
   "dependencies": {

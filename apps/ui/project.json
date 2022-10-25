@@ -10,7 +10,8 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "swc",
-        "outputPath": "dist/apps/ui",
+        "outputPath": "bin/ui",
+        "deleteOutputPath": false,
         "index": "apps/ui/src/index.html",
         "baseHref": "/",
         "main": "apps/ui/src/main.tsx",

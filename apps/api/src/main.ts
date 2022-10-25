@@ -28,7 +28,7 @@ const loggingMiddleware = (queryDefinition: DefinitionNode): void => {
 
 const app = express()
 app.use(cors())
-const root = join(__dirname, 'client', 'build')
+const root = join(__dirname, 'ui')
 app.use(express.static(root))
 app.get('*', (_, res) => {
   res.sendFile('index.html', { root })
