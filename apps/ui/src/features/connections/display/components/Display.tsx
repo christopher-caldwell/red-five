@@ -20,17 +20,17 @@ export const ConnectionDisplay: FC = () => {
       ) : null}
       {isFetching ? <LinearProgress variant='indeterminate' /> : null}
       <div>
-        <DataGridOuterContainer>
-          <DataGridInnerContainer>
-            <Table<Connection>
-              sortingHandler={sortingHandler}
-              total={connections.length}
-              items={connections}
-              isLoading={isFetching}
-              columns={columns}
-            />
-          </DataGridInnerContainer>
-        </DataGridOuterContainer>
+        <Table<Connection>
+          colors={{
+            headerBackground: '#212121',
+            border: '#212121'
+          }}
+          sortingHandler={sortingHandler}
+          total={connections.length}
+          items={connections}
+          isLoading={isFetching}
+          columns={columns}
+        />
       </div>
     </Container>
   )
@@ -68,17 +68,5 @@ const columns: ColumnDef<Connection>[] = [
 ]
 
 const Container = styled(Paper)`
-  padding: 20px !important;
   min-width: 30vw;
-`
-
-const DataGridOuterContainer = styled('div')`
-  height: 300px;
-  min-width: 40vw;
-  /* width: 40vw; */
-`
-
-const DataGridInnerContainer = styled('div')`
-  display: flex;
-  height: 100%;
 `

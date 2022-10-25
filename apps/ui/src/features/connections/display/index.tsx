@@ -10,7 +10,6 @@ import styles from './connectionsDisplay.module.sass'
 export const ConnectionMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { data, isLoading } = useActiveConnectionQuery()
-  console.log('data', data)
 
   const connectionName = data?.activeConnection?.name
   if (!connectionName) {
@@ -30,7 +29,7 @@ export const ConnectionMenu: FC = () => {
     <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
       <ConnectionContainer>
         <ConnectionSelectMenuButton
-          variant='text'
+          variant='outlined'
           color='inherit'
           fullWidth
           aria-describedby={id}
