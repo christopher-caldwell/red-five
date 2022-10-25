@@ -2,6 +2,8 @@ import { serializeError } from 'serialize-error'
 import { GraphQLClient, ClientError } from 'graphql-request'
 import { Variables, GraphQLResponse } from 'graphql-request/dist/types'
 
+const uri = process.env['NX_GRAPHQL_ENDPOINT']
+if (!uri) throw new Error('Cannot determine the GraphQL endpoint')
 /** Runs a request to the GraphQL API */
 export const runQuery =
   <ReturnTypeOfQuery, TVariables extends Variables>(
@@ -9,8 +11,6 @@ export const runQuery =
     variables?: TVariables
   ): (() => Promise<ReturnTypeOfQuery>) =>
   async () => {
-    const uri = process.env['NX_GRAPHQL_ENDPOINT']
-    if (!uri) throw new Error('Cannot determine the GraphQL endpoint')
     try {
       const token = localStorage.getItem('_auth') || ''
       const client = new GraphQLClient(uri, { headers: { Authorization: token } })

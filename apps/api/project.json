@@ -10,8 +10,10 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/api",
+        "outputPath": "bin",
         "main": "apps/api/src/main.ts",
+        "sourceMap": false,
+        "deleteOutputPath": false,
         "tsConfig": "apps/api/tsconfig.app.json"
       },
       "configurations": {
