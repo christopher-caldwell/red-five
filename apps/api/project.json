@@ -14,12 +14,12 @@
         "main": "apps/api/src/main.ts",
         "sourceMap": false,
         "deleteOutputPath": false,
-        "tsConfig": "apps/api/tsconfig.app.json"
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "externalDependencies": "none"
       },
       "configurations": {
         "production": {
           "optimization": true,
-          "extractLicenses": true,
           "inspect": false,
           "fileReplacements": [
             {

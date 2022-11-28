@@ -39,7 +39,15 @@ export const ConnectionMenu: FC = () => {
           {isLoading ? <CircularProgress variant='indeterminate' /> : connectionName || ''}
           {anchorEl ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </ConnectionSelectMenuButton>
-        <Popper className={styles['connectionDisplay']} id={id} open={open} anchorEl={anchorEl}>
+        <Popper
+          className={styles['connectionDisplay']}
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onResize={undefined}
+          onResizeCapture={undefined}
+          nonce={undefined}
+        >
           <ConnectionDisplay />
         </Popper>
       </ConnectionContainer>
