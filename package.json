@@ -12,6 +12,7 @@
     "graphql:codegen": "graphql-codegen && prettier --write packages/shared-types/src",
     "publish:version": "sh scripts/publish.sh"
   },
+  "main": "bin/bin.js",
   "bin": "bin/bin.js",
   "files": [
     "bin/"
