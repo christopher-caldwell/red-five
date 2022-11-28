@@ -61,7 +61,7 @@ const TtlEditor = styled(BaseTextField)`
 
 const getDateFromTTL = (ttl?: number) => {
   if (!ttl || ttl === -1) return ''
-  const ttlAsDate = Date.now() + ttl
+  const ttlAsDate = Date.now() + ttl * 1000
   return `( ${standardFormatDate(ttlAsDate)} )`
 }
 

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { ClientError } from 'graphql-request'
 import { TextField, styled } from '@mui/material'
-import ReactJsonView from 'react-json-view'
+import { JsonViewer } from '@textea/json-viewer'
 
 import { UseInputBind } from '@_ui/hooks'
 import { FlexContainer, Button } from '@_ui/components'
@@ -18,7 +18,14 @@ export const KeyDisplay: FC<Props> = ({
 }) => {
   return shouldViewAsJson ? (
     <HighlightContainer>
-      <ReactJsonView src={getParsedJson(targetKey?.value)} theme='monokai' style={{ backgroundColor: 'transparent' }} />
+      <JsonViewer
+        maxDisplayLength={15}
+        // TODO: Make this a user setting
+        groupArraysAfterLength={5}
+        value={getParsedJson(targetKey?.value)}
+        theme='dark'
+        style={{ backgroundColor: 'transparent' }}
+      />
     </HighlightContainer>
   ) : (
     <>
