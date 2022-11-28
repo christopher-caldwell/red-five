@@ -39,5 +39,5 @@ testem.log
 Thumbs.db
 
 # Bin
-bin/main.js
+bin/main.js*
 bin/ui
