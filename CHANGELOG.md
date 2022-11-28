@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/christopher-caldwell/red-five/compare/v0.0.9...v0.0.10) (2022-11-28)
+
+
+### Features
+
+* Building with production ([#32](https://github.com/christopher-caldwell/red-five/issues/32)) ([23dd934](https://github.com/christopher-caldwell/red-five/commit/23dd9349cefb080dadc270e046e93d204537624b))
+
+
+### Bug Fixes
+
+* Readding publish ([a3e01eb](https://github.com/christopher-caldwell/red-five/commit/a3e01eb8c0f95761cb896d068bc476f5452d448a))
+* Uncommenting ([d6a85db](https://github.com/christopher-caldwell/red-five/commit/d6a85db0140168eb264f9bda287072a3be96b124))
+* Updating json viewer package ([#31](https://github.com/christopher-caldwell/red-five/issues/31)) ([2eca831](https://github.com/christopher-caldwell/red-five/commit/2eca831e5a9bd8e5f6ee4c0924a27ca01679a10a))
+
 ### 0.0.9 (2022-10-25)
 
 
